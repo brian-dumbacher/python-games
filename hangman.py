@@ -156,10 +156,10 @@ def oldGuess(guesses, guess):
 def correctGuess(wordSet, guess):
     return guess in wordSet
 
-def gameWon(wordSet, guesses):
+def winGame(wordSet, guesses):
     return wordSet <= set(guesses)
 
-def printEnding(word, winFlag):
+def printEndGame(word, winFlag):
     print("========================================")
     if winFlag:
         print("The word was indeed " + word.upper())
@@ -192,14 +192,14 @@ def playHangman(word):
             guess = guess.lower()
         guesses.append(guess)
         if correctGuess(wordSet, guess):
-            winFlag = gameWon(wordSet, guesses)
+            winFlag = winGame(wordSet, guesses)
         else:
             life = life - 1
     
     printHangman(life)
     printIncorrectGuesses(wordSet, guesses)
     printWord(word, guesses)
-    printEnding(word, winFlag)
+    printEndGame(word, winFlag)
     
     return
 
