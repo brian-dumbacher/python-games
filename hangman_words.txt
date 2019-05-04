@@ -8,6 +8,7 @@ arboretum
 arrangement
 artificial
 astronomy
+atrocious
 basketball
 behemoth
 blacksmith
@@ -22,10 +23,12 @@ computer
 conference
 conspicuous
 consternation
+construction
 corruption
 crystal
 cynical
 dandelion
+democracy
 dinosaur
 distractible
 documentation
@@ -48,6 +51,7 @@ fragility
 garrulous
 giraffe
 goofball
+graphical
 guardianship
 guitar
 gyration
@@ -140,10 +144,12 @@ turbulent
 tutelage
 ulterior
 umbrella
+unbelievable
 undertake
 vacation
 vegetable
 venomous
+veterinarian
 vitamin
 waterfall
 watershed
