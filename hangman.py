@@ -11,6 +11,7 @@ def cleanWord(word):
     return word.strip()
 
 def printHangman(life):
+    print("")
     if life == 0:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
@@ -126,21 +127,25 @@ def printHangman(life):
     print("")
     return
 
-def printGuesses(guesses):
+def printIncorrectGuesses(word, guesses):
+    wordSet = set()
+    for letter in word:
+        wordSet.add(letter)
     text = "Guesses: "
-    for guess in guesses.sort():
-        text = text + guess.upper()
+    for guess in guesses:
+        if guess not in wordSet:
+            text = text + guess.upper()
     print(text)
     print("")
     return
 
 def printWord(word, guesses):
-    text = ""
+    text = "Word:   "
     for letter in word:
         if letter in guesses:
-            text = text + letter.upper()
+            text = text + " " + letter.upper()
         else:
-            text = text + "?"
+            text = text + " _"
     print(text)
     print("")
     return
@@ -157,13 +162,13 @@ def gameWon(word, guesses):
     for letter in word:
         wordSet.add(letter)
     guessesSet = set(guesses)
-    return wordSet == guessesSet
+    return wordSet <= guessesSet
 
 def main():
     
     #Read in words
     words = []
-    f = codes.open("hangman_words.txt", "r")
+    f = codecs.open("hangman_words.txt", "r")
     for w in f:
         words.append(cleanWord(w))
     f.close()
@@ -175,12 +180,12 @@ def main():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     word = words[random.randint(0, len(words) - 1)]
     
-    while life > 0 and winFlag = False:
+    while life > 0 and winFlag == False:
         printHangman(life)
-        printGuesses(guesses)
+        printIncorrectGuesses(word, guesses)
         printWord(word, guesses)
         guess = ""
-        while guess not in letters and guess not in guesses:
+        while guess not in letters or guess in guesses:
             guess = input("Next guess: ")
             guess = guess.lower()
         guesses.append(guess)
@@ -189,11 +194,19 @@ def main():
         else:
             life = life - 1
     
+    printHangman(life)
+    printIncorrectGuesses(word, guesses)
+    printWord(word, guesses)
+    
+    print("========================================")
     print("The word was " + word.upper())
     if winFlag:
         print("You win!")
     else:
         print("You lose.")
+    print("========================================")
+    print("")
+    
     return
 
 if __name__ == "__main__":
