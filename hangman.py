@@ -16,7 +16,7 @@ def printHangman(life):
         print("    @@           |        ")
         print("    @@          _|_       ")
         print("    @@         (*_*)      ")
-        print("    @@          _Y_       ")
+        print("    @@          _|_       ")
         print("    @@   <<----(   )---->>")
         print("    @@          ( )       ")
         print("    @@          ( )       ")
@@ -30,7 +30,7 @@ def printHangman(life):
         print("    @@           |        ")
         print("    @@          _|_       ")
         print("    @@         (*_*)      ")
-        print("    @@          _Y_       ")
+        print("    @@          _|_       ")
         print("    @@   <<----(   )---->>")
         print("    @@          ( )       ")
         print("    @@          ( )       ")
@@ -44,7 +44,7 @@ def printHangman(life):
         print("    @@           |        ")
         print("    @@          _|_       ")
         print("    @@         (*_*)      ")
-        print("    @@          _Y_       ")
+        print("    @@          _|_       ")
         print("    @@   <<----(   )---->>")
         print("    @@          ( )       ")
         print("    @@          ( )       ")
@@ -58,7 +58,7 @@ def printHangman(life):
         print("    @@           |        ")
         print("    @@          _|_       ")
         print("    @@         (*_*)      ")
-        print("    @@          _Y_       ")
+        print("    @@          _|_       ")
         print("    @@   <<----(   )      ")
         print("    @@          ( )       ")
         print("    @@          ( )       ")
@@ -72,7 +72,7 @@ def printHangman(life):
         print("    @@           |        ")
         print("    @@          _|_       ")
         print("    @@         (*_*)      ")
-        print("    @@          _Y_       ")
+        print("    @@          _|_       ")
         print("    @@         (   )      ")
         print("    @@          ( )       ")
         print("    @@          ( )       ")
@@ -86,7 +86,7 @@ def printHangman(life):
         print("    @@           |        ")
         print("    @@          _|_       ")
         print("    @@         (*_*)      ")
-        print("    @@          _Y_       ")
+        print("    @@          _|_       ")
         print("    @@                    ")
         print("    @@                    ")
         print("    @@                    ")
@@ -172,13 +172,17 @@ def main():
     winFlag = False
     life = 7
     guesses = []
+    letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     word = words[random.randint(0, len(words) - 1)]
     
     while life > 0 and winFlag = False:
         printHangman(life)
         printGuesses(guesses)
         printWord(word, guesses)
-        #input
+        guess = ""
+        while guess not in letters and guess not in guesses:
+            guess = input("Next guess: ")
+            guess = guess.lower()
         guesses.append(guess)
         if correctGuess(word, guess):
             winFlag = gameWon(word, guesses)
