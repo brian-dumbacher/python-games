@@ -131,7 +131,7 @@ def printIncorrectGuesses(word, guesses):
     wordSet = set()
     for letter in word:
         wordSet.add(letter)
-    text = "Guesses: "
+    text = "Incorrect: "
     for guess in guesses:
         if guess not in wordSet:
             text = text + guess.upper()
@@ -140,7 +140,7 @@ def printIncorrectGuesses(word, guesses):
     return
 
 def printWord(word, guesses):
-    text = "Word:   "
+    text = "Word:     "
     for letter in word:
         if letter in guesses:
             text = text + " " + letter.upper()
@@ -199,10 +199,11 @@ def main():
     printWord(word, guesses)
     
     print("========================================")
-    print("The word was " + word.upper())
     if winFlag:
+        print("The word was indeed " + word.upper())
         print("You win!")
     else:
+        print("I'm sorry. The word was " + word.upper())
         print("You lose.")
     print("========================================")
     print("")
