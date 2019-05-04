@@ -4,14 +4,17 @@ adjudicate
 airplane
 amazing
 ambrosia
+arboretum
 arrangement
 artificial
 astronomy
 basketball
+behemoth
 blacksmith
 bombastic
 bookshelf
 bucolic
+category
 championship
 chemistry
 chimerical
@@ -47,6 +50,7 @@ giraffe
 goofball
 guardianship
 guitar
+gyration
 hamstring
 happenstance
 harmonious
@@ -85,8 +89,10 @@ mechanism
 microwave
 mysterious
 narcissism
+necessary
 nightingale
 nomenclature
+nugatory
 nutrition
 opinionated
 opportunity
@@ -125,6 +131,7 @@ systematic
 taciturn
 tantalizing
 theater
+tightrope
 tortoise
 tournament
 translation
