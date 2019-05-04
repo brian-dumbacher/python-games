@@ -180,10 +180,16 @@ def main():
         printWord(word, guesses)
         #input
         guesses.append(guess)
-        if not correctGuess(word, guess):
+        if correctGuess(word, guess):
+            winFlag = gameWon(word, guesses)
+        else:
             life = life - 1
-        winFlag = gameWon(word, guesses)
     
+    print("The word was " + word.upper())
+    if winFlag:
+        print("You win!")
+    else:
+        print("You lose.")
     return
 
 if __name__ == "__main__":
