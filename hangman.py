@@ -147,6 +147,12 @@ def printWord(word, guesses):
     print("")
     return
 
+def invalidGuess(guess):
+    return guess not in ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
+def oldGuess(guesses, guess):
+    return guess in guesses
+
 def correctGuess(wordSet, guess):
     return guess in wordSet
 
@@ -165,13 +171,12 @@ def printEnding(word, winFlag):
     print("")
     return
 
-def playHangman(words, letters):
+def playHangman(word):
     
     #Parameters
     winFlag = False
     life = 7
     guesses = []
-    word = words[random.randint(0, len(words) - 1)]
     wordSet = set()
     for letter in word:
         wordSet.add(letter)
@@ -182,7 +187,7 @@ def playHangman(words, letters):
         printIncorrectGuesses(wordSet, guesses)
         printWord(word, guesses)
         guess = ""
-        while guess not in letters or guess in guesses:
+        while invalidGuess(guess) or oldGuess(guesses, guess):
             guess = input("Next guess: ")
             guess = guess.lower()
         guesses.append(guess)
@@ -206,18 +211,19 @@ def main():
     for w in f:
         words.append(cleanWord(w))
     f.close()
-    letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     loopFlag = True
     
     #Game loop
     while loopFlag:
-        playHangman(words, letters)
+        word = words[random.randint(0, len(words) - 1)]
+        playHangman(word)
         newGame = ""
-        while newGame not in ["y", "n"]:
+        while newGame not in ["n", "y"]:
             newGame = input("Another game? Y/N: ")
             newGame = newGame.lower()
         if newGame == "n":
             loopFlag = False
+    print("")
     
     return
 
