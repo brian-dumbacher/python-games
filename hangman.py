@@ -188,7 +188,7 @@ def playHangman(word):
         printWord(word, guesses)
         guess = ""
         while invalidGuess(guess) or oldGuess(guesses, guess):
-            guess = input("Next guess: ")
+            guess = input("Guess:     ")
             guess = guess.lower()
         guesses.append(guess)
         if correctGuess(wordSet, guess):
@@ -215,6 +215,7 @@ def main():
     
     #Game loop
     while loopFlag:
+        random.seed()
         word = words[random.randint(0, len(words) - 1)]
         playHangman(word)
         newGame = ""
