@@ -58,8 +58,7 @@ def validMoveEnd(board, moveStart, moveEnd, color):
             moveEndConvert = convertMove(moveEnd)
             i = moveEndConvert[0]
             j = moveEndConvert[1]
-            if board[i][j] == "":
-                validFlag = (board[i][j][0] == color)
+            validFlag = (board[i][j] == "")
     return validFlag
 
 def updateBoard(board, moveStart, moveEnd):
