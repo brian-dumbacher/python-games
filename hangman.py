@@ -147,11 +147,11 @@ def printWord(word, guesses):
     print("")
     return
 
-def invalidGuess(guess):
-    return guess not in ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+def validGuess(guess):
+    return guess in ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-def oldGuess(guesses, guess):
-    return guess in guesses
+def newGuess(guesses, guess):
+    return guess not in guesses
 
 def correctGuess(wordSet, guess):
     return guess in wordSet
@@ -185,7 +185,7 @@ def playHangman(word):
         printIncorrectGuesses(wordSet, guesses)
         printWord(word, guesses)
         guess = ""
-        while invalidGuess(guess) or oldGuess(guesses, guess):
+        while not validGuess(guess) or not newGuess(guesses, guess):
             guess = input("Guess:     ")
             guess = guess.lower()
         guesses.append(guess)
