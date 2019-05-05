@@ -1,5 +1,5 @@
 #Name:     hangman.py
-#Purpose:  Play a game of hangman
+#Purpose:  Play hangman
 
 import codecs
 import re
@@ -177,9 +177,7 @@ def playHangman(word):
     winFlag = False
     life = 7
     guesses = []
-    wordSet = set()
-    for letter in word:
-        wordSet.add(letter)
+    wordSet = set([l for l in word])
     
     #Guess loop
     while life > 0 and winFlag == False:
