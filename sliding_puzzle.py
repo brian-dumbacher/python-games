@@ -50,8 +50,8 @@ def printPuzzle(puzzle):
     print("")
     return
 
-def invalidSlide(puzzle, slide):
-    return slide not in slidesValid(puzzle)
+def validSlide(puzzle, slide):
+    return slide in slidesValid(puzzle)
 
 def updatePuzzle(puzzle, slide):
     iBlank = 0
@@ -89,7 +89,7 @@ def playPuzzle(puzzleStart):
     while solveFlag == False:
         printPuzzle(puzzle)
         slide = ""
-        while invalidSlide(puzzle, slide):
+        while not validSlide(puzzle, slide):
             slide = input("Slide: ")
         numSlides = numSlides + 1
         puzzle = updatePuzzle(puzzle, slide)
