@@ -1,7 +1,10 @@
 #Name:     sliding_puzzle.py
-#Purpose:  Solve the 3x3 sliding puzzle
+#Purpose:  Play the 3x3 sliding puzzle
 
 import random
+
+def isPuzzleSolved(puzzle):
+    return puzzle == [["1","2","3"],["4","5","6"],["7","8"," "]]
 
 def slidesValid(puzzle):
     slides = []
@@ -19,17 +22,15 @@ def slidesValid(puzzle):
     return slides
 
 def randomPuzzle():
-    startPuzzle = [["1","2","3"],["4","5","6"],["7","8"," "]]
-    mixPuzzle = [["1","2","3"],["4","5","6"],["7","8"," "]]
+    puzzle = [["1","2","3"],["4","5","6"],["7","8"," "]]
     numSlides = 0
-    while mixPuzzle == startPuzzle or numSlides < 50:
+    while isPuzzleSolved(puzzle) or numSlides < 50:
         random.seed()
-        slides = slidesValid(mixPuzzle)
+        slides = slidesValid(puzzle)
         slide = slides[random.randint(0, len(slides) - 1)]
-        mixPuzzle = updatePuzzle(mixPuzzle, slide)
+        puzzle = updatePuzzle(puzzle, slide)
         numSlides = numSlides + 1
-        
-    return mixPuzzle
+    return puzzle
 
 def printPuzzle(puzzle):
     print("")
@@ -69,9 +70,6 @@ def updatePuzzle(puzzle, slide):
     puzzle[iSlide][jSlide] = " "
     return puzzle
 
-def solvePuzzle(puzzle):
-    return puzzle == [["1","2","3"],["4","5","6"],["7","8"," "]]
-
 def printEndPuzzle(numSlides):
     print("==================================================")
     print("You solved the puzzle in " + str(numSlides) + " slides.")
@@ -95,11 +93,10 @@ def playPuzzle(puzzleStart):
             slide = input("Slide: ")
         numSlides = numSlides + 1
         puzzle = updatePuzzle(puzzle, slide)
-        solveFlag = solvePuzzle(puzzle)
+        solveFlag = isPuzzleSolved(puzzle)
     
     printPuzzle(puzzle)
     printEndPuzzle(numSlides)
-    
     return
 
 def main():
@@ -118,7 +115,6 @@ def main():
         if newPuzzle == "n":
             loopFlag = False
     print("")
-    
     return
 
 if __name__ == "__main__":
