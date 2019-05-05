@@ -4,22 +4,7 @@
 def printBoard(board):
     print("")
     for i in [7,6,5,4,3,2,1,0]:
-        if i == 0:
-            print(" A | ", end="")
-        elif i == 1:
-            print(" B | ", end="")
-        elif i == 2:
-            print(" C | ", end="")
-        elif i == 3:
-            print(" D | ", end="")
-        elif i == 4:
-            print(" E | ", end="")
-        elif i == 5:
-            print(" F | ", end="")
-        elif i == 6:
-            print(" G | ", end="")
-        elif i == 7:
-            print(" H | ", end="")
+        print(" " + str(i+1) + " | ", end="")
         for j in [0,1,2,3,4,5,6,7]:
             square = " "
             if len(board[i][j]) == 2:
@@ -30,7 +15,7 @@ def printBoard(board):
             print(square, end="")
         print("")
     print("     --------")
-    print("     12345678")
+    print("     abcdefgh")
     print("")
     return
 
