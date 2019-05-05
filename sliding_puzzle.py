@@ -22,12 +22,12 @@ def randomPuzzle():
     startPuzzle = [["1","2","3"],["4","5","6"],["7","8"," "]]
     mixPuzzle = [["1","2","3"],["4","5","6"],["7","8"," "]]
     numSlides = 0
-    while mixPuzzle == startPuzzle or numSlides < 20:
+    while mixPuzzle == startPuzzle or numSlides < 50:
         random.seed()
         slides = slidesValid(mixPuzzle)
-        slide = slides[random.ranint(0, len(slides) - 1)]
+        slide = slides[random.randint(0, len(slides) - 1)]
         mixPuzzle = updatePuzzle(mixPuzzle, slide)
-        num = num + 1
+        numSlides = numSlides + 1
         
     return mixPuzzle
 
