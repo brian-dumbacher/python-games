@@ -4,34 +4,26 @@
 import random
 
 def randomPuzzle():
-    nums = [n for n in range(0, 9)]
-    mix = nums
-    while mix != nums:
+    nums = ["1","2","3","4","5","6","7","8"," "]
+    mix = ["1","2","3","4","5","6","7","8"," "]
+    while mix == nums:
         random.seed()
         random.shuffle(mix)
     return [mix[0:3],mix[3:6],mix[6:9]]
-
-def numToString(num):
-    s = ""
-    if num == 0:
-        s = " "
-    else:
-        s = str(num)
-    return s
 
 def printPuzzle(puzzle):
     print("")
     print("@@@@@@@@@@@@@")
     print("@   @   @   @")
-    print("@ " + numToString(puzzle[0][0]) + " @ " + numToString(puzzle[0][1]) + " @ " + numToString(puzzle[0][2]) + " @")
+    print("@ " + puzzle[0][0] + " @ " + puzzle[0][1] + " @ " + puzzle[0][2] + " @")
     print("@   @   @   @")
     print("@@@@@@@@@@@@@")
     print("@   @   @   @")
-    print("@ " + numToString(puzzle[1][0]) + " @ " + numToString(puzzle[1][1]) + " @ " + numToString(puzzle[1][2]) + " @")
+    print("@ " + puzzle[1][0] + " @ " + puzzle[1][1] + " @ " + puzzle[1][2] + " @")
     print("@   @   @   @")
     print("@@@@@@@@@@@@@")
     print("@   @   @   @")
-    print("@ " + numToString(puzzle[2][0]) + " @ " + numToString(puzzle[2][1]) + " @ " + numToString(puzzle[2][2]) + " @")
+    print("@ " + puzzle[2][0] + " @ " + puzzle[2][1] + " @ " + puzzle[2][2] + " @")
     print("@   @   @   @")
     print("@@@@@@@@@@@@@")
     print("")
@@ -39,38 +31,38 @@ def printPuzzle(puzzle):
 
 def invalidSlide(puzzle, slide):
     slidesValid = []
-    iZero = 0
-    jZero = 0
+    iBlank = 0
+    jBlank = 0
     for i in [0,1,2]:
         for j in [0,1,2]:
-            if puzzle[i][j] == 0:
-                iZero = i
-                jZero = j
-    for i in [n for n in [iZero-1,iZero+1] if n in [0,1,2]]:
-        slidesValid.append(str(puzzle[i][jZero]))
-    for j in [n for n in [jZero-1,jZero+1] if n in [0,1,2]]:
-        slidesValid.append(str(puzzle[iZero][j]))
+            if puzzle[i][j] == " ":
+                iBlank = i
+                jBlank = j
+    for i in [n for n in [iBlank-1,iBlank+1] if n in [0,1,2]]:
+        slidesValid.append(puzzle[i][jBlank])
+    for j in [n for n in [jBlank-1,jBlank+1] if n in [0,1,2]]:
+        slidesValid.append(puzzle[iBlank][j])
     return slide not in slidesValid
 
 def updatePuzzle(puzzle, slide):
-    iZero = 0
-    jZero = 0
+    iBlank = 0
+    jBlank = 0
     iSlide = 0
     jSlide = 0
     for i in [0,1,2]:
         for j in [0,1,2]:
-            if puzzle[i][j] == 0:
-                iZero = i
-                jZero = j
-            elif str(puzzle[i][j]) == slide:
+            if puzzle[i][j] == " ":
+                iBlank = i
+                jBlank = j
+            elif puzzle[i][j] == slide:
                 iSlide = i
                 jSlide = j
-    puzzle[iZero][jZero] = int(slide)
-    puzzle[iSlide][jSlide] = 0
+    puzzle[iBlank][jBlank] = slide
+    puzzle[iSlide][jSlide] = " "
     return puzzle
 
 def solvePuzzle(puzzle):
-    return puzzle == [[1,2,3],[4,5,6],[7,8,0]]
+    return puzzle == [["1","2","3"],["4","5","6"],["7","8"," "]]
 
 def printEndPuzzle(numSlides):
     print("==================================================")
