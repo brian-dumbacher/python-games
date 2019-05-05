@@ -40,24 +40,26 @@ def convertMove(move):
         j = 7
     return [i,j]
 
-def validMoveStart(board, moveStart):
+def validMoveStart(board, moveStart, color):
     validFlag = False
     if len(moveStart) == 2:
         if moveStart[0] in ["a","b","c","d","e","f","g","h"] and moveStart[1] in ["1","2","3","4","5","6","7","8"]:
             moveStartConvert = convertMove(moveStart)
             i = moveStartConvert[0]
             j = moveStartConvert[1]
-            validFlag = (board[i][j] != "")
+            if board[i][j] != "":
+                validFlag = (board[i][j][0] == color)
     return validFlag
 
-def validMoveEnd(board, moveStart, moveEnd):
+def validMoveEnd(board, moveStart, moveEnd, color):
     validFlag = False
     if len(moveEnd) == 2:
         if moveEnd[0] in ["a","b","c","d","e","f","g","h"] and moveEnd[1] in ["1","2","3","4","5","6","7","8"]:
             moveEndConvert = convertMove(moveEnd)
             i = moveEndConvert[0]
             j = moveEndConvert[1]
-            validFlag = (board[i][j] == "")
+            if board[i][j] == "":
+                validFlag = (board[i][j][0] == color)
     return validFlag
 
 def updateBoard(board, moveStart, moveEnd):
@@ -85,14 +87,27 @@ def main():
     board = [row1, row2, row3, row4, row5, row6, row7, row8]
     
     printBoard(board)
+    
     print("White to move")
     moveStart = ""
     moveEnd = ""
-    while not validMoveStart(board, moveStart):
+    while not validMoveStart(board, moveStart, "w"):
         moveStart = input("Start square: ")
         moveStart = moveStart.lower()
-    while not validMoveEnd(board, moveStart, moveEnd):
-        moveEnd = input("End square: ")
+    while not validMoveEnd(board, moveStart, moveEnd, "w"):
+        moveEnd = input("End square:   ")
+        moveEnd = moveEnd.lower()
+    board = updateBoard(board, moveStart, moveEnd)
+    printBoard(board)
+    
+    print("Black to move")
+    moveStart = ""
+    moveEnd = ""
+    while not validMoveStart(board, moveStart, "b"):
+        moveStart = input("Start square: ")
+        moveStart = moveStart.lower()
+    while not validMoveEnd(board, moveStart, moveEnd, "b"):
+        moveEnd = input("End square:   ")
         moveEnd = moveEnd.lower()
     board = updateBoard(board, moveStart, moveEnd)
     printBoard(board)
