@@ -46,9 +46,9 @@ def invalidSlide(puzzle, slide):
             if puzzle[i][j] == 0:
                 iZero = i
                 jZero = j
-    for i in [n for n in [i-1,i+1] if n in [0,1,2]]:
+    for i in [n for n in [iZero-1,iZero+1] if n in [0,1,2]]:
         slidesValid.append(str(puzzle[i][jZero]))
-    for j in [n for n in [j-1,j+1] if n in [0,1,2]]:
+    for j in [n for n in [jZero-1,jZero+1] if n in [0,1,2]]:
         slidesValid.append(str(puzzle[iZero][j]))
     return slide not in slidesValid
 
@@ -80,10 +80,11 @@ def printEndPuzzle(numSlides):
     print("")
     return
 
-def playPuzzle(puzzle):
+def playPuzzle(puzzleStart):
     
     #Parameters
     solveFlag = False
+    puzzle = puzzleStart
     numSlides = 0
     
     #Slide loop
@@ -108,8 +109,8 @@ def main():
     
     #Game loop
     while loopFlag:
-        puzzle = randomPuzzle()
-        playPuzzle(puzzle)
+        puzzleStart = randomPuzzle()
+        playPuzzle(puzzleStart)
         newPuzzle = ""
         while newPuzzle not in ["n", "y"]:
             newPuzzle = input("Another puzzle? Y/N: ")
