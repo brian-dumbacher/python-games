@@ -256,11 +256,11 @@ def main():
     notationsKing = [makeNotation(move, "K") for move in movesKing]
     notationsKing.sort()
     #Print moves
-    print(movesBishop)
-    print(movesKnight)
-    print(movesRook)
-    print(movesQueen)
-    print(movesKing)
+    print(notationsBishop)
+    print(notationsKnight)
+    print(notationsRook)
+    print(notationsQueen)
+    print(notationsKing)
     return
 
 if __name__ == "__main__":
