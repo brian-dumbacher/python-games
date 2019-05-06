@@ -25,43 +25,47 @@ def findBishopMoves(board, colorMove, posit):
     candsQual = []
     #Up-Right
     blocked = False
-    for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]
+    numSquares = min([7-i,7-j])
+    for d in range(1, numSquares + 1):
         if not blocked:
-            if board[z][j] == "":
+            if board[i+d][j+d] == "":
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[z][j][0] != colorMove:
+                if board[i+d][j+d][0] != colorMove:
                     candsQual.append(cand)
     #Down-Right
     blocked = False
-    for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]
+    numSquares = min([i,7-j])
+    for d in range(1, numSquares + 1):
         if not blocked:
-            if board[z][j] == "":
+            if board[i-d][j+d] == "":
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[z][j][0] != colorMove:
+                if board[i-d][j+d][0] != colorMove:
                     candsQual.append(cand)
     #Down-Left
     blocked = False
-    for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]
+    numSquares = min([i,j])
+    for d in range(1, numSquares + 1):
         if not blocked:
-            if board[i][z] == "":
+            if board[i-d][j-d] == "":
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i][z][0] != colorMove:
+                if board[i-d][j-d][0] != colorMove:
                     candsQual.append(cand)
     #Up-Left
     blocked = False
-    for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]
+    numSquares = min([7-i,j])
+    for d in range(1, numSquares + 1):
         if not blocked:
-            if board[i][z] == "":
+            if board[i+d][j-d] == "":
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i][z][0] != colorMove:
+                if board[i+d][j-d][0] != colorMove:
                     candsQual.append(cand)
     return candsQual
 
