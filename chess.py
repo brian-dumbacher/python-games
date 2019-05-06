@@ -32,6 +32,52 @@ def findKnightMoves(board, colorMove, posit):
                 candsQual.append(cand)
     return candsQual
 
+def findRookMoves(board, colorMove, posit):
+    i = posit[0]
+    j = posit[1]
+    candsQual = []
+    #Up
+    blocked = False
+    for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]
+        if not blocked:
+            if board[z][j] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[z][j][0] != colorMove:
+                    candsQual.append(cand)
+    #Down
+    blocked = False
+    for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]
+        if not blocked:
+            if board[z][j] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[z][j][0] != colorMove:
+                    candsQual.append(cand)
+    #Right
+    blocked = False
+    for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]
+        if not blocked:
+            if board[i][z] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[i][z][0] != colorMove:
+                    candsQual.append(cand)
+    #Left
+    blocked = False
+    for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]
+        if not blocked:
+            if board[i][z] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[i][z][0] != colorMove:
+                    candsQual.append(cand)
+    return candsQual
+
 def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit):
     i = posit[0]
     j = posit[1]
@@ -44,20 +90,12 @@ def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit
             elif board[cand[0]][cand[1]][0] != colorMove:
                 candsQual.append(cand)
     #Castling
-    if colorMove == "w":
-        if canCastleKingside:
-            if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == "wR":
-                candsQual.append([i, j+2])
-        if canCastleQueenside:
-            if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == "wR":
-                candsQual.append([i, j-2])
-    elif colorMove == "b":
-        if canCastleKingside:
-            if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == "bR":
-                candsQual.append([i, j+2])
-        if canCastleQueenside:
-            if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == "bR":
-                candsQual.append([i, j-2])
+    if canCastleKingside:
+        if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == (colorMove + "R"):
+            candsQual.append([i, j+2])
+    if canCastleQueenside:
+        if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (colorMove + "R"):
+            candsQual.append([i, j-2])
     return candsQual
 
 """
@@ -166,12 +204,15 @@ def main():
     for posit in positsKnight:
         movesKnight.extend(findKnightMoves(board, colorMove, posit))
     movesRook   = []
+    for posit in positsRook:
+        movesRook.extend(findRookMoves(board, colorMove, posit))
     movesQueen  = []
     movesKing   = []
     for posit in positsKing:
         movesKing.extend(findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit))
     
     print(movesKnight)
+    print(movesRook)
     print(movesKing)
 
     return
