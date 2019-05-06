@@ -25,8 +25,11 @@ def findKnightMoves(board, colorMove, posit):
     cands = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
     candsQual = []
     for cand in cands:
-        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7] and board[cand[0]][cand[1]][0] != colorMove:
-            candsQual.append(cand)
+        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
+            if board[cand[0]][cand[1]] == "":
+                candsQual.append(cand)
+            elif board[cand[0]][cand[1]][0] != colorMove:
+                candsQual.append(cand)
     return candsQual
 
 """
