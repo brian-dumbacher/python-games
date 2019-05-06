@@ -1,5 +1,5 @@
 #Name:     chess.py
-#Purpose:  Execute chess moves
+#Purpose:  Determine the possible moves a player can make in a given legal position
 
 def printBoard(board):
     print("")
@@ -19,6 +19,17 @@ def printBoard(board):
     print("")
     return
 
+def findKnightMoves(board, colorMove, posit):
+    i = posit[0]
+    j = posit[1]
+    cands = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
+    candsQual = []
+    for cand in cands:
+        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7] and board[cand[0]][cand[1]][0] != colorMove:
+            candsQual.append(cand)
+    return candsQual
+
+"""
 def convertMove(move):
     i = int(move[1]) - 1
     j = 0
@@ -71,45 +82,60 @@ def updateBoard(board, moveStart, moveEnd):
     board[iEnd][jEnd] = board[iStart][jStart]
     board[iStart][jStart] = ""
     return board
+"""
 
 def main():
     
-    #Global parameters
-    row1 = ["wR","wN","wB","wQ","wK","wB","wN","wR"]
-    row2 = ["wp","wp","wp","wp","wp","wp","wp","wp"]
-    row3 = ["","","","","","","",""]
-    row4 = ["","","","","","","",""]
-    row5 = ["","","","","","","",""]
-    row6 = ["","","","","","","",""]
-    row7 = ["bp","bp","bp","bp","bp","bp","bp","bp"]
+    #Position setup
     row8 = ["bR","bN","bB","bQ","bK","bB","bN","bR"]
+    row7 = ["bp","bp","bp","bp","bp","bp","bp","bp"]
+    row6 = ["","","","","","","",""]
+    row5 = ["","","","","","","",""]
+    row4 = ["","","","","","","",""]
+    row3 = ["","","","","","","",""]
+    row2 = ["wp","wp","wp","wp","wp","wp","wp","wp"]
+    row1 = ["wR","wN","wB","wQ","wK","wB","wN","wR"]
     board = [row1, row2, row3, row4, row5, row6, row7, row8]
+    colorMove = "w"
+    canCastleKingside = True
+    canCastleQueenside = True
+    enPassant = ""
+    
+    #Piece positions
+    positsPawn   = []
+    positsBishop = []
+    positsKnight = []
+    positsRook   = []
+    positsQueen  = []
+    positsKing   = []
+    for i in [0,1,2,3,4,5,6,7]:
+        for j in [0,1,2,3,4,5,6,7]:
+            if board[i][j] != "":
+                if board[i][j][0] == colorMove:
+                    if board[i][j][1] == "p":
+                        positsPawn.append([i,j])
+                    elif board[i][j][1] == "B":
+                        positsBishop.append([i,j])
+                    elif board[i][j][1] == "N":
+                        positsKnight.append([i,j])
+                    elif board[i][j][1] == "R":
+                        positsRook.append([i,j])
+                    elif board[i][j][1] == "Q":
+                        positsQueen.append([i,j])
+                    elif board[i][j][1] == "K":
+                        positsKing.append([i,j])
+    
+    #Possible moves
+    movesPawn   = []
+    movesBishop = []
+    movesKnight = [findKnightMoves(board, colorMove, posit) for posit in positsKnight]
+    movesRook   = []
+    movesQueen  = []
+    movesKing   = []
     
     printBoard(board)
     
-    print("White to move")
-    moveStart = ""
-    moveEnd = ""
-    while not validMoveStart(board, moveStart, "w"):
-        moveStart = input("Start square: ")
-        moveStart = moveStart.lower()
-    while not validMoveEnd(board, moveStart, moveEnd, "w"):
-        moveEnd = input("End square:   ")
-        moveEnd = moveEnd.lower()
-    board = updateBoard(board, moveStart, moveEnd)
-    printBoard(board)
-    
-    print("Black to move")
-    moveStart = ""
-    moveEnd = ""
-    while not validMoveStart(board, moveStart, "b"):
-        moveStart = input("Start square: ")
-        moveStart = moveStart.lower()
-    while not validMoveEnd(board, moveStart, moveEnd, "b"):
-        moveEnd = input("End square:   ")
-        moveEnd = moveEnd.lower()
-    board = updateBoard(board, moveStart, moveEnd)
-    printBoard(board)
+    print(movesKnight)
 
     return
 
