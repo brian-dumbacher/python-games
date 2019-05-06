@@ -32,6 +32,34 @@ def findKnightMoves(board, colorMove, posit):
                 candsQual.append(cand)
     return candsQual
 
+def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit):
+    i = posit[0]
+    j = posit[1]
+    cands = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
+    candsQual = []
+    for cand in cands:
+        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
+            if board[cand[0]][cand[1]] == "":
+                candsQual.append(cand)
+            elif board[cand[0]][cand[1]][0] != colorMove:
+                candsQual.append(cand)
+    #Castling
+    if colorMove == "w":
+        if canCastleKingside:
+            if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == "wR":
+                candsQual.append([i, j+2])
+        if canCastleQueenside:
+            if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == "wR":
+                candsQual.append([i, j-2])
+    elif colorMove == "b":
+        if canCastleKingside:
+            if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == "bR":
+                candsQual.append([i, j+2])
+        if canCastleQueenside:
+            if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == "bR":
+                candsQual.append([i, j-2])
+    return candsQual
+
 """
 def convertMove(move):
     i = int(move[1]) - 1
@@ -104,6 +132,9 @@ def main():
     canCastleQueenside = True
     enPassant = ""
     
+    #Print board
+    printBoard(board)
+    
     #Piece positions
     positsPawn   = []
     positsBishop = []
@@ -131,14 +162,17 @@ def main():
     #Possible moves
     movesPawn   = []
     movesBishop = []
-    movesKnight = [findKnightMoves(board, colorMove, posit) for posit in positsKnight]
+    movesKnight = []
+    for posit in positsKnight:
+        movesKnight.extend(findKnightMoves(board, colorMove, posit))
     movesRook   = []
     movesQueen  = []
     movesKing   = []
-    
-    printBoard(board)
+    for posit in positsKing:
+        movesKing.extend(findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit))
     
     print(movesKnight)
+    print(movesKing)
 
     return
 
