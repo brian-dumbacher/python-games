@@ -19,35 +19,32 @@ def printBoard(board):
     print("")
     return
 
-def makeNotation(posits, piece):
-    notations = []
-    for posit in posits:
-        i = posit[0]
-        j = posit[1]
-        row = str(i+1)
-        col = ""
-        if j == 0:
-            col = "a"
-        elif j == 1:
-            col = "b"
-        elif j == 2:
-            col = "c"
-        elif j == 3:
-            col = "d"
-        elif j == 4:
-            col = "e"
-        elif j == 5:
-            col = "f"
-        elif j == 6:
-            col = "g"
-        elif j == 7:
-            col = "h"
-        pid = piece
-        if piece == "p":
-            pid = ""
-        notation = pid + col + row
-        notations.append(notation)
-    return notations
+def makeNotation(move, piece):
+    i = move[0]
+    j = move[1]
+    row = str(i+1)
+    col = ""
+    if j == 0:
+        col = "a"
+    elif j == 1:
+        col = "b"
+    elif j == 2:
+        col = "c"
+    elif j == 3:
+        col = "d"
+    elif j == 4:
+        col = "e"
+    elif j == 5:
+        col = "f"
+    elif j == 6:
+        col = "g"
+    elif j == 7:
+        col = "h"
+    pid = piece
+    if piece == "p":
+        pid = ""
+    notation = pid + col + row
+    return notation
 
 def findBishopMoves(board, colorMove, posit):
     i = posit[0]
@@ -101,7 +98,7 @@ def findBishopMoves(board, colorMove, posit):
                 blocked = True
                 if board[i+d][j-d][0] != colorMove:
                     candsQual.append(cand)
-    return makeNotation(candsQual, "B")
+    return candsQual
 
 def findKnightMoves(board, colorMove, posit):
     i = posit[0]
@@ -114,7 +111,7 @@ def findKnightMoves(board, colorMove, posit):
                 candsQual.append(cand)
             elif board[cand[0]][cand[1]][0] != colorMove:
                 candsQual.append(cand)
-    return makeNotation(candsQual, "N")
+    return candsQual
 
 def findRookMoves(board, colorMove, posit):
     i = posit[0]
@@ -164,12 +161,12 @@ def findRookMoves(board, colorMove, posit):
                 blocked = True
                 if board[i][z][0] != colorMove:
                     candsQual.append(cand)
-    return makeNotation(candsQual, "R")
+    return candsQual
 
 def findQueenMoves(board, colorMove, posit):
     candsQual = findBishopMoves(board, colorMove, posit)
     candsQual.extend(findRookMoves(board, colorMove, posit))
-    return makeNotation(candsQual, "Q")
+    return candsQual
 
 def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit):
     i = posit[0]
@@ -189,7 +186,7 @@ def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit
     if canCastleQueenside:
         if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (colorMove + "R"):
             candsQual.append([i, j-2])
-    return makeNotation(candsQual, "K")
+    return candsQual
 
 def main():
     #Position setup
@@ -236,23 +233,28 @@ def main():
     movesBishop = []
     for posit in positsBishop:
         movesBishop.extend(findBishopMoves(board, colorMove, posit))
-    movesBishop.sort()
+    notationsBishop = [makeNotation(move, "B") for move in movesBishop]
+    notationsBishop.sort()
     movesKnight = []
     for posit in positsKnight:
         movesKnight.extend(findKnightMoves(board, colorMove, posit))
-    movesKnight.sort()
+    notationsKnight = [makeNotation(move, "N") for move in movesKnight]
+    notationsKnight.sort()
     movesRook = []
     for posit in positsRook:
         movesRook.extend(findRookMoves(board, colorMove, posit))
-    movesRook.sort()
+    notationsRook = [makeNotation(move, "R") for move in movesRook]
+    notationsRook.sort()
     movesQueen = []
     for posit in positsQueen:
         movesQueen.extend(findQueenMoves(board, colorMove, posit))
-    movesQueen.sort()
+    notationsQueen = [makeNotation(move, "Q") for move in movesQueen]
+    notationsQueen.sort()
     movesKing = []
     for posit in positsKing:
         movesKing.extend(findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit))
-    movesKing.sort()
+    notationsKing = [makeNotation(move, "K") for move in movesKing]
+    notationsKing.sort()
     #Print moves
     print(movesBishop)
     print(movesKnight)
