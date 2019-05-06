@@ -1,10 +1,10 @@
 #Name:     chess.py
-#Purpose:  Determine the possible moves a player can make in a given legal position
+#Purpose:  Given a legal chess position, determine all possible moves
 
 def printBoard(board):
     print("")
     for i in [7,6,5,4,3,2,1,0]:
-        print(" " + str(i+1) + " | ", end="")
+        print(" " + str(i+1) + " |", end="")
         for j in [0,1,2,3,4,5,6,7]:
             square = "."
             if len(board[i][j]) == 2:
@@ -12,12 +12,42 @@ def printBoard(board):
                     square = board[i][j][1]
                 if board[i][j][0] == "b":
                     square = "\033[94m" + board[i][j][1] + "\033[0m"
-            print(square, end="")
+            print(" " + square, end="")
         print("")
-    print("     --------")
-    print("     abcdefgh")
+    print("     ---------------")
+    print("     a b c d e f g h")
     print("")
     return
+
+def makeNotation(posits, piece):
+    notations = []
+    for posit in posits:
+        i = posit[0]
+        j = posit[1]
+        row = str(i+1)
+        col = ""
+        if j == 0:
+            col = "a"
+        elif j == 1:
+            col = "b"
+        elif j == 2:
+            col = "c"
+        elif j == 3:
+            col = "d"
+        elif j == 4:
+            col = "e"
+        elif j == 5:
+            col = "f"
+        elif j == 6:
+            col = "g"
+        elif j == 7:
+            col = "h"
+        pid = piece
+        if piece == "p":
+            pid = ""
+        notation = pid + col + row
+        notations.append(notation)
+    return notations
 
 def findBishopMoves(board, colorMove, posit):
     i = posit[0]
@@ -71,7 +101,7 @@ def findBishopMoves(board, colorMove, posit):
                 blocked = True
                 if board[i+d][j-d][0] != colorMove:
                     candsQual.append(cand)
-    return candsQual
+    return makeNotation(candsQual)
 
 def findKnightMoves(board, colorMove, posit):
     i = posit[0]
@@ -84,7 +114,7 @@ def findKnightMoves(board, colorMove, posit):
                 candsQual.append(cand)
             elif board[cand[0]][cand[1]][0] != colorMove:
                 candsQual.append(cand)
-    return candsQual
+    return makeNotation(candsQual)
 
 def findRookMoves(board, colorMove, posit):
     i = posit[0]
@@ -134,12 +164,12 @@ def findRookMoves(board, colorMove, posit):
                 blocked = True
                 if board[i][z][0] != colorMove:
                     candsQual.append(cand)
-    return candsQual
+    return makeNotation(candsQual)
 
 def findQueenMoves(board, colorMove, posit):
     candsQual = findBishopMoves(board, colorMove, posit)
     candsQual.extend(findRookMoves(board, colorMove, posit))
-    return candsQual
+    return makeNotation(candsQual)
 
 def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit):
     i = posit[0]
@@ -159,7 +189,7 @@ def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit
     if canCastleQueenside:
         if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (colorMove + "R"):
             candsQual.append([i, j-2])
-    return candsQual
+    return makeNotation(candsQual)
 
 """
 def convertMove(move):
