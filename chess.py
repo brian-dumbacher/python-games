@@ -19,6 +19,52 @@ def printBoard(board):
     print("")
     return
 
+def findBishopMoves(board, colorMove, posit):
+    i = posit[0]
+    j = posit[1]
+    candsQual = []
+    #Up-Right
+    blocked = False
+    for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]
+        if not blocked:
+            if board[z][j] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[z][j][0] != colorMove:
+                    candsQual.append(cand)
+    #Down-Right
+    blocked = False
+    for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]
+        if not blocked:
+            if board[z][j] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[z][j][0] != colorMove:
+                    candsQual.append(cand)
+    #Down-Left
+    blocked = False
+    for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]
+        if not blocked:
+            if board[i][z] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[i][z][0] != colorMove:
+                    candsQual.append(cand)
+    #Up-Left
+    blocked = False
+    for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]
+        if not blocked:
+            if board[i][z] == "":
+                candsQual.append(cand)
+            else:
+                blocked = True
+                if board[i][z][0] != colorMove:
+                    candsQual.append(cand)
+    return candsQual
+
 def findKnightMoves(board, colorMove, posit):
     i = posit[0]
     j = posit[1]
@@ -76,6 +122,11 @@ def findRookMoves(board, colorMove, posit):
                 blocked = True
                 if board[i][z][0] != colorMove:
                     candsQual.append(cand)
+    return candsQual
+
+def findQueenMoves(board, colorMove, posit):
+    candsQual = findBishopMoves(board, colorMove, posit)
+    candsQual.extend(findRookMoves(board, colorMove, posit))
     return candsQual
 
 def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit):
@@ -200,6 +251,8 @@ def main():
     #Possible moves
     movesPawn   = []
     movesBishop = []
+    for posit in positsBishop:
+        movesBishop.extend(findBishopMoves(board, colorMove, posit))
     movesKnight = []
     for posit in positsKnight:
         movesKnight.extend(findKnightMoves(board, colorMove, posit))
@@ -207,12 +260,16 @@ def main():
     for posit in positsRook:
         movesRook.extend(findRookMoves(board, colorMove, posit))
     movesQueen  = []
+    for posit in positsQueen:
+        movesQueen.extend(findQueenMoves(board, colorMove, posit))
     movesKing   = []
     for posit in positsKing:
         movesKing.extend(findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit))
     
+    print(movesBishop)
     print(movesKnight)
     print(movesRook)
+    print(movesQueen)
     print(movesKing)
 
     return
