@@ -28,6 +28,7 @@ def findBishopMoves(board, colorMove, posit):
     numSquares = min([7-i,7-j])
     for d in range(1, numSquares + 1):
         if not blocked:
+            cand = [i+d,j+d]
             if board[i+d][j+d] == "":
                 candsQual.append(cand)
             else:
@@ -39,6 +40,7 @@ def findBishopMoves(board, colorMove, posit):
     numSquares = min([i,7-j])
     for d in range(1, numSquares + 1):
         if not blocked:
+            cand = [i-d,j+d]
             if board[i-d][j+d] == "":
                 candsQual.append(cand)
             else:
@@ -50,6 +52,7 @@ def findBishopMoves(board, colorMove, posit):
     numSquares = min([i,j])
     for d in range(1, numSquares + 1):
         if not blocked:
+            cand = [i-d,j-d]
             if board[i-d][j-d] == "":
                 candsQual.append(cand)
             else:
@@ -61,6 +64,7 @@ def findBishopMoves(board, colorMove, posit):
     numSquares = min([7-i,j])
     for d in range(1, numSquares + 1):
         if not blocked:
+            cand = [i+d,j-d]
             if board[i+d][j-d] == "":
                 candsQual.append(cand)
             else:
@@ -88,8 +92,9 @@ def findRookMoves(board, colorMove, posit):
     candsQual = []
     #Up
     blocked = False
-    for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]
+    for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]:
         if not blocked:
+            cand = [z,j]
             if board[z][j] == "":
                 candsQual.append(cand)
             else:
@@ -98,8 +103,9 @@ def findRookMoves(board, colorMove, posit):
                     candsQual.append(cand)
     #Down
     blocked = False
-    for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]
+    for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]:
         if not blocked:
+            cand = [z,j]
             if board[z][j] == "":
                 candsQual.append(cand)
             else:
@@ -108,8 +114,9 @@ def findRookMoves(board, colorMove, posit):
                     candsQual.append(cand)
     #Right
     blocked = False
-    for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]
+    for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]:
         if not blocked:
+            cand = [i,z]
             if board[i][z] == "":
                 candsQual.append(cand)
             else:
@@ -118,8 +125,9 @@ def findRookMoves(board, colorMove, posit):
                     candsQual.append(cand)
     #Left
     blocked = False
-    for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]
+    for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]:
         if not blocked:
+            cand = [i,z]
             if board[i][z] == "":
                 candsQual.append(cand)
             else:
