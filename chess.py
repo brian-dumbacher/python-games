@@ -19,34 +19,7 @@ def printBoard(board):
     print("")
     return
 
-def makeNotation(move, piece):
-    i = move[0]
-    j = move[1]
-    row = str(i+1)
-    col = ""
-    if j == 0:
-        col = "a"
-    elif j == 1:
-        col = "b"
-    elif j == 2:
-        col = "c"
-    elif j == 3:
-        col = "d"
-    elif j == 4:
-        col = "e"
-    elif j == 5:
-        col = "f"
-    elif j == 6:
-        col = "g"
-    elif j == 7:
-        col = "h"
-    pid = piece
-    if piece == "p":
-        pid = ""
-    notation = pid + col + row
-    return notation
-
-def findPawnMoves(board, colorMove, enPassant, posit):
+def findPositsEndPawn(board, colorMove, enPassant, posit):
     d = 1
     if colorMove == "b":
         d = -1
@@ -78,7 +51,7 @@ def findPawnMoves(board, colorMove, enPassant, posit):
                 candsQual.append([iEP+d,jEP])
     return candsQual
 
-def findBishopMoves(board, colorMove, posit):
+def findPositsEndBishop(board, colorMove, posit):
     i = posit[0]
     j = posit[1]
     candsQual = []
@@ -132,7 +105,7 @@ def findBishopMoves(board, colorMove, posit):
                     candsQual.append(cand)
     return candsQual
 
-def findKnightMoves(board, colorMove, posit):
+def findPositsEndKnight(board, colorMove, posit):
     i = posit[0]
     j = posit[1]
     cands = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
@@ -145,7 +118,7 @@ def findKnightMoves(board, colorMove, posit):
                 candsQual.append(cand)
     return candsQual
 
-def findRookMoves(board, colorMove, posit):
+def findPositsEndRook(board, colorMove, posit):
     i = posit[0]
     j = posit[1]
     candsQual = []
@@ -195,12 +168,12 @@ def findRookMoves(board, colorMove, posit):
                     candsQual.append(cand)
     return candsQual
 
-def findQueenMoves(board, colorMove, posit):
-    candsQual = findBishopMoves(board, colorMove, posit)
-    candsQual.extend(findRookMoves(board, colorMove, posit))
+def findPositsEndQueen(board, colorMove, posit):
+    candsQual = findPositsEndBishop(board, colorMove, posit)
+    candsQual.extend(findPositsEndRook(board, colorMove, posit))
     return candsQual
 
-def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit):
+def findPositsEndKing(board, colorMove, canCastleKingside, canCastleQueenside, posit):
     i = posit[0]
     j = posit[1]
     cands = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
@@ -219,6 +192,32 @@ def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit
         if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (colorMove + "R"):
             candsQual.append([i, j-2])
     return candsQual
+
+def convertPositCoord(posit):
+    i = posit[0]
+    j = posit[1]
+    row = str(i+1)
+    col = ""
+    if j == 0:
+        col = "a"
+    elif j == 1:
+        col = "b"
+    elif j == 2:
+        col = "c"
+    elif j == 3:
+        col = "d"
+    elif j == 4:
+        col = "e"
+    elif j == 5:
+        col = "f"
+    elif j == 6:
+        col = "g"
+    elif j == 7:
+        col = "h"
+    return col + row
+
+def convertMoveCoord(move):
+    return convertPositCoord(move[0]) + "-" + convertPositCoord(move[1])
 
 def printNotations(text, notations):
     print(text, end="")
@@ -271,47 +270,47 @@ def main():
     #Possible moves
     movesPawn = []
     for posit in positsPawn:
-        movesPawn.extend(findPawnMoves(board, colorMove, enPassant, posit))
-    notationsPawn = [makeNotation(move, "") for move in movesPawn]
-    notationsPawn.sort()
+        movesPawn.extend([[posit, positEnd] for positEnd in findPositsEndPawn(board, colorMove, enPassant, posit)])
+    movesCoordPawn = [convertMoveCoord(move) for move in movesPawn]
+    movesCoordPawn.sort()
     
     movesBishop = []
     for posit in positsBishop:
-        movesBishop.extend(findBishopMoves(board, colorMove, posit))
-    notationsBishop = [makeNotation(move, "B") for move in movesBishop]
-    notationsBishop.sort()
+        movesBishop.extend([[posit, positEnd] for positEnd in findPositsEndBishop(board, colorMove, posit)])
+    movesCoordBishop = [convertMoveCoord(move) for move in movesBishop]
+    movesCoordBishop.sort()
     
     movesKnight = []
     for posit in positsKnight:
-        movesKnight.extend(findKnightMoves(board, colorMove, posit))
-    notationsKnight = [makeNotation(move, "N") for move in movesKnight]
-    notationsKnight.sort()
+        movesKnight.extend([[posit, positEnd] for positEnd in findPositsEndKnight(board, colorMove, posit)])
+    movesCoordKnight = [convertMoveCoord(move) for move in movesKnight]
+    movesCoordKnight.sort()
     
     movesRook = []
     for posit in positsRook:
-        movesRook.extend(findRookMoves(board, colorMove, posit))
-    notationsRook = [makeNotation(move, "R") for move in movesRook]
-    notationsRook.sort()
+        movesRook.extend([[posit, positEnd] for positEnd in findPositsEndRook(board, colorMove, posit)])
+    movesCoordRook = [convertMoveCoord(move) for move in movesRook]
+    movesCoordRook.sort()
     
     movesQueen = []
     for posit in positsQueen:
-        movesQueen.extend(findQueenMoves(board, colorMove, posit))
-    notationsQueen = [makeNotation(move, "Q") for move in movesQueen]
-    notationsQueen.sort()
+        movesQueen.extend([[posit, positEnd] for positEnd in findPositsEndQueen(board, colorMove, posit)])
+    movesCoordQueen = [convertMoveCoord(move) for move in movesQueen]
+    movesCoordQueen.sort()
     
     movesKing = []
     for posit in positsKing:
-        movesKing.extend(findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit))
-    notationsKing = [makeNotation(move, "K") for move in movesKing]
-    notationsKing.sort()
+        movesKing.extend([[posit, positEnd] for positEnd in findPositsEndKing(board, colorMove, canCastleKingside, canCastleQueenside, posit)])
+    movesCoordKing = [convertMoveCoord(move) for move in movesKing]
+    movesCoordKing.sort()
     
     #Print moves
-    printNotations("Pawn   | ", notationsPawn)
-    printNotations("Bishop | ", notationsBishop)
-    printNotations("Knight | ", notationsKnight)
-    printNotations("Rook   | ", notationsRook)
-    printNotations("Queen  | ", notationsQueen)
-    printNotations("King   | ", notationsKing)
+    printMovesCoord("Pawn   | ", movesCoordPawn)
+    printMovesCoord("Bishop | ", movesCoordBishop)
+    printMovesCoord("Knight | ", movesCoordKnight)
+    printMovesCoord("Rook   | ", movesCoordRook)
+    printMovesCoord("Queen  | ", movesCoordQueen)
+    printMovesCoord("King   | ", movesCoordKing)
     print("")
     return
 
