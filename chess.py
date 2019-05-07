@@ -7,7 +7,7 @@ def printBoard(board):
         print(" " + str(i+1) + " |", end="")
         for j in [0,1,2,3,4,5,6,7]:
             square = "."
-            if len(board[i][j]) == 2:
+            if board[i][j] != "":
                 if board[i][j][0] == "w":
                     square = board[i][j][1]
                 if board[i][j][0] == "b":
@@ -62,11 +62,13 @@ def findPawnMoves(board, colorMove, enPassant, posit):
             candsQual.append([i+2*d,j])
     #Capture
     if j >= 1:
-        if board[i+d][j-1][0] == "b":
-            candsQual.append([i+d,j-1])
+        if board[i+d][j-1] != "":
+            if board[i+d][j-1][0] != colorMove:
+                candsQual.append([i+d,j-1])
     if j <= 6:
-        if board[i+d][j+1][0] == "b":
-            candsQual.append([i+d,j+1])
+        if board[i+d][j+1] != "":
+            if board[i+d][j+1][0] != colorMove:
+                candsQual.append([i+d,j+1])
     #en passant
     if enPassant != []:
         iEP = enPassant[0]
