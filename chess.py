@@ -220,6 +220,11 @@ def findKingMoves(board, colorMove, canCastleKingside, canCastleQueenside, posit
             candsQual.append([i, j-2])
     return candsQual
 
+def printNotations(text, notations):
+    print(text, end="")
+    print(", ".join(notations))
+    return
+
 def main():
     #Position setup
     row8 = ["bR","bN","bB","bQ","bK","bB","bN","bR"]
@@ -301,11 +306,12 @@ def main():
     notationsKing.sort()
     
     #Print moves
-    print(notationsBishop)
-    print(notationsKnight)
-    print(notationsRook)
-    print(notationsQueen)
-    print(notationsKing)
+    printNotations("Pawn:   ", notationsPawn)
+    printNotations("Bishop: ", notationsBishop)
+    printNotations("Knight: ", notationsKnight)
+    printNotations("Rook:   ", notationsRook)
+    printNotations("Queen:  ", notationsQueen)
+    printNotations("King:   ", notationsKing)
     return
 
 if __name__ == "__main__":
