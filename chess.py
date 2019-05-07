@@ -219,9 +219,9 @@ def convertPositCoord(posit):
 def convertMoveCoord(move):
     return convertPositCoord(move[0]) + "-" + convertPositCoord(move[1])
 
-def printNotations(text, notations):
+def printMovesCoord(text, movesCoord):
     print(text, end="")
-    print(", ".join(notations))
+    print(", ".join(movesCoord))
     return
 
 def main():
