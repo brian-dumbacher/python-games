@@ -306,12 +306,13 @@ def main():
     notationsKing.sort()
     
     #Print moves
-    printNotations("Pawn:   ", notationsPawn)
-    printNotations("Bishop: ", notationsBishop)
-    printNotations("Knight: ", notationsKnight)
-    printNotations("Rook:   ", notationsRook)
-    printNotations("Queen:  ", notationsQueen)
-    printNotations("King:   ", notationsKing)
+    printNotations("Pawn   | ", notationsPawn)
+    printNotations("Bishop | ", notationsBishop)
+    printNotations("Knight | ", notationsKnight)
+    printNotations("Rook   | ", notationsRook)
+    printNotations("Queen  | ", notationsQueen)
+    printNotations("King   | ", notationsKing)
+    print("")
     return
 
 if __name__ == "__main__":
