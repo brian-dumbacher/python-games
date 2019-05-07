@@ -2,20 +2,24 @@
 #Purpose:  Given a legal chess position, determine all possible moves
 
 def printBoard(board):
+    CGREY = "\x1b[90m"
+    CRED  = "\x1b[91m"
+    CBLUE = "\x1b[94m"
+    CEND  = "\x1b[0m"
     print("")
     for i in [7,6,5,4,3,2,1,0]:
-        print(" " + str(i+1) + " |", end="")
+        print(CRED + " " + str(i+1) + " |" + CEND, end="")
         for j in [0,1,2,3,4,5,6,7]:
-            square = "."
-            if board[i][j] != "":
-                if board[i][j][0] == "w":
-                    square = board[i][j][1]
-                if board[i][j][0] == "b":
-                    square = "\033[94m" + board[i][j][1] + "\033[0m"
+            if board[i][j] == "":
+                square = CGREY + "." + CEND
+            elif board[i][j][0] == "w":
+                square = board[i][j][1]
+            elif board[i][j][0] == "b":
+                square = CBLUE + board[i][j][1] + CEND
             print(" " + square, end="")
         print("")
-    print("     ---------------")
-    print("     a b c d e f g h")
+    print(CRED + "     ---------------" + CEND)
+    print(CRED + "     a b c d e f g h" + CEND)
     print("")
     return
 
