@@ -3,12 +3,12 @@
 
 def printBoard(board):
     ansiGREY = "\x1b[90m"
-    ansiRED  = "\x1b[91m"
     ansiBLUE = "\x1b[94m"
+    ansiTEAL = "\x1b[96m"
     ansiEND  = "\x1b[0m"
     print("")
     for i in [7,6,5,4,3,2,1,0]:
-        print(ansiRED + " " + str(i+1) + " |" + ansiEND, end="")
+        print(ansiTEAL + " " + str(i+1) + " |" + ansiEND, end="")
         for j in [0,1,2,3,4,5,6,7]:
             if board[i][j] == "":
                 square = ansiGREY + "." + ansiEND
@@ -18,8 +18,8 @@ def printBoard(board):
                 square = ansiBLUE + board[i][j][1] + ansiEND
             print(" " + square, end="")
         print("")
-    print(ansiRED + "     ---------------" + ansiEND)
-    print(ansiRED + "     a b c d e f g h" + ansiEND)
+    print(ansiTEAL + "     ---------------" + ansiEND)
+    print(ansiTEAL + "     a b c d e f g h" + ansiEND)
     print("")
     return
 
@@ -307,7 +307,12 @@ def main():
     movesCoordKing = [convertMoveCoord(move) for move in movesKing]
     movesCoordKing.sort()
     
+    #Print status
+    print("Status")
+    print("")
+    
     #Print moves
+    print("Possible Moves")
     printMovesCoord("Pawn   | ", movesCoordPawn)
     printMovesCoord("Bishop | ", movesCoordBishop)
     printMovesCoord("Knight | ", movesCoordKnight)
