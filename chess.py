@@ -20,8 +20,9 @@ def printBoard(board):
     return
 
 def findPositsEndPawn(board, colorMove, enPassant, posit):
-    d = 1
-    if colorMove == "b":
+    if colorMove == "w":
+        d = 1
+    elif colorMove == "b":
         d = -1
     i = posit[0]
     j = posit[1]
@@ -46,9 +47,8 @@ def findPositsEndPawn(board, colorMove, enPassant, posit):
     if enPassant != []:
         iEP = enPassant[0]
         jEP = enPassant[1]
-        if i == iEP:
-            if abs(j - jEP) == 1:
-                candsQual.append([iEP+d,jEP])
+        if i == iEP and abs(j - jEP) == 1:
+            candsQual.append([iEP+d,jEP])
     return candsQual
 
 def findPositsEndBishop(board, colorMove, posit):
@@ -197,7 +197,6 @@ def convertPositCoord(posit):
     i = posit[0]
     j = posit[1]
     row = str(i+1)
-    col = ""
     if j == 0:
         col = "a"
     elif j == 1:
