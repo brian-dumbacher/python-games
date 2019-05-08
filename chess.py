@@ -36,7 +36,7 @@ def findMoveSquaresPawn(board, color, enPassant, posit):
         moveSquares.append([i+d,j])
     #Two squares ahead
     if i == 1:
-        if board[i+2*d][j] == "":
+        if board[i+d][j] == "" and board[i+2*d][j] == "":
             moveSquares.append([i+2*d,j])
     #Capture
     if j >= 1:
