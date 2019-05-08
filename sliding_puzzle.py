@@ -79,7 +79,6 @@ def printEndPuzzle(numSlides):
     return
 
 def playPuzzle(puzzleStart):
-    
     #Parameters
     solveFlag = False
     puzzle = puzzleStart
@@ -100,7 +99,6 @@ def playPuzzle(puzzleStart):
     return
 
 def main():
-    
     #Global parameters
     loopFlag = True
     
