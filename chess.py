@@ -110,7 +110,7 @@ def findMoveSquaresKnight(board, color, posit):
     j = posit[1]
     moveSquaresEight = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
     moveSquares = []
-    for moveSquare in moveSquareEight:
+    for moveSquare in moveSquaresEight:
         if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
             if board[moveSquare[0]][moveSquare[1]] == "":
                 moveSquares.append(moveSquare)
@@ -325,8 +325,8 @@ def isLegalMove(board, color, move):
     i1 = move[1][0]
     j1 = move[1][1]
     boardNew = board
-    boardNew[i1,j1] = boardNew[i0,j0]
-    boardNew[i0,j0] = ""
+    boardNew[i1][j1] = boardNew[i0][j0]
+    boardNew[i0][j0] = ""
     return not inCheck(boardNew, color)
 
 def printStatus(colorMove, checkFlag, checkmateFlag):
