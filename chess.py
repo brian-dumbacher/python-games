@@ -30,172 +30,164 @@ def findMoveSquaresPawn(board, color, enPassant, posit):
         d = -1
     i = posit[0]
     j = posit[1]
-    candsQual = []
+    moveSquares = []
     #One square ahead
     if board[i+d][j] == "":
-        candsQual.append([i+d,j])
+        moveSquares.append([i+d,j])
     #Two squares ahead
     if i == 1:
         if board[i+2*d][j] == "":
-            candsQual.append([i+2*d,j])
+            moveSquares.append([i+2*d,j])
     #Capture
     if j >= 1:
         if board[i+d][j-1] != "":
             if board[i+d][j-1][0] != color:
-                candsQual.append([i+d,j-1])
+                moveSquares.append([i+d,j-1])
     if j <= 6:
         if board[i+d][j+1] != "":
             if board[i+d][j+1][0] != color:
-                candsQual.append([i+d,j+1])
+                moveSquares.append([i+d,j+1])
     #en passant
     if enPassant != []:
         iEP = enPassant[0]
         jEP = enPassant[1]
         if i == iEP and abs(j - jEP) == 1:
-            candsQual.append([iEP+d,jEP])
-    return candsQual
+            moveSquares.append([iEP+d,jEP])
+    return moveSquares
 
 def findMoveSquaresBishop(board, color, posit):
     i = posit[0]
     j = posit[1]
-    candsQual = []
+    moveSquares = []
     #Up-Right
     blocked = False
     numSquares = min([7-i,7-j])
     for d in range(1, numSquares + 1):
         if not blocked:
-            cand = [i+d,j+d]
             if board[i+d][j+d] == "":
-                candsQual.append(cand)
+                moveSquares.append([i+d,j+d])
             else:
                 blocked = True
                 if board[i+d][j+d][0] != color:
-                    candsQual.append(cand)
+                    moveSquares.append([i+d,j+d])
     #Down-Right
     blocked = False
     numSquares = min([i,7-j])
     for d in range(1, numSquares + 1):
         if not blocked:
-            cand = [i-d,j+d]
             if board[i-d][j+d] == "":
-                candsQual.append(cand)
+                moveSquares.append([i-d,j+d])
             else:
                 blocked = True
                 if board[i-d][j+d][0] != color:
-                    candsQual.append(cand)
+                    moveSquares.append([i-d,j+d])
     #Down-Left
     blocked = False
     numSquares = min([i,j])
     for d in range(1, numSquares + 1):
         if not blocked:
-            cand = [i-d,j-d]
             if board[i-d][j-d] == "":
-                candsQual.append(cand)
+                moveSquares.append([i-d,j-d])
             else:
                 blocked = True
                 if board[i-d][j-d][0] != color:
-                    candsQual.append(cand)
+                    moveSquares.append([i-d,j-d])
     #Up-Left
     blocked = False
     numSquares = min([7-i,j])
     for d in range(1, numSquares + 1):
         if not blocked:
-            cand = [i+d,j-d]
             if board[i+d][j-d] == "":
-                candsQual.append(cand)
+                moveSquares.append([i+d,j-d])
             else:
                 blocked = True
                 if board[i+d][j-d][0] != color:
-                    candsQual.append(cand)
-    return candsQual
+                    moveSquares.append([i+d,j-d])
+    return moveSquares
 
 def findMoveSquaresKnight(board, color, posit):
     i = posit[0]
     j = posit[1]
-    cands = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
-    candsQual = []
-    for cand in cands:
-        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
-            if board[cand[0]][cand[1]] == "":
-                candsQual.append(cand)
-            elif board[cand[0]][cand[1]][0] != color:
-                candsQual.append(cand)
-    return candsQual
+    moveSquaresEight = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
+    moveSquares = []
+    for moveSquare in moveSquareEight:
+        if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
+            if board[moveSquare[0]][moveSquare[1]] == "":
+                moveSquares.append(moveSquare)
+            elif board[moveSquare[0]][moveSquare[1]][0] != color:
+                moveSquares.append(moveSquare)
+    return moveSquares
 
 def findMoveSquaresRook(board, color, posit):
     i = posit[0]
     j = posit[1]
-    candsQual = []
+    moveSquares = []
     #Up
     blocked = False
     for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]:
         if not blocked:
-            cand = [z,j]
             if board[z][j] == "":
-                candsQual.append(cand)
+                moveSquares.append([z,j])
             else:
                 blocked = True
                 if board[z][j][0] != color:
-                    candsQual.append(cand)
+                    moveSquares.append([z,j])
     #Down
     blocked = False
     for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]:
         if not blocked:
-            cand = [z,j]
             if board[z][j] == "":
-                candsQual.append(cand)
+                moveSquares.append([z,j])
             else:
                 blocked = True
                 if board[z][j][0] != color:
-                    candsQual.append(cand)
+                    moveSquares.append([z,j])
     #Right
     blocked = False
     for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]:
         if not blocked:
-            cand = [i,z]
             if board[i][z] == "":
-                candsQual.append(cand)
+                moveSquares.append([i,z])
             else:
                 blocked = True
                 if board[i][z][0] != color:
-                    candsQual.append(cand)
+                    moveSquares.append([i,z])
     #Left
     blocked = False
     for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]:
         if not blocked:
-            cand = [i,z]
             if board[i][z] == "":
-                candsQual.append(cand)
+                moveSquares.append([i,z])
             else:
                 blocked = True
                 if board[i][z][0] != color:
-                    candsQual.append(cand)
-    return candsQual
+                    moveSquares.append([i,z])
+    return moveSquares
 
 def findMoveSquaresQueen(board, color, posit):
-    candsQual = findMoveSquaresBishop(board, color, posit)
-    candsQual.extend(findMoveSquaresRook(board, color, posit))
-    return candsQual
+    moveSquares = findMoveSquaresBishop(board, color, posit)
+    moveSquares.extend(findMoveSquaresRook(board, color, posit))
+    return moveSquares
 
 def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, posit):
     i = posit[0]
     j = posit[1]
-    cands = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
-    candsQual = []
-    for cand in cands:
-        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
-            if board[cand[0]][cand[1]] == "":
-                candsQual.append(cand)
-            elif board[cand[0]][cand[1]][0] != color:
-                candsQual.append(cand)
+    moveSquaresEight = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
+    moveSquares = []
+    for moveSquare in moveSquaresEight:
+        if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
+            if board[moveSquare[0]][moveSquare[1]] == "":
+                moveSquares.append(moveSquare)
+            elif board[moveSquare[0]][moveSquare[1]][0] != color:
+                moveSquares.append(moveSquare)
     #Castling
     if canCastleKingside:
         if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == (color + "R"):
-            candsQual.append([i, j+2])
+            moveSquares.append([i, j+2])
     if canCastleQueenside:
         if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (color + "R"):
-            candsQual.append([i, j-2])
-    return candsQual
+            moveSquares.append([i, j-2])
+    return moveSquares
 
 def findAttackSquaresPawn(board, color, posit):
     if color == "w":
@@ -204,17 +196,17 @@ def findAttackSquaresPawn(board, color, posit):
         d = -1
     i = posit[0]
     j = posit[1]
-    candsQual = []
+    attackSquares = []
     #Capture
     if j >= 1:
         if board[i+d][j-1] != "":
             if board[i+d][j-1][0] != color:
-                candsQual.append([i+d,j-1])
+                attackSquares.append([i+d,j-1])
     if j <= 6:
         if board[i+d][j+1] != "":
             if board[i+d][j+1][0] != color:
-                candsQual.append([i+d,j+1])
-    return candsQual
+                attackSquares.append([i+d,j+1])
+    return attackSquares
 
 def findAttackSquaresBishop(board, color, posit):
     return findMoveSquaresBishop(board, color, posit)
@@ -231,15 +223,15 @@ def findAttackSquaresQueen(board, color, posit):
 def findAttackSquaresKing(board, color, posit):
     i = posit[0]
     j = posit[1]
-    cands = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
-    candsQual = []
-    for cand in cands:
-        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
-            if board[cand[0]][cand[1]] == "":
-                candsQual.append(cand)
-            elif board[cand[0]][cand[1]][0] != color:
-                candsQual.append(cand)
-    return candsQual
+    attackSquaresEight = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
+    attackSquares = []
+    for attackSquare in attackSquaresEight:
+        if attackSquare[0] in [0,1,2,3,4,5,6,7] and attackSquare[1] in [0,1,2,3,4,5,6,7]:
+            if board[attackSquare[0]][attackSquare[1]] == "":
+                attackSquares.append(attackSquare)
+            elif board[attackSquare[0]][attackSquare[1]][0] != color:
+                attackSquares.append(attackSquare)
+    return attackSquares
 
 def inCheck(board, color):
     #Determine color of opponent
@@ -327,19 +319,29 @@ def printMovesCoord(text, movesCoord):
     print(", ".join(movesCoord))
     return
 
+def isLegalMove(board, color, move):
+    i0 = move[0][0]
+    j0 = move[0][1]
+    i1 = move[1][0]
+    j1 = move[1][1]
+    boardNew = board
+    boardNew[i1,j1] = boardNew[i0,j0]
+    boardNew[i0,j0] = ""
+    return not inCheck(boardNew, color)
+
 def printStatus(colorMove, checkFlag, checkmateFlag):
     if colorMove == "w":
-        print("WHITE to move")
+        print("Turn to move: WHITE")
     elif colorMove == "b":
-        print("BLACK to move")
+        print("Turn to move: BLACK")
     if checkFlag:
-        print("In check? YES")
+        print("In check?     YES")
     else:
-        print("In check? NO")
+        print("In check?     NO")
     if checkmateFlag:
-        print("Checkmated? YES")
+        print("Checkmated?   YES")
     else:
-        print("Checkmated? NO")
+        print("Checkmated?   NO")
     print("")
     return
 
@@ -390,48 +392,54 @@ def main():
     movesPawn = []
     for posit in positsPawn:
         movesPawn.extend([[posit, moveSquare] for moveSquare in findMoveSquaresPawn(board, colorMove, enPassant, posit)])
-    movesCoordPawn = [convertMoveCoord(move) for move in movesPawn]
+    movesLegalPawn = [move for move in movesPawn if isLegalMove(board, colorMove, move)]
+    movesCoordPawn = [convertMoveCoord(move) for move in movesLegalPawn]
     movesCoordPawn.sort()
     
     movesBishop = []
     for posit in positsBishop:
         movesBishop.extend([[posit, moveSquare] for moveSquare in findMoveSquaresBishop(board, colorMove, posit)])
-    movesCoordBishop = [convertMoveCoord(move) for move in movesBishop]
+    movesLegalBishop = [move for move in movesBishop if isLegalMove(board, colorMove, move)]
+    movesCoordBishop = [convertMoveCoord(move) for move in movesLegalBishop]
     movesCoordBishop.sort()
     
     movesKnight = []
     for posit in positsKnight:
         movesKnight.extend([[posit, moveSquare] for moveSquare in findMoveSquaresKnight(board, colorMove, posit)])
-    movesCoordKnight = [convertMoveCoord(move) for move in movesKnight]
+    movesLegalKnight = [move for move in movesKnight if isLegalMove(board, colorMove, move)]
+    movesCoordKnight = [convertMoveCoord(move) for move in movesLegalKnight]
     movesCoordKnight.sort()
     
     movesRook = []
     for posit in positsRook:
         movesRook.extend([[posit, moveSquare] for moveSquare in findMoveSquaresRook(board, colorMove, posit)])
-    movesCoordRook = [convertMoveCoord(move) for move in movesRook]
+    movesLegalRook = [move for move in movesRook if isLegalMove(board, colorMove, move)]
+    movesCoordRook = [convertMoveCoord(move) for move in movesLegalRook]
     movesCoordRook.sort()
     
     movesQueen = []
     for posit in positsQueen:
         movesQueen.extend([[posit, moveSquare] for moveSquare in findMoveSquaresQueen(board, colorMove, posit)])
-    movesCoordQueen = [convertMoveCoord(move) for move in movesQueen]
+    movesLegalQueen = [move for move in movesQueen if isLegalMove(board, colorMove, move)]
+    movesCoordQueen = [convertMoveCoord(move) for move in movesLegalQueen]
     movesCoordQueen.sort()
     
     movesKing = []
     for posit in positsKing:
         movesKing.extend([[posit, moveSquare] for moveSquare in findMoveSquaresKing(board, colorMove, canCastleKingside, canCastleQueenside, posit)])
-    movesCoordKing = [convertMoveCoord(move) for move in movesKing]
+    movesLegalKing = [move for move in movesKing if isLegalMove(board, colorMove, move)]
+    movesCoordKing = [convertMoveCoord(move) for move in movesLegalKing]
     movesCoordKing.sort()
     
-    moves = movesCoordPawn + movesCoordBishop + movesCoordKnight + movesCoordRook + movesCoordQueen + movesCoordKing
+    movesCoord = movesCoordPawn + movesCoordBishop + movesCoordKnight + movesCoordRook + movesCoordQueen + movesCoordKing
     
     #Print status
-    checkFlag = isCheck(board, colorMove)
-    checkmateFlag = (len(moves) == 0)
+    checkFlag = inCheck(board, colorMove)
+    checkmateFlag = (len(movesCoord) == 0)
     printStatus(colorMove, checkFlag, checkmateFlag)
     
     #Print moves
-    print("Possible Moves")
+    print("Possible Moves:")
     printMovesCoord("Pawn   | ", movesCoordPawn)
     printMovesCoord("Bishop | ", movesCoordBishop)
     printMovesCoord("Knight | ", movesCoordKnight)
