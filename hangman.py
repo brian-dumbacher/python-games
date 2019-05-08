@@ -172,7 +172,6 @@ def printEndGame(word, winFlag):
     return
 
 def playHangman(word):
-    
     #Parameters
     winFlag = False
     life = 7
@@ -201,7 +200,6 @@ def playHangman(word):
     return
 
 def main():
-    
     #Global parameters
     words = []
     f = codecs.open("hangman_words.txt", "r")
