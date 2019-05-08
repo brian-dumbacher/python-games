@@ -23,10 +23,10 @@ def printBoard(board):
     print("")
     return
 
-def findPositsEndPawn(board, colorMove, enPassant, posit):
-    if colorMove == "w":
+def findMoveSquaresPawn(board, color, enPassant, posit):
+    if color == "w":
         d = 1
-    elif colorMove == "b":
+    elif color == "b":
         d = -1
     i = posit[0]
     j = posit[1]
@@ -41,11 +41,11 @@ def findPositsEndPawn(board, colorMove, enPassant, posit):
     #Capture
     if j >= 1:
         if board[i+d][j-1] != "":
-            if board[i+d][j-1][0] != colorMove:
+            if board[i+d][j-1][0] != color:
                 candsQual.append([i+d,j-1])
     if j <= 6:
         if board[i+d][j+1] != "":
-            if board[i+d][j+1][0] != colorMove:
+            if board[i+d][j+1][0] != color:
                 candsQual.append([i+d,j+1])
     #en passant
     if enPassant != []:
@@ -55,7 +55,7 @@ def findPositsEndPawn(board, colorMove, enPassant, posit):
             candsQual.append([iEP+d,jEP])
     return candsQual
 
-def findPositsEndBishop(board, colorMove, posit):
+def findMoveSquaresBishop(board, color, posit):
     i = posit[0]
     j = posit[1]
     candsQual = []
@@ -69,7 +69,7 @@ def findPositsEndBishop(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i+d][j+d][0] != colorMove:
+                if board[i+d][j+d][0] != color:
                     candsQual.append(cand)
     #Down-Right
     blocked = False
@@ -81,7 +81,7 @@ def findPositsEndBishop(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i-d][j+d][0] != colorMove:
+                if board[i-d][j+d][0] != color:
                     candsQual.append(cand)
     #Down-Left
     blocked = False
@@ -93,7 +93,7 @@ def findPositsEndBishop(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i-d][j-d][0] != colorMove:
+                if board[i-d][j-d][0] != color:
                     candsQual.append(cand)
     #Up-Left
     blocked = False
@@ -105,11 +105,11 @@ def findPositsEndBishop(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i+d][j-d][0] != colorMove:
+                if board[i+d][j-d][0] != color:
                     candsQual.append(cand)
     return candsQual
 
-def findPositsEndKnight(board, colorMove, posit):
+def findMoveSquaresKnight(board, color, posit):
     i = posit[0]
     j = posit[1]
     cands = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
@@ -118,11 +118,11 @@ def findPositsEndKnight(board, colorMove, posit):
         if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
             if board[cand[0]][cand[1]] == "":
                 candsQual.append(cand)
-            elif board[cand[0]][cand[1]][0] != colorMove:
+            elif board[cand[0]][cand[1]][0] != color:
                 candsQual.append(cand)
     return candsQual
 
-def findPositsEndRook(board, colorMove, posit):
+def findMoveSquaresRook(board, color, posit):
     i = posit[0]
     j = posit[1]
     candsQual = []
@@ -135,7 +135,7 @@ def findPositsEndRook(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[z][j][0] != colorMove:
+                if board[z][j][0] != color:
                     candsQual.append(cand)
     #Down
     blocked = False
@@ -146,7 +146,7 @@ def findPositsEndRook(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[z][j][0] != colorMove:
+                if board[z][j][0] != color:
                     candsQual.append(cand)
     #Right
     blocked = False
@@ -157,7 +157,7 @@ def findPositsEndRook(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i][z][0] != colorMove:
+                if board[i][z][0] != color:
                     candsQual.append(cand)
     #Left
     blocked = False
@@ -168,16 +168,16 @@ def findPositsEndRook(board, colorMove, posit):
                 candsQual.append(cand)
             else:
                 blocked = True
-                if board[i][z][0] != colorMove:
+                if board[i][z][0] != color:
                     candsQual.append(cand)
     return candsQual
 
-def findPositsEndQueen(board, colorMove, posit):
-    candsQual = findPositsEndBishop(board, colorMove, posit)
-    candsQual.extend(findPositsEndRook(board, colorMove, posit))
+def findMoveSquaresQueen(board, color, posit):
+    candsQual = findMoveSquaresBishop(board, color, posit)
+    candsQual.extend(findMoveSquaresRook(board, color, posit))
     return candsQual
 
-def findPositsEndKing(board, colorMove, canCastleKingside, canCastleQueenside, posit):
+def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, posit):
     i = posit[0]
     j = posit[1]
     cands = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
@@ -186,16 +186,116 @@ def findPositsEndKing(board, colorMove, canCastleKingside, canCastleQueenside, p
         if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
             if board[cand[0]][cand[1]] == "":
                 candsQual.append(cand)
-            elif board[cand[0]][cand[1]][0] != colorMove:
+            elif board[cand[0]][cand[1]][0] != color:
                 candsQual.append(cand)
     #Castling
     if canCastleKingside:
-        if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == (colorMove + "R"):
+        if board[i][j+1] == "" and board[i][j+2] == "" and board[i][j+3] == (color + "R"):
             candsQual.append([i, j+2])
     if canCastleQueenside:
-        if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (colorMove + "R"):
+        if board[i][j-1] == "" and board[i][j-2] == "" and board[i][j-3] == "" and board[i][j-4] == (color + "R"):
             candsQual.append([i, j-2])
     return candsQual
+
+def findAttackSquaresPawn(board, color, posit):
+    if color == "w":
+        d = 1
+    elif color == "b":
+        d = -1
+    i = posit[0]
+    j = posit[1]
+    candsQual = []
+    #Capture
+    if j >= 1:
+        if board[i+d][j-1] != "":
+            if board[i+d][j-1][0] != color:
+                candsQual.append([i+d,j-1])
+    if j <= 6:
+        if board[i+d][j+1] != "":
+            if board[i+d][j+1][0] != color:
+                candsQual.append([i+d,j+1])
+    return candsQual
+
+def findAttackSquaresBishop(board, color, posit):
+    return findMoveSquaresBishop(board, color, posit)
+
+def findAttackSquaresKnight(board, color, posit):
+    return findMoveSquaresKnight(board, color, posit)
+
+def findAttackSquaresRook(board, color, posit):
+    return findMoveSquaresRook(board, color, posit)
+
+def findAttackSquaresQueen(board, color, posit):
+    return findMoveSquaresQueen(board, color, posit)
+
+def findAttackSquaresKing(board, color, posit):
+    i = posit[0]
+    j = posit[1]
+    cands = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
+    candsQual = []
+    for cand in cands:
+        if cand[0] in [0,1,2,3,4,5,6,7] and cand[1] in [0,1,2,3,4,5,6,7]:
+            if board[cand[0]][cand[1]] == "":
+                candsQual.append(cand)
+            elif board[cand[0]][cand[1]][0] != color:
+                candsQual.append(cand)
+    return candsQual
+
+def inCheck(board, color):
+    #Determine color of opponent
+    if color == "w":
+        colorOpp = "b"
+    elif color == "b":
+        colorOpp = "w"
+    
+    #Piece positions
+    positsPawnOpp   = []
+    positsBishopOpp = []
+    positsKnightOpp = []
+    positsRookOpp   = []
+    positsQueenOpp  = []
+    positsKingOpp   = []
+    for i in [0,1,2,3,4,5,6,7]:
+        for j in [0,1,2,3,4,5,6,7]:
+            if board[i][j] != "":
+                if board[i][j][0] == colorOpp:
+                    if board[i][j][1] == "p":
+                        positsPawnOpp.append([i,j])
+                    elif board[i][j][1] == "B":
+                        positsBishopOpp.append([i,j])
+                    elif board[i][j][1] == "N":
+                        positsKnightOpp.append([i,j])
+                    elif board[i][j][1] == "R":
+                        positsRookOpp.append([i,j])
+                    elif board[i][j][1] == "Q":
+                        positsQueenOpp.append([i,j])
+                    elif board[i][j][1] == "K":
+                        positsKingOpp.append([i,j])
+                elif board[i][j][0] == color:
+                    if board[i][j][1] == "K":
+                        positKing = [i,j]
+    
+    #Possible moves
+    attackSquares = []
+    for posit in positsPawnOpp:
+        attackSquares.extend(findAttackSquaresPawn(board, colorOpp, posit))
+    for posit in positsBishopOpp:
+        attackSquares.extend(findAttackSquaresBishop(board, colorOpp, posit))
+    for posit in positsKnightOpp:
+        attackSquares.extend(findAttackSquaresKnight(board, colorOpp, posit))
+    for posit in positsRookOpp:
+        attackSquares.extend(findAttackSquaresRook(board, colorOpp, posit))
+    for posit in positsQueenOpp:
+        attackSquares.extend(findAttackSquaresQueen(board, colorOpp, posit))
+    for posit in positsKingOpp:
+        attackSquares.extend(findAttackSquaresKing(board, colorOpp, posit))
+    
+    #Determine whether king is in check
+    checkFlag = False
+    for attackSquare in attackSquares:
+        if attackSquare == positKing:
+            checkFlag = True
+    return checkFlag
 
 def convertPositCoord(posit):
     i = posit[0]
@@ -225,6 +325,22 @@ def convertMoveCoord(move):
 def printMovesCoord(text, movesCoord):
     print(text, end="")
     print(", ".join(movesCoord))
+    return
+
+def printStatus(colorMove, checkFlag, checkmateFlag):
+    if colorMove == "w":
+        print("WHITE to move")
+    elif colorMove == "b":
+        print("BLACK to move")
+    if checkFlag:
+        print("In check? YES")
+    else:
+        print("In check? NO")
+    if checkmateFlag:
+        print("Checkmated? YES")
+    else:
+        print("Checkmated? NO")
+    print("")
     return
 
 def main():
@@ -273,43 +389,46 @@ def main():
     #Possible moves
     movesPawn = []
     for posit in positsPawn:
-        movesPawn.extend([[posit, positEnd] for positEnd in findPositsEndPawn(board, colorMove, enPassant, posit)])
+        movesPawn.extend([[posit, moveSquare] for moveSquare in findMoveSquaresPawn(board, colorMove, enPassant, posit)])
     movesCoordPawn = [convertMoveCoord(move) for move in movesPawn]
     movesCoordPawn.sort()
     
     movesBishop = []
     for posit in positsBishop:
-        movesBishop.extend([[posit, positEnd] for positEnd in findPositsEndBishop(board, colorMove, posit)])
+        movesBishop.extend([[posit, moveSquare] for moveSquare in findMoveSquaresBishop(board, colorMove, posit)])
     movesCoordBishop = [convertMoveCoord(move) for move in movesBishop]
     movesCoordBishop.sort()
     
     movesKnight = []
     for posit in positsKnight:
-        movesKnight.extend([[posit, positEnd] for positEnd in findPositsEndKnight(board, colorMove, posit)])
+        movesKnight.extend([[posit, moveSquare] for moveSquare in findMoveSquaresKnight(board, colorMove, posit)])
     movesCoordKnight = [convertMoveCoord(move) for move in movesKnight]
     movesCoordKnight.sort()
     
     movesRook = []
     for posit in positsRook:
-        movesRook.extend([[posit, positEnd] for positEnd in findPositsEndRook(board, colorMove, posit)])
+        movesRook.extend([[posit, moveSquare] for moveSquare in findMoveSquaresRook(board, colorMove, posit)])
     movesCoordRook = [convertMoveCoord(move) for move in movesRook]
     movesCoordRook.sort()
     
     movesQueen = []
     for posit in positsQueen:
-        movesQueen.extend([[posit, positEnd] for positEnd in findPositsEndQueen(board, colorMove, posit)])
+        movesQueen.extend([[posit, moveSquare] for moveSquare in findMoveSquaresQueen(board, colorMove, posit)])
     movesCoordQueen = [convertMoveCoord(move) for move in movesQueen]
     movesCoordQueen.sort()
     
     movesKing = []
     for posit in positsKing:
-        movesKing.extend([[posit, positEnd] for positEnd in findPositsEndKing(board, colorMove, canCastleKingside, canCastleQueenside, posit)])
+        movesKing.extend([[posit, moveSquare] for moveSquare in findMoveSquaresKing(board, colorMove, canCastleKingside, canCastleQueenside, posit)])
     movesCoordKing = [convertMoveCoord(move) for move in movesKing]
     movesCoordKing.sort()
     
+    moves = movesCoordPawn + movesCoordBishop + movesCoordKnight + movesCoordRook + movesCoordQueen + movesCoordKing
+    
     #Print status
-    print("Status")
-    print("")
+    checkFlag = isCheck(board, colorMove)
+    checkmateFlag = (len(moves) == 0)
+    printStatus(colorMove, checkFlag, checkmateFlag)
     
     #Print moves
     print("Possible Moves")
