@@ -324,7 +324,18 @@ def isLegalMove(board, color, move):
     j0 = move[0][1]
     i1 = move[1][0]
     j1 = move[1][1]
-    boardNew = board
+    row1New = ["","","","","","","",""]
+    row2New = ["","","","","","","",""]
+    row3New = ["","","","","","","",""]
+    row4New = ["","","","","","","",""]
+    row5New = ["","","","","","","",""]
+    row6New = ["","","","","","","",""]
+    row7New = ["","","","","","","",""]
+    row8New = ["","","","","","","",""]
+    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New,row7New,row8New]
+    for i in [0,1,2,3,4,5,6,7]:
+        for j in [0,1,2,3,4,5,6,7]:
+            boardNew[i][j] = board[i][j]
     boardNew[i1][j1] = boardNew[i0][j0]
     boardNew[i0][j0] = ""
     return not inCheck(boardNew, color)
@@ -389,21 +400,21 @@ def main():
                         positsKing.append([i,j])
     
     #Possible moves
-    """
+    
     movesPawn = []
     for posit in positsPawn:
         movesPawn.extend([[posit, moveSquare] for moveSquare in findMoveSquaresPawn(board, colorMove, enPassant, posit)])
     movesLegalPawn = [move for move in movesPawn if isLegalMove(board, colorMove, move)]
     movesCoordPawn = [convertMoveCoord(move) for move in movesLegalPawn]
     movesCoordPawn.sort()
-    """
+    
     movesBishop = []
     for posit in positsBishop:
         movesBishop.extend([[posit, moveSquare] for moveSquare in findMoveSquaresBishop(board, colorMove, posit)])
-    #movesLegalBishop = [move for move in movesBishop if isLegalMove(board, colorMove, move)]
-    movesCoordBishop = [convertMoveCoord(move) for move in movesBishop]
+    movesLegalBishop = [move for move in movesBishop if isLegalMove(board, colorMove, move)]
+    movesCoordBishop = [convertMoveCoord(move) for move in movesLegalBishop]
     movesCoordBishop.sort()
-    """
+    
     movesKnight = []
     for posit in positsKnight:
         movesKnight.extend([[posit, moveSquare] for moveSquare in findMoveSquaresKnight(board, colorMove, posit)])
@@ -438,15 +449,15 @@ def main():
     checkFlag = inCheck(board, colorMove)
     checkmateFlag = (len(movesCoord) == 0)
     printStatus(colorMove, checkFlag, checkmateFlag)
-    """
+    
     #Print moves
     print("Possible Moves:")
-    #printMovesCoord("Pawn   | ", movesCoordPawn)
+    printMovesCoord("Pawn   | ", movesCoordPawn)
     printMovesCoord("Bishop | ", movesCoordBishop)
-    #printMovesCoord("Knight | ", movesCoordKnight)
-    #printMovesCoord("Rook   | ", movesCoordRook)
-    #printMovesCoord("Queen  | ", movesCoordQueen)
-    #printMovesCoord("King   | ", movesCoordKing)
+    printMovesCoord("Knight | ", movesCoordKnight)
+    printMovesCoord("Rook   | ", movesCoordRook)
+    printMovesCoord("Queen  | ", movesCoordQueen)
+    printMovesCoord("King   | ", movesCoordKing)
     print("")
     return
 
