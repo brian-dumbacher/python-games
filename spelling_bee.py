@@ -1,73 +1,66 @@
 #Name:     spelling_bee.py
 #Purpose:  Play the spelling bee game
 
-import random
-
-def isPuzzleSolved(puzzle):
-    return puzzle == [["1","2","3"],["4","5","6"],["7","8"," "]]
-
-def slidesValid(puzzle):
-    slides = []
-    iBlank = 0
-    jBlank = 0
-    for i in [0,1,2]:
-        for j in [0,1,2]:
-            if puzzle[i][j] == " ":
-                iBlank = i
-                jBlank = j
-    for i in [n for n in [iBlank-1,iBlank+1] if n in [0,1,2]]:
-        slides.append(puzzle[i][jBlank])
-    for j in [n for n in [jBlank-1,jBlank+1] if n in [0,1,2]]:
-        slides.append(puzzle[iBlank][j])
-    return slides
-
-def printPuzzle(puzzle):
+def printPuzzle(lettersReg, letterCenter, words):
     print("")
-    print("@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @")
-    print("@  " + puzzle[0][0] + "  @  " + puzzle[0][1] + "  @  " + puzzle[0][2] + "  @")
-    print("@     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @")
-    print("@  " + puzzle[1][0] + "  @  " + puzzle[1][1] + "  @  " + puzzle[1][2] + "  @")
-    print("@     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @")
-    print("@  " + puzzle[2][0] + "  @  " + puzzle[2][1] + "  @  " + puzzle[2][2] + "  @")
-    print("@     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@")
+    print("        +---+        ")
+    print("       /     \       ")
+    print("      +   " + lettersReg[0] + "   +      ")
+    print("  +---+       +---+  ")
+    print(" /     \     /     \ ")
+    print("+   " + lettersReg[1] + "   +---+   " + lettersReg[2] + "   +")
+    print("+       +---+       +")
+    print(" \     /     \     / ")
+    print("  +---+   " + letterCenter + "   +---+  ")
+    print("  +---+       +---+  ")
+    print(" /     \     /     \ ")
+    print("+   " + lettersReg[3] + "   +---+   " + lettersReg[4] + "   +")
+    print("+       +---+       +")
+    print(" \     /     \     / ")
+    print("  +---+   " + lettersReg[5] + "   +---+  ")
+    print("      +       +      ")
+    print("       \     /       ")
+    print("        +---+        ")
+    print("")
+    print("Words:")
+    for word in words:
+        print(word)
     print("")
     return
 
-def validSlide(puzzle, slide):
-    return slide in slidesValid(puzzle)
+def settify(listOrString):
+    return set([c for c in listOrString])
 
-def printEndPuzzle(numSlides):
+def wordValid(lettersReg, letterCenter, word):
+    return (len(word) >= 5 and letterCenter in settify(word)) and (settify(word) <= settify(lettersReg.append(letterCenter)))
+
+def printEndPuzzle(words):
     print("==================================================")
-    print("You solved the puzzle in " + str(numSlides) + " slides.")
-    print("Congratulations!")
+    print("You found " + str(len(words)) + " words.")
     print("==================================================")
     print("")
     return
 
 def main():
     #Parameters
-    solveFlag = False
-    puzzle = puzzleStart
-    numSlides = 0
+    continueFlag = True
+    lettersReg = ["T","O","U","F","N","I"]
+    letterCenter = "R"
+    words = []
     
     #Slide loop
-    while solveFlag == False:
-        printPuzzle(puzzle)
-        slide = ""
-        while not validSlide(puzzle, slide):
-            slide = input("Slide: ")
-        numSlides = numSlides + 1
-        puzzle = updatePuzzle(puzzle, slide)
-        solveFlag = isPuzzleSolved(puzzle)
+    while continueFlag == True:
+        printPuzzle(lettersReg, letterCenter, words)
+        word = input("Word: ")
+        word = word.upper()
+        word = word.strip()
+        if word in ["Q","QUIT","EXIT"]:
+            continueFlag = False
+        else:
+            if wordValid(lettersReg, letterCenter, word):
+                words.append(word)
     
-    printPuzzle(puzzle)
-    printEndPuzzle(numSlides)
+    printEndPuzzle(words)
     return
 
 if __name__ == "__main__":
