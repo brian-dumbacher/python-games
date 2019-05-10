@@ -32,7 +32,15 @@ def settify(listOrString):
     return set([c for c in listOrString])
 
 def wordValid(lettersReg, letterCenter, word):
-    return (len(word) >= 5 and letterCenter in settify(word)) and (settify(word) <= settify(lettersReg.append(letterCenter)))
+    lettersFull = []
+    lettersFull.append(lettersReg[0])
+    lettersFull.append(lettersReg[1])
+    lettersFull.append(lettersReg[2])
+    lettersFull.append(lettersReg[3])
+    lettersFull.append(lettersReg[4])
+    lettersFull.append(lettersReg[5])
+    lettersFull.append(letterCenter)
+    return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull))
 
 def printEndPuzzle(words):
     print("==================================================")
