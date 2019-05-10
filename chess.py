@@ -1,5 +1,6 @@
 #Name:     chess.py
 #Purpose:  Given a legal chess position, determine all possible moves
+#Author:   Brian Dumbacher
 
 def printBoard(board):
     ansiGREY = "\x1b[90m"
