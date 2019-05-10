@@ -22,7 +22,7 @@ def printPuzzle(lettersReg, letterCenter, words):
     print("       \     /       ")
     print("        +---+        ")
     print("")
-    print("Words:")
+    print("Words found:")
     for word in words:
         print(word)
     print("")
@@ -43,6 +43,7 @@ def wordValid(lettersReg, letterCenter, word):
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull))
 
 def printEndPuzzle(words):
+    print("")
     print("==================================================")
     print("You found " + str(len(words)) + " words.")
     print("==================================================")
