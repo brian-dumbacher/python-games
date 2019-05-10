@@ -1,5 +1,6 @@
 #Name:     spelling_bee.py
 #Purpose:  Play the spelling bee game
+#Author:   Brian Dumbacher
 
 def printPuzzle(lettersReg, letterCenter, words):
     print("")
