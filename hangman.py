@@ -1,5 +1,6 @@
 #Name:     hangman.py
 #Purpose:  Play hangman
+#Author:   Brian Dumbacher
 
 import codecs
 import re
