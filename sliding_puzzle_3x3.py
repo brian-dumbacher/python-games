@@ -1,5 +1,6 @@
-#Name:     sliding_puzzle.py
+#Name:     sliding_puzzle_3x3.py
 #Purpose:  Play the 3x3 sliding puzzle
+#Author:   Brian Dumbacher
 
 import random
 
