@@ -30,20 +30,14 @@ def printPuzzle(lettersReg, letterCenter, words):
     return
 
 def settify(listOrString):
-    return set([c for c in listOrString])
+    return set([l for l in listOrString])
 
 def wordValid(lettersReg, letterCenter, word):
-    lettersFull = []
-    lettersFull.append(lettersReg[0])
-    lettersFull.append(lettersReg[1])
-    lettersFull.append(lettersReg[2])
-    lettersFull.append(lettersReg[3])
-    lettersFull.append(lettersReg[4])
-    lettersFull.append(lettersReg[5])
+    lettersFull = [l for l in lettersReg]
     lettersFull.append(letterCenter)
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull))
 
-def printEndPuzzle(words):
+def printScore(words):
     print("")
     print("==================================================")
     print("You found " + str(len(words)) + " words.")
@@ -64,13 +58,14 @@ def main():
         word = input("Word: ")
         word = word.upper()
         word = word.strip()
-        if word in ["Q","QUIT","EXIT"]:
+        if word in ["E","EX","EXI","EXIT","S","ST","STO","STOP","Q","QU","QUI","QUIT"]:
             continueFlag = False
         else:
             if wordValid(lettersReg, letterCenter, word):
                 words.append(word)
     
-    printEndPuzzle(words)
+    #Print end
+    printScore(words)
     return
 
 if __name__ == "__main__":
