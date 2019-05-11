@@ -33,25 +33,31 @@ def randomPuzzle():
         numSlides = numSlides + 1
     return puzzle
 
+def pn(c):
+    cNew = c
+    if c in ["1","2","3","4","5","6","7","8","9"]:
+        cNew = " " + c
+    return cNew
+
 def printPuzzle(puzzle):
     print("")
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @     @")
-    print("@  " + puzzle[0][0] + "  @  " + puzzle[0][1] + "  @  " + puzzle[0][2] + "  @  " + puzzle[0][3] + "  @")
-    print("@     @     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @     @")
-    print("@  " + puzzle[1][0] + "  @  " + puzzle[1][1] + "  @  " + puzzle[1][2] + "  @  " + puzzle[1][3] + "  @")
-    print("@     @     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @     @")
-    print("@  " + puzzle[2][0] + "  @  " + puzzle[2][1] + "  @  " + puzzle[2][2] + "  @  " + puzzle[2][3] + "  @")
-    print("@     @     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print("@     @     @     @     @")
-    print("@  " + puzzle[3][0] + "  @  " + puzzle[3][1] + "  @  " + puzzle[3][2] + "  @  " + puzzle[3][3] + "  @")
-    print("@     @     @     @     @")
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@      @      @      @      @")
+    print("@  " + pn(puzzle[0][0]) + "  @  " + pn(puzzle[0][1]) + "  @  " + pn(puzzle[0][2]) + "  @  " + pn(puzzle[0][3]) + "  @")
+    print("@      @      @      @      @")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@      @      @      @      @")
+    print("@  " + pn(puzzle[1][0]) + "  @  " + pn(puzzle[1][1]) + "  @  " + pn(puzzle[1][2]) + "  @  " + pn(puzzle[1][3]) + "  @")
+    print("@      @      @      @      @")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@      @      @      @      @")
+    print("@  " + pn(puzzle[2][0]) + "  @  " + pn(puzzle[2][1]) + "  @  " + pn(puzzle[2][2]) + "  @  " + pn(puzzle[2][3]) + "  @")
+    print("@      @      @      @      @")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@      @      @      @      @")
+    print("@  " + pn(puzzle[3][0]) + "  @  " + pn(puzzle[3][1]) + "  @  " + pn(puzzle[3][2]) + "  @  " + pn(puzzle[3][3]) + "  @")
+    print("@      @      @      @      @")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("")
     return
 
