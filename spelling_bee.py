@@ -63,6 +63,7 @@ def main():
         else:
             if wordValid(lettersReg, letterCenter, word):
                 words.append(word)
+                words.sort()
     
     #Print end
     printScore(words)
