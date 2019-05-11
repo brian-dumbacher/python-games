@@ -35,7 +35,7 @@ def randomPuzzle():
 
 def pn(c):
     cNew = c
-    if c in ["1","2","3","4","5","6","7","8","9"]:
+    if c in [" ","1","2","3","4","5","6","7","8","9"]:
         cNew = " " + c
     return cNew
 
