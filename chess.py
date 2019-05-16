@@ -121,7 +121,7 @@ def findMoveSquaresKnight(board, color, square):
     moveSquares = []
     for moveSquare in moveSquaresEight:
         if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
-            if board[moveSquare[0]][moveSquare[1]][0] in [" ",colorOpp]:
+            if board[moveSquare[0]][moveSquare[1]][0] in ["  ",colorOpp]:
                 moveSquares.append(moveSquare)
     return moveSquares
 
@@ -191,7 +191,7 @@ def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, squ
     moveSquares = []
     for moveSquare in moveSquaresEight:
         if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
-            if board[moveSquare[0]][moveSquare[1]][0] in [" ",colorOpp]:
+            if board[moveSquare[0]][moveSquare[1]][0] in ["  ",colorOpp]:
                 moveSquares.append(moveSquare)
     #Castling
     if canCastleKingside:
@@ -214,10 +214,10 @@ def findAttackSquaresPawn(board, color, square):
     attackSquares = []
     #Capture
     if j >= 1:
-        if board[i+d][j-1][0] in [" ",colorOpp]:
+        if board[i+d][j-1][0] in ["  ",colorOpp]:
             attackSquares.append([i+d,j-1])
     if j <= 6:
-        if board[i+d][j+1][0] in [" ",colorOpp]:
+        if board[i+d][j+1][0] in ["  ",colorOpp]:
             attackSquares.append([i+d,j+1])
     return attackSquares
 
@@ -244,7 +244,7 @@ def findAttackSquaresKing(board, color, square):
     attackSquares = []
     for attackSquare in attackSquaresEight:
         if attackSquare[0] in [0,1,2,3,4,5,6,7] and attackSquare[1] in [0,1,2,3,4,5,6,7]:
-            if board[attackSquare[0]][attackSquare[1]][0] in [" ",colorOpp]:
+            if board[attackSquare[0]][attackSquare[1]][0] in ["  ",colorOpp]:
                 attackSquares.append(attackSquare)
     return attackSquares
 
