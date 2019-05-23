@@ -32,10 +32,10 @@ def printPuzzle(lettersReg, letterCenter, words):
 def settify(listOrString):
     return set([l for l in listOrString])
 
-def wordValid(lettersReg, letterCenter, word):
+def wordValid(dictionary, lettersReg, letterCenter, word):
     lettersFull = [l for l in lettersReg]
     lettersFull.append(letterCenter)
-    return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull))
+    return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
 def printScore(words):
     print("")
@@ -47,11 +47,16 @@ def printScore(words):
 
 def main():
     #Parameters
+    dictionary = []
+    f = codecs.open("spelling_bee_dictionary.txt", "r")
+    for w in f:
+        words.append(cleanWord(w))
+    f.close()
+    words = []
     continueFlag = True
     lettersReg = ["T","O","U","F","N","I"]
     letterCenter = "R"
-    words = []
-    
+
     #Slide loop
     while continueFlag == True:
         printPuzzle(lettersReg, letterCenter, words)
@@ -61,7 +66,7 @@ def main():
         if word in ["E","EX","EXI","EXIT","S","ST","STO","STOP","Q","QU","QUI","QUIT"]:
             continueFlag = False
         else:
-            if wordValid(lettersReg, letterCenter, word):
+            if wordValid(dictionary, lettersReg, letterCenter, word):
                 words.append(word)
                 words.sort()
     
