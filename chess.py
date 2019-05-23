@@ -214,10 +214,10 @@ def findAttackSquaresPawn(board, color, square):
     attackSquares = []
     #Capture
     if j >= 1:
-        if board[i+d][j-1][0] in ["  ",colorOpp]:
+        if board[i+d][j-1][0] in [" ",colorOpp]:
             attackSquares.append([i+d,j-1])
     if j <= 6:
-        if board[i+d][j+1][0] in ["  ",colorOpp]:
+        if board[i+d][j+1][0] in [" ",colorOpp]:
             attackSquares.append([i+d,j+1])
     return attackSquares
 
