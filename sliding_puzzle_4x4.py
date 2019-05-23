@@ -83,8 +83,7 @@ def updatePuzzle(puzzle, slide):
 
 def printEndPuzzle(numSlides):
     print("==================================================")
-    print("You solved the puzzle in " + str(numSlides) + " slides.")
-    print("Congratulations!")
+    print("You solved the 4x4 sliding puzzle in " + str(numSlides) + " slides.")
     print("==================================================")
     print("")
     return
