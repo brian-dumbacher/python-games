@@ -2,6 +2,11 @@
 #Purpose:  Play the spelling bee game
 #Author:   Brian Dumbacher
 
+def cleanWord(w):
+    w = w.upper()
+    w = re.sub("\s+", " ", w);
+    return w.strip()
+
 def printPuzzle(lettersReg, letterCenter, words):
     print("")
     print("        +---+        ")
