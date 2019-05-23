@@ -7,10 +7,12 @@ aerodynamic
 aggressive
 agonizing
 airplane
+alabaster
 amazing
 ambrosia
 ambulance
 anniversary
+apoplectic
 arboretum
 argument
 arrangement
@@ -30,7 +32,9 @@ bucolic
 catapult
 category
 cauliflower
+cerulean
 championship
+chartreuse
 chemistry
 childhood
 chimerical
@@ -43,6 +47,7 @@ conspicuous
 constellation
 consternation
 construction
+copacetic
 corruption
 crystal
 cynical
@@ -51,8 +56,11 @@ delectable
 democracy
 diarrhea
 dinosaur
+discombobulated
+disposition
 distractible
 documentation
+draconian
 dramatic
 dumbfound
 duplicate
@@ -69,10 +77,12 @@ emblematic
 engineer
 entrance
 entrapment
+esoteric
 euphoria
 evaporate
 existence
 fabulous
+fastidious
 feminism
 fictional
 flamboyant
@@ -129,6 +139,7 @@ jackknife
 jellyfish
 journalist
 judicious
+juggernaut
 juncture
 kaleidoscope
 kangaroo
@@ -138,6 +149,7 @@ kingdom
 knowledge
 labyrinth
 lackadaisical
+laconic
 laidback
 lamentable
 laziness
@@ -156,8 +168,10 @@ mannequin
 manumission
 mathematics
 mechanism
+mercurial
 mesmerize
 microwave
+miniature
 monastery
 mysterious
 narcissism
@@ -166,7 +180,9 @@ nightingale
 nomenclature
 nugatory
 nutrition
+obsequious
 obsolete
+obstinate
 onomatopoeia
 opalescent
 opinionated
@@ -185,12 +201,16 @@ paradox
 peacock
 pedestrian
 perfunctory
+persnickety
 pessimistic
 phlegmatic
 physical
 pinnacle
 potential
+precocious
 predator
+presentiment
+pretentious
 problematic
 pugnacious
 pumpkin
@@ -204,6 +224,9 @@ querulous
 quintessential
 quixotic
 rambunctious
+rebellion
+recalcitrant
+refractory
 refrigerator
 relaxation
 religious
@@ -257,6 +280,7 @@ twisted
 ulterior
 umbrella
 unbelievable
+uncooperative
 undertake
 uproarious
 vacation
