@@ -2,6 +2,9 @@
 #Purpose:  Play the spelling bee game
 #Author:   Brian Dumbacher
 
+import codecs
+import re
+
 def cleanWord(w):
     w = w.upper()
     w = re.sub("\s+", " ", w);
@@ -55,7 +58,7 @@ def main():
     dictionary = []
     f = codecs.open("spelling_bee_dictionary.txt", "r")
     for w in f:
-        words.append(cleanWord(w))
+        dictionary.append(cleanWord(w))
     f.close()
     words = []
     continueFlag = True
