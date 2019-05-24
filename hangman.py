@@ -207,13 +207,17 @@ def main():
     for w in f:
         words.append(cleanWord(w))
     f.close()
+    random.seed()
+    random.shuffle(words)
+    gameCounter = 0
     loopFlag = True
     
     #Game loop
     while loopFlag:
-        random.seed()
-        word = words[random.randint(0, len(words) - 1)]
-        playHangman(word)
+        playHangman(words[gameCounter])
+        gameCounter = gameCounter + 1
+        if gameCounter >= len(words):
+            gameCounter = 0
         newGame = ""
         while newGame not in ["n", "y"]:
             newGame = input("Another game? Y/N: ")
