@@ -4,6 +4,7 @@ addlepated
 adjudicate
 adolescent
 aerodynamic
+affiliation
 aggressive
 agonizing
 airplane
@@ -11,8 +12,11 @@ alabaster
 amazing
 ambrosia
 ambulance
+anachronism
 anniversary
 apoplectic
+aptitude
+aquarium
 arboretum
 argument
 arrangement
@@ -40,6 +44,7 @@ childhood
 chimerical
 chronology
 classroom
+clockwork
 colloquial
 computer
 conference
@@ -88,6 +93,7 @@ fictional
 flamboyant
 flamingo
 football
+fractious
 fragility
 fundamental
 garrulous
@@ -123,6 +129,7 @@ illumination
 imperceptible
 imperialism
 impervious
+incongruous
 incredible
 indefatigable
 independence
@@ -183,6 +190,7 @@ nutrition
 obsequious
 obsolete
 obstinate
+obstreperous
 onomatopoeia
 opalescent
 opinionated
@@ -203,12 +211,14 @@ pedestrian
 perfunctory
 persnickety
 pessimistic
+petulant
 phlegmatic
 physical
 pinnacle
 potential
 precocious
 predator
+predilection
 presentiment
 pretentious
 problematic
@@ -223,6 +233,7 @@ quarrel
 querulous
 quintessential
 quixotic
+rainbow
 rambunctious
 rebellion
 recalcitrant
@@ -233,6 +244,7 @@ religious
 relinquish
 reluctance
 reprehensible
+reptile
 rhetoric
 rhinocerous
 ridiculous
@@ -269,6 +281,7 @@ tightrope
 tollbooth
 tortoise
 tournament
+tranquility
 translation
 transmission
 treacherous
@@ -281,6 +294,8 @@ ulterior
 umbrella
 unbelievable
 uncooperative
+unctuous
+underdeveloped
 undertake
 uproarious
 vacation
