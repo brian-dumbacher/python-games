@@ -45,10 +45,19 @@ def wordValid(dictionary, lettersReg, letterCenter, word):
     lettersFull.append(letterCenter)
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
-def printScore(words):
+def getScore(lettersReg, letterCenter, word):
+    score = 1
+    lettersFull = [l for l in lettersReg]
+    lettersFull.append(letterCenter)
+    if settify(word) == settify(lettersFull):
+        score = 3
+    return score
+
+def printScore(words, score):
     print("")
     print("==================================================")
     print("You found " + str(len(words)) + " words.")
+    print("Your score is " + str(score) + ".")
     print("==================================================")
     print("")
     return
@@ -61,6 +70,7 @@ def main():
         dictionary.append(cleanWord(w))
     f.close()
     words = []
+    score = 0
     continueFlag = True
     lettersReg = ["T","O","U","F","N","I"]
     letterCenter = "R"
@@ -68,7 +78,7 @@ def main():
     #Slide loop
     while continueFlag == True:
         printPuzzle(lettersReg, letterCenter, words)
-        word = input("Word: ")
+        word = input("Word (q to quit): ")
         word = word.upper()
         word = word.strip()
         if word in ["E","EX","EXI","EXIT","S","ST","STO","STOP","Q","QU","QUI","QUIT"]:
@@ -77,9 +87,10 @@ def main():
             if wordValid(dictionary, lettersReg, letterCenter, word):
                 words.append(word)
                 words.sort()
+                score = score + getScore(lettersReg, letterCenter, word)
     
-    #Print end
-    printScore(words)
+    #Print score
+    printScore(words, score)
     return
 
 if __name__ == "__main__":
