@@ -1,7 +1,16 @@
+footrot
+furor
 front
+fruit
 fruition
+intort
+intortion
+inturn
+nitro
 nutrition
 outrun
+outtrot
+roton
 rotor
 runoff
 trout
@@ -9,4 +18,5 @@ trunnion
 turnoff
 turnout
 tutor
+unroot
 unturn
