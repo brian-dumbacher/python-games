@@ -1,2 +1,6 @@
 # python-games
-Games written in Python
+This repository is a collection of games written in Python:
+- Chess
+- Hangman
+- Sliding puzzle
+- Spelling bee
