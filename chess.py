@@ -334,7 +334,7 @@ def isLegalMove(board, color, checkFlag, move):
             boardNew[i0][j0] = "  "
             legalCastleFlag = not inCheck(boardNew, color)
     
-    #Everything else
+    #Everything other than castling
     row1New = ["  ","  ","  ","  ","  ","  ","  ","  "]
     row2New = ["  ","  ","  ","  ","  ","  ","  ","  "]
     row3New = ["  ","  ","  ","  ","  ","  ","  ","  "]
