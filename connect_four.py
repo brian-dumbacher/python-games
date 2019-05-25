@@ -75,9 +75,31 @@ def checkWin(board, player):
     return winFlag
 
 def winMove(board, move, player):
-    return
+    row6New = [" "," "," "," "," "," "," "]
+    row5New = [" "," "," "," "," "," "," "]
+    row4New = [" "," "," "," "," "," "," "]
+    row3New = [" "," "," "," "," "," "," "]
+    row2New = [" "," "," "," "," "," "," "]
+    row1New = [" "," "," "," "," "," "," "]
+    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New]
+    for i in [0,1,2,3,4,5]:
+        for j in [0,1,2,3,4,5,6]:
+            boardNew[i][j] = board[i][j]
+    boardNew = updateBoard(boardNew, move, player)
+    return checkWin(boardNew, player)
 
 def loseMove(board, move, player):
+    row6New = [" "," "," "," "," "," "," "]
+    row5New = [" "," "," "," "," "," "," "]
+    row4New = [" "," "," "," "," "," "," "]
+    row3New = [" "," "," "," "," "," "," "]
+    row2New = [" "," "," "," "," "," "," "]
+    row1New = [" "," "," "," "," "," "," "]
+    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New]
+    for i in [0,1,2,3,4,5]:
+        for j in [0,1,2,3,4,5,6]:
+            boardNew[i][j] = board[i][j]
+    boardNew = updateBoard(boardNew, move, player)
     return
 
 def getMoveComputer(board, moveHuman):
