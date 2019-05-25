@@ -90,7 +90,7 @@ def getColumnComputer(board, columnHuman):
         validColumns.append(adjRight)
     random.seed()
     random.shuffle(validColumns)
-    return
+    return validColumns[0]
 
 def checkBoardFull(board):
     fullFlag = True
