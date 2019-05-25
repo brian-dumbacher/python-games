@@ -15,7 +15,7 @@ def printBoard(board):
         for j in [0,1,2,3,4,5,6]:
             if board[i][j] == " ":
                 square = ansiGREY + "." + ansiEND
-            elif board[i][j] == "p":
+            elif board[i][j] == "h":
                 square = "o"
             elif board[i][j] == "c":
                 square = ansiBLUE + "o" + ansiEND
@@ -74,6 +74,24 @@ def checkWin(board, player):
                 winFlag = True
     return winFlag
 
+def getColumnComputer(board, columnHuman):
+    columns = ["1","2","3","4","5","6","7"]
+    validColumns = [column for column in columns if validColumn(board, column)]
+    if columnHuman in validColumns:
+        validColumns.append(columnHuman)
+        validColumns.append(columnHuman)
+    adjLeft = str(int(columnHuman) - 1)
+    if adjLeft in validColumns:
+        validColumns.append(adjLeft)
+        validColumns.append(adjLeft)
+    adjRight = str(int(columnHuman) + 1)
+    if adjRight in validColumns:
+        validColumns.append(adjRight)
+        validColumns.append(adjRight)
+    random.seed()
+    random.shuffle(validColumns)
+    return
+
 def checkBoardFull(board):
     fullFlag = True
     for j in [0,1,2,3,4,5,6]:
@@ -81,11 +99,11 @@ def checkBoardFull(board):
             fullFlag = False
     return fullFlag
 
-def printEndGame(playerWin, computerWin):
+def printEndGame(winHuman, winComputer):
     print("==================================================")
-    if playerWin:
+    if winHuman:
         print("You win!")
-    elif computerWin:
+    elif winComputer:
         print("The comptuer has won.")
     else:
         print("Neither you nor the computer has won.")
@@ -94,7 +112,7 @@ def printEndGame(playerWin, computerWin):
     return
 
 def playConnectFour():
-    #Set up board
+    #Board setup
     row6 = [" "," "," "," "," "," "," "]
     row5 = [" "," "," "," "," "," "," "]
     row4 = [" "," "," "," "," "," "," "]
@@ -102,28 +120,28 @@ def playConnectFour():
     row2 = [" "," "," "," "," "," "," "]
     row1 = [" "," "," "," "," "," "," "]
     board = [row1,row2,row3,row4,row5,row6]
-    columns = ["1","2","3","4","5","6","7"]
-    playerWin = False
-    computerWin = False
+    winHuman = False
+    winComputer = False
     boardFull = False
         
-    #Column loop
-    while (not playerWin) and (not computerWin) and (not boardFull):
+    #Move loop
+    while (not winHuman) and (not winComputer) and (not boardFull):
         printBoard(board)
-        column = ""
-        while not validColumn(board, column):
-            column = input("Column: ")
-        board = updateBoard(board, column, "p")
-        playerWin = checkWin(board, "p")
-        validColumns = [column for column in columns if validColumn(board, column)]
-        random.seed()
-        random.shuffle(validColumns)
-        board = updateBoard(board, validColumns[0], "c")
-        computerWin = checkWin(board, "c")
-        boardFull = checkBoardFull(board)
+        #Human move
+        columnHuman = ""
+        while not validColumn(board, columnHuman):
+            columnHuman = input("Column: ")
+        board = updateBoard(board, columnHuman, "h")
+        winHuman = checkWin(board, "h")
+        #Computer move
+        if not winHuman:
+            columnComputer = getColumnComputer(board, columnHuman)        
+            board = updateBoard(board, columnComputer, "c")
+            winComputer = checkWin(board, "c")
+            boardFull = checkBoardFull(board)
     
     printBoard(board)
-    printEndGame(playerWin, computerWin)
+    printEndGame(winHuman, winComputer)
     return
 
 def main():
