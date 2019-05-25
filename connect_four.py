@@ -13,10 +13,10 @@ def printBoard(board):
         for j in [0,1,2,3,4,5,6]:
             if board[i][j] == " ":
                 square = ansiGREY + "." + ansiEND
-            elif board[i][j] == "w":
-                square = "x"
-            elif board[i][j] == "b":
-                square = ansiBLUE + "x" + ansiEND
+            elif board[i][j] == "p":
+                square = "o"
+            elif board[i][j] == "c":
+                square = ansiBLUE + "o" + ansiEND
             print(" " + square, end="")
         print("")
     print(ansiTEAL + "     -------------" + ansiEND)
@@ -128,76 +128,16 @@ def inCheck(board, color):
             checkFlag = True
     return checkFlag
 
-def isLegalMove(board, color, checkFlag, move):
-    i0 = move[0][0]
-    j0 = move[0][1]
-    i1 = move[1][0]
-    j1 = move[1][1]
-    isKing = (board[i0][j0][1] == "K")
-    
-    #Castling
-    legalCastleFlag = True
-    if isKing and abs(j1 - j0) == 2:
-        if j1 > j0:
-            jMiddle = j0 + 1
-        elif j1 < j0:
-            jMiddle = j0 - 1
-        if checkFlag:
-            legalCastleFlag = False
-        else:
-            row1New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row2New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row3New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row4New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row5New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row6New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row7New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row8New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            boardNew = [row1New,row2New,row3New,row4New,row5New,row6New,row7New,row8New]
-            for i in [0,1,2,3,4,5,6,7]:
-                for j in [0,1,2,3,4,5,6,7]:
-                    boardNew[i][j] = board[i][j]
-            boardNew[i1][jMiddle] = boardNew[i0][j0]
-            boardNew[i0][j0] = "  "
-            legalCastleFlag = not inCheck(boardNew, color)
-    
-    #Everything other than castling
-    row1New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row2New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row3New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row4New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row5New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row6New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row7New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row8New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New,row7New,row8New]
-    for i in [0,1,2,3,4,5,6,7]:
-        for j in [0,1,2,3,4,5,6,7]:
-            boardNew[i][j] = board[i][j]
-    boardNew[i1][j1] = boardNew[i0][j0]
-    boardNew[i0][j0] = "  "
-    legalFlag = not inCheck(boardNew, color)
-    
-    return legalCastleFlag and legalFlag
-
-def printStatus(colorMove, checkFlag, checkmateFlag):
-    if colorMove == "w":
-        print("Turn to move: WHITE")
-    elif colorMove == "b":
-        print("Turn to move: BLACK")
-    if checkFlag:
-        print("In check?     YES")
-    else:
-        print("In check?     NO")
-    if checkmateFlag:
-        print("Checkmated?   YES")
-    else:
-        print("Checkmated?   NO")
-    print("")
-    return
+def validColumn(board, column):
+    validFlag = False
+    if column in ["1","2","3","4","5","6","7"]:
+        jColumn = int(column) - 1
+        if board[5][jColumn] == " ":
+            validFlag = True
+    return validFlag
 
 def main():
-    #Position setup
+    #Parameters
     row6 = [" "," "," "," "," "," "," "]
     row5 = [" "," "," "," "," "," "," "]
     row4 = [" "," "," "," "," "," "," "]
@@ -205,49 +145,19 @@ def main():
     row2 = [" "," "," "," "," "," "," "]
     row1 = [" "," "," "," "," "," "," "]
     board = [row1,row2,row3,row4,row5,row6]
+    playerWin = False
+    computerWin = False
+        
+    #Move loop
+    while (not playerWin) and (not computerWin):
+        printBoard(board)
+        column = ""
+        while not validColumn(board, column):
+            column = input("Column: ")
+        board = updateBoard(board, column, "p")
+        playerWin = checkWin(board, "p")
+        computerWin = checkWin(board, "c")
     
-    #Print board
-    printBoard(board)
-    
-    #Piece positions
-    squaresPawn   = []
-    squaresBishop = []
-    squaresKnight = []
-    squaresRook   = []
-    squaresQueen  = []
-    squaresKing   = []
-    for i in [0,1,2,3,4,5,6,7]:
-        for j in [0,1,2,3,4,5,6,7]:
-            if board[i][j][0] == colorMove:
-                if board[i][j][1] == "p":
-                    squaresPawn.append([i,j])
-                elif board[i][j][1] == "B":
-                    squaresBishop.append([i,j])
-                elif board[i][j][1] == "N":
-                    squaresKnight.append([i,j])
-                elif board[i][j][1] == "R":
-                    squaresRook.append([i,j])
-                elif board[i][j][1] == "Q":
-                    squaresQueen.append([i,j])
-                elif board[i][j][1] == "K":
-                    squaresKing.append([i,j])
-    
-    #Possible moves
-    movesPawn = []
-    for square in squaresPawn:
-        movesPawn.extend([[square, moveSquare] for moveSquare in findMoveSquaresPawn(board, colorMove, enPassant, square)])
-    movesLegalPawn = [move for move in movesPawn if isLegalMove(board, colorMove, checkFlag, move)]
-    movesCoordPawn = [convertMoveCoord(move) for move in movesLegalPawn]
-    movesCoordPawn.sort()
-    
-    #Print status
-    checkmateFlag = (len(movesCoord) == 0)
-    printStatus(colorMove, checkFlag, checkmateFlag)
-    
-    #Print moves
-    print("Possible Moves:")
-    printMovesCoord("Pawn   | ", movesCoordPawn)
-    print("")
     return
 
 if __name__ == "__main__":
