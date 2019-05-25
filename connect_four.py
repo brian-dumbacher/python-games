@@ -26,16 +26,16 @@ def printBoard(board):
     print("")
     return
 
-def validColumn(board, column):
+def validMove(board, move):
     validFlag = False
-    if column in ["1","2","3","4","5","6","7"]:
-        j = int(column) - 1
+    if move in ["1","2","3","4","5","6","7"]:
+        j = int(move) - 1
         if board[5][j] == " ":
             validFlag = True
     return validFlag
 
-def updateBoard(board, column, player):
-    j = int(column) - 1
+def updateBoard(board, move, player):
+    j = int(move) - 1
     if board[0][j] == " ":
         board[0][j] = player
     elif board[1][j] == " ":
@@ -74,23 +74,12 @@ def checkWin(board, player):
                 winFlag = True
     return winFlag
 
-def getColumnComputer(board, columnHuman):
+def getMoveComputer(board, moveHuman):
     columns = ["1","2","3","4","5","6","7"]
-    validColumns = [column for column in columns if validColumn(board, column)]
-    if columnHuman in validColumns:
-        validColumns.append(columnHuman)
-        validColumns.append(columnHuman)
-    adjLeft = str(int(columnHuman) - 1)
-    if adjLeft in validColumns:
-        validColumns.append(adjLeft)
-        validColumns.append(adjLeft)
-    adjRight = str(int(columnHuman) + 1)
-    if adjRight in validColumns:
-        validColumns.append(adjRight)
-        validColumns.append(adjRight)
+    validMoves = [move for move in columns if validMove(board, move)]
     random.seed()
-    random.shuffle(validColumns)
-    return validColumns[0]
+    random.shuffle(validMoves) 
+    return validMoves[0]  
 
 def checkBoardFull(board):
     fullFlag = True
@@ -128,15 +117,15 @@ def playConnectFour():
     while (not winHuman) and (not winComputer) and (not boardFull):
         printBoard(board)
         #Human move
-        columnHuman = ""
-        while not validColumn(board, columnHuman):
-            columnHuman = input("Column: ")
-        board = updateBoard(board, columnHuman, "h")
+        moveHuman = ""
+        while not validMove(board, moveHuman):
+            moveHuman = input("Column: ")
+        board = updateBoard(board, moveHuman, "h")
         winHuman = checkWin(board, "h")
         #Computer move
         if not winHuman:
-            columnComputer = getColumnComputer(board, columnHuman)        
-            board = updateBoard(board, columnComputer, "c")
+            moveComputer = getMoveComputer(board, moveHuman)        
+            board = updateBoard(board, moveComputer, "c")
             winComputer = checkWin(board, "c")
             boardFull = checkBoardFull(board)
     
