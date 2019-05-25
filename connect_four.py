@@ -26,110 +26,6 @@ def printBoard(board):
     print("")
     return
 
-def findMoveSquaresPawn(board, color, enPassant, square):
-    if color == "w":
-        colorOpp = "b"
-        d = 1
-    elif color == "b":
-        colorOpp = "w"
-        d = -1
-    i = square[0]
-    j = square[1]
-    moveSquares = []
-    #One square ahead
-    if board[i+d][j] == "  ":
-        moveSquares.append([i+d,j])
-    #Two squares ahead
-    if (color == "w" and i == 1) or (color == "b" and i == 6):
-        if board[i+d][j] == "  " and board[i+2*d][j] == "  ":
-            moveSquares.append([i+2*d,j])
-    #Capture
-    if j >= 1:
-        if board[i+d][j-1][0] == colorOpp:
-            moveSquares.append([i+d,j-1])
-    if j <= 6:
-        if board[i+d][j+1][0] == colorOpp:
-            moveSquares.append([i+d,j+1])
-    #en passant
-    if enPassant != []:
-        iEP = enPassant[0]
-        jEP = enPassant[1]
-        if i == iEP and abs(j - jEP) == 1:
-            moveSquares.append([iEP+d,jEP])
-    return moveSquares
-
-def findAttackSquaresPawn(board, color, square):
-    if color == "w":
-        colorOpp = "b"
-        d = 1
-    elif color == "b":
-        colorOpp = "w"
-        d = -1
-    i = square[0]
-    j = square[1]
-    attackSquares = []
-    #Capture
-    if j >= 1:
-        if board[i+d][j-1][0] in [" ",colorOpp]:
-            attackSquares.append([i+d,j-1])
-    if j <= 6:
-        if board[i+d][j+1][0] in [" ",colorOpp]:
-            attackSquares.append([i+d,j+1])
-    return attackSquares
-
-def inCheck(board, color):
-    if color == "w":
-        colorOpp = "b"
-    elif color == "b":
-        colorOpp = "w"
-    
-    #Piece positions
-    squaresPawnOpp   = []
-    squaresBishopOpp = []
-    squaresKnightOpp = []
-    squaresRookOpp   = []
-    squaresQueenOpp  = []
-    squaresKingOpp   = []
-    for i in [0,1,2,3,4,5,6,7]:
-        for j in [0,1,2,3,4,5,6,7]:
-            if board[i][j][0] == colorOpp:
-                if board[i][j][1] == "p":
-                    squaresPawnOpp.append([i,j])
-                elif board[i][j][1] == "B":
-                    squaresBishopOpp.append([i,j])
-                elif board[i][j][1] == "N":
-                    squaresKnightOpp.append([i,j])
-                elif board[i][j][1] == "R":
-                    squaresRookOpp.append([i,j])
-                elif board[i][j][1] == "Q":
-                    squaresQueenOpp.append([i,j])
-                elif board[i][j][1] == "K":
-                    squaresKingOpp.append([i,j])
-            elif board[i][j] == color + "K":
-                squareKing = [i,j]
-    
-    #Possible moves
-    attackSquares = []
-    for square in squaresPawnOpp:
-        attackSquares.extend(findAttackSquaresPawn(board, colorOpp, square))
-    for square in squaresBishopOpp:
-        attackSquares.extend(findAttackSquaresBishop(board, colorOpp, square))
-    for square in squaresKnightOpp:
-        attackSquares.extend(findAttackSquaresKnight(board, colorOpp, square))
-    for square in squaresRookOpp:
-        attackSquares.extend(findAttackSquaresRook(board, colorOpp, square))
-    for square in squaresQueenOpp:
-        attackSquares.extend(findAttackSquaresQueen(board, colorOpp, square))
-    for square in squaresKingOpp:
-        attackSquares.extend(findAttackSquaresKing(board, colorOpp, square))
-    
-    #Determine whether king is in check
-    checkFlag = False
-    for attackSquare in attackSquares:
-        if attackSquare == squareKing:
-            checkFlag = True
-    return checkFlag
-
 def validColumn(board, column):
     validFlag = False
     if column in ["1","2","3","4","5","6","7"]:
@@ -155,7 +51,28 @@ def updateBoard(board, column, player):
     return board
 
 def checkWin(board, player):
-    return
+    winFlag = False
+    #Rows
+    for i in [0,1,2,3,4,5]:
+        for j in [0,1,2,3]:
+            if board[i][j] == player and board[i][j+1] == player and board[i][j+2] == player and board[i][j+3] == player:
+                winFlag = True
+    #Columns
+    for j in [0,1,2,3,4,5,6]:
+        for i in [0,1,2]:
+            if board[i][j] == player and board[i+1][j] == player and board[i+2][j] == player and board[i+3][j] == player:
+                winFlag = True
+    #SW-NE Diagonals
+    for j in [0,1,2,3]:
+        for i in [0,1,2]:
+            if board[i][j] == player and board[i+1][j+1] == player and board[i+2][j+2] == player and board[i+3][j+3] == player:
+                winFlag = True
+    #SE-NW Diagonals
+    for j in [3,4,5,6]:
+        for i in [0,1,2]:
+            if board[i][j] == player and board[i+1][j-1] == player and board[i+2][j-2] == player and board[i+3][j-3] == player:
+                winFlag = True
+    return winFlag
 
 def checkBoardFull(board):
     fullFlag = True
@@ -163,6 +80,18 @@ def checkBoardFull(board):
         if board[5][j] == " ":
             fullFlag = False
     return fullFlag
+
+def printEndGame(playerWin, computerWin):
+    print("==================================================")
+    if playerWin:
+        print("You win!")
+    elif computerWin:
+        print("The comptuer has won.")
+    else:
+        print("Neither you nor the computer has won.")
+    print("==================================================")
+    print("")
+    return
 
 def main():
     #Parameters
@@ -194,8 +123,7 @@ def main():
         boardFull = checkBoardFull(board)
     
     printBoard(board)
-    printEndGame(playerWin, computerWin, boardFull)
-    
+    printEndGame(playerWin, computerWin)
     return
 
 if __name__ == "__main__":
