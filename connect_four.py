@@ -93,8 +93,8 @@ def printEndGame(playerWin, computerWin):
     print("")
     return
 
-def main():
-    #Parameters
+def playConnectFour():
+    #Set up board
     row6 = [" "," "," "," "," "," "," "]
     row5 = [" "," "," "," "," "," "," "]
     row4 = [" "," "," "," "," "," "," "]
@@ -107,7 +107,7 @@ def main():
     computerWin = False
     boardFull = False
         
-    #Move loop
+    #Column loop
     while (not playerWin) and (not computerWin) and (not boardFull):
         printBoard(board)
         column = ""
@@ -124,6 +124,22 @@ def main():
     
     printBoard(board)
     printEndGame(playerWin, computerWin)
+    return
+
+def main():
+    #Parameters
+    loopFlag = True
+    
+    #Game loop
+    while loopFlag:
+        playConnectFour()
+        newGame = ""
+        while newGame not in ["n", "y"]:
+            newGame = input("Another game? Y/N: ")
+            newGame = newGame.lower()
+        if newGame == "n":
+            loopFlag = False
+    print("")
     return
 
 if __name__ == "__main__":
