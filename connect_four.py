@@ -2,6 +2,8 @@
 #Purpose:  Play connect four
 #Author:   Brian Dumbacher
 
+import random
+
 def printBoard(board):
     ansiGREY = "\x1b[90m"
     ansiBLUE = "\x1b[94m"
@@ -131,10 +133,36 @@ def inCheck(board, color):
 def validColumn(board, column):
     validFlag = False
     if column in ["1","2","3","4","5","6","7"]:
-        jColumn = int(column) - 1
-        if board[5][jColumn] == " ":
+        j = int(column) - 1
+        if board[5][j] == " ":
             validFlag = True
     return validFlag
+
+def updateBoard(board, column, player):
+    j = int(column) - 1
+    if board[0][j] == " ":
+        board[0][j] = player
+    elif board[1][j] == " ":
+        board[1][j] = player
+    elif board[2][j] == " ":
+        board[2][j] = player
+    elif board[3][j] == " ":
+        board[3][j] = player
+    elif board[4][j] == " ":
+        board[4][j] = player
+    elif board[5][j] == " ":
+        board[5][j] = player
+    return board
+
+def checkWin(board, player):
+    return
+
+def checkBoardFull(board):
+    fullFlag = True
+    for j in [0,1,2,3,4,5,6]:
+        if board[5][j] == " ":
+            fullFlag = False
+    return fullFlag
 
 def main():
     #Parameters
@@ -145,18 +173,28 @@ def main():
     row2 = [" "," "," "," "," "," "," "]
     row1 = [" "," "," "," "," "," "," "]
     board = [row1,row2,row3,row4,row5,row6]
+    columns = ["1","2","3","4","5","6","7"]
     playerWin = False
     computerWin = False
+    boardFull = False
         
     #Move loop
-    while (not playerWin) and (not computerWin):
+    while (not playerWin) and (not computerWin) and (not boardFull):
         printBoard(board)
         column = ""
         while not validColumn(board, column):
             column = input("Column: ")
         board = updateBoard(board, column, "p")
         playerWin = checkWin(board, "p")
+        validColumns = [column for column in columns if validColumn(board, column)]
+        random.seed()
+        random.shuffle(validColumns)
+        board = updateBoard(board, validColumns[0], "c")
         computerWin = checkWin(board, "c")
+        boardFull = checkBoardFull(board)
+    
+    printBoard(board)
+    printEndGame(playerWin, computerWin, boardFull)
     
     return
 
