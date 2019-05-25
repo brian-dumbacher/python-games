@@ -74,12 +74,39 @@ def checkWin(board, player):
                 winFlag = True
     return winFlag
 
+def winMove(board, move, player):
+    return
+
+def loseMove(board, move, player):
+    return
+
 def getMoveComputer(board, moveHuman):
+    #Classify valid moves
     columns = ["1","2","3","4","5","6","7"]
     validMoves = [move for move in columns if validMove(board, move)]
+    winMoves = []
+    otherMoves = []
+    loseMoves = []
+    for move in validMoves:
+        if winMove(board, move, "c"):
+            winMoves.append(move)
+        elif loseMove(board, move, "c"):
+            loseMoves.append(move)
+        else:
+            otherMoves.append(move)
+    #Randomly choose move
     random.seed()
-    random.shuffle(validMoves) 
-    return validMoves[0]  
+    random.shuffle(winMoves)
+    random.shuffle(otherMoves)
+    random.shuffle(loseMoves)
+    computerMove = ""
+    if len(winMoves) > 0:
+        computerMove = winMoves[0]
+    elif len(otherMoves) > 0:
+        computerMove = otherMoves[0]
+    else:
+        computerMove = loseMoves[0]
+    return computerMove
 
 def checkBoardFull(board):
     fullFlag = True
