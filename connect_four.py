@@ -75,23 +75,23 @@ def checkWin(board, player):
     return winFlag
 
 def winMove(board, move, player):
-    row6New = [" "," "," "," "," "," "," "]
-    row5New = [" "," "," "," "," "," "," "]
-    row4New = [" "," "," "," "," "," "," "]
-    row3New = [" "," "," "," "," "," "," "]
-    row2New = [" "," "," "," "," "," "," "]
-    row1New = [" "," "," "," "," "," "," "]
-    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New]
+    row6Win = [" "," "," "," "," "," "," "]
+    row5Win = [" "," "," "," "," "," "," "]
+    row4Win = [" "," "," "," "," "," "," "]
+    row3Win = [" "," "," "," "," "," "," "]
+    row2Win = [" "," "," "," "," "," "," "]
+    row1Win = [" "," "," "," "," "," "," "]
+    boardWin = [row1Win,row2Win,row3Win,row4Win,row5Win,row6Win]
     for i in [0,1,2,3,4,5]:
         for j in [0,1,2,3,4,5,6]:
-            boardNew[i][j] = board[i][j]
-    boardNew = updateBoard(boardNew, move, player)
-    return checkWin(boardNew, player)
+            boardWin[i][j] = board[i][j]
+    boardWin = updateBoard(boardWin, move, player)
+    return checkWin(boardWin, player)
 
 def loseMove(board, move, player):
     if player == "c":
-        playerOpp = "p"
-    elif player == "p":
+        playerOpp = "h"
+    elif player == "h":
         playerOpp = "c"
     
     row6New = [" "," "," "," "," "," "," "]
@@ -107,9 +107,9 @@ def loseMove(board, move, player):
     boardNew = updateBoard(boardNew, move, player)
     
     columns = ["1","2","3","4","5","6","7"]
-    validMoves = [move for move in columns if validMove(boardNew, move)]
+    validMovesNew = [move for move in columns if validMove(boardNew, move)]
     loseFlag = False
-    for move in validMoves:
+    for move in validMovesNew:
         if winMove(boardNew, move, playerOpp):
             loseFlag = True
     return loseFlag
