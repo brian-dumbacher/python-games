@@ -1,4 +1,5 @@
 aardvark
+abominable
 acrimonious
 addlepated
 adjudicate
@@ -14,12 +15,15 @@ ambrosia
 ambulance
 anachronism
 anniversary
+anthropomorphic
 apathetic
 apoplectic
 aptitude
 aquarium
 arboretum
 argument
+aristocracy
+armistice
 arrangement
 artificial
 astronomy
@@ -48,6 +52,9 @@ childhood
 chimerical
 chiropractic
 chronology
+circumference
+circumscribe
+circumspect
 classroom
 clockwork
 colloquial
@@ -61,6 +68,7 @@ contentious
 copacetic
 corruption
 crystal
+curmudgeon
 cynical
 dandelion
 decadent
@@ -90,8 +98,10 @@ emblematic
 engineer
 entrance
 entrapment
+epistolary
 eponymous
 esoteric
+euphemism
 euphoria
 evaporate
 existence
@@ -131,6 +141,7 @@ horrible
 hospital
 humility
 hygiene
+hypothesize
 icicle
 iconoclast
 identify
@@ -142,18 +153,21 @@ imperceptible
 imperialism
 impervious
 incongruous
+incorrigible
 incredible
 indefatigable
 independence
 indispensable
 indolent
 ineptitude
+inexorable
 infallible
 inquisitive
 insatiable
 instantaneous
 intelligence
 interpretation
+irrefutable
 irresponsible
 isolation
 iteration
@@ -240,9 +254,11 @@ oxymoron
 pandemonium
 panther
 paradox
+paraprosdokian
 pastoral
 peacock
 pedestrian
+penultimate
 perfunctory
 persnickety
 pessimistic
@@ -276,6 +292,7 @@ rambunctious
 ravenous
 rebellion
 recalcitrant
+recidivism
 refractory
 refrigerator
 relaxation
@@ -284,6 +301,8 @@ relinquish
 reluctance
 reprehensible
 reptile
+reticence
+revanchism
 rhetoric
 rhinocerous
 ridiculous
@@ -331,6 +350,7 @@ turbulent
 turquoise
 tutelage
 twisted
+ubiquitous
 ulterior
 umbrella
 unassuming
