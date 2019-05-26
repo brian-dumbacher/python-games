@@ -89,6 +89,11 @@ def winMove(board, move, player):
     return checkWin(boardNew, player)
 
 def loseMove(board, move, player):
+    if player == "c":
+        playerOpp = "p"
+    elif player == "p":
+        playerOpp = "c"
+    
     row6New = [" "," "," "," "," "," "," "]
     row5New = [" "," "," "," "," "," "," "]
     row4New = [" "," "," "," "," "," "," "]
@@ -100,7 +105,14 @@ def loseMove(board, move, player):
         for j in [0,1,2,3,4,5,6]:
             boardNew[i][j] = board[i][j]
     boardNew = updateBoard(boardNew, move, player)
-    return
+    
+    columns = ["1","2","3","4","5","6","7"]
+    validMoves = [move for move in columns if validMove(boardNew, move)]
+    loseFlag = False
+    for move in validMoves:
+        if winMove(boardNew, move, playerOpp):
+            loseFlag = True
+    return loseFlag
 
 def getMoveComputer(board, moveHuman):
     #Classify valid moves
@@ -121,7 +133,6 @@ def getMoveComputer(board, moveHuman):
     random.shuffle(winMoves)
     random.shuffle(otherMoves)
     random.shuffle(loseMoves)
-    computerMove = ""
     if len(winMoves) > 0:
         computerMove = winMoves[0]
     elif len(otherMoves) > 0:
