@@ -51,28 +51,27 @@ def updateBoard(board, move, player):
     return board
 
 def checkWin(board, player):
-    winFlag = False
     #Rows
     for i in [0,1,2,3,4,5]:
         for j in [0,1,2,3]:
             if board[i][j] == player and board[i][j+1] == player and board[i][j+2] == player and board[i][j+3] == player:
-                winFlag = True
+                return True
     #Columns
     for j in [0,1,2,3,4,5,6]:
         for i in [0,1,2]:
             if board[i][j] == player and board[i+1][j] == player and board[i+2][j] == player and board[i+3][j] == player:
-                winFlag = True
+                return True
     #SW-NE Diagonals
     for j in [0,1,2,3]:
         for i in [0,1,2]:
             if board[i][j] == player and board[i+1][j+1] == player and board[i+2][j+2] == player and board[i+3][j+3] == player:
-                winFlag = True
+                return True
     #SE-NW Diagonals
     for j in [3,4,5,6]:
         for i in [0,1,2]:
             if board[i][j] == player and board[i+1][j-1] == player and board[i+2][j-2] == player and board[i+3][j-3] == player:
-                winFlag = True
-    return winFlag
+                return True
+    return False
 
 def winMove(board, move, player):
     row6Win = [" "," "," "," "," "," "," "]
@@ -108,11 +107,10 @@ def loseMove(board, move, player):
     
     columns = ["1","2","3","4","5","6","7"]
     validMovesNew = [move for move in columns if validMove(boardNew, move)]
-    loseFlag = False
     for move in validMovesNew:
         if winMove(boardNew, move, playerOpp):
-            loseFlag = True
-    return loseFlag
+            return True
+    return False
 
 def getMoveComputer(board, moveHuman):
     #Classify valid moves
@@ -130,23 +128,22 @@ def getMoveComputer(board, moveHuman):
             otherMoves.append(move)
     #Randomly choose move
     random.seed()
-    random.shuffle(winMoves)
-    random.shuffle(otherMoves)
-    random.shuffle(loseMoves)
     if len(winMoves) > 0:
+        random.shuffle(winMoves)
         computerMove = winMoves[0]
     elif len(otherMoves) > 0:
+        random.shuffle(otherMoves)
         computerMove = otherMoves[0]
     else:
+        random.shuffle(loseMoves)
         computerMove = loseMoves[0]
     return computerMove
 
 def checkBoardFull(board):
-    fullFlag = True
     for j in [0,1,2,3,4,5,6]:
         if board[5][j] == " ":
-            fullFlag = False
-    return fullFlag
+            return False
+    return True
 
 def printEndGame(winHuman, winComputer):
     print("==================================================")
@@ -201,10 +198,10 @@ def main():
     while loopFlag:
         playConnectFour()
         newGame = ""
-        while newGame not in ["n", "y"]:
+        while newGame not in ["n", "no", "y", "yes"]:
             newGame = input("Another game? Y/N: ")
             newGame = newGame.lower()
-        if newGame == "n":
+        if newGame in ["n", "no"]:
             loopFlag = False
     print("")
     return
