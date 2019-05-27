@@ -132,7 +132,7 @@ def printIncorrectGuesses(wordSet, guesses):
     text = "Incorrect: "
     for guess in guesses:
         if guess not in wordSet:
-            text = text + guess.upper()
+            text += guess.upper()
     print(text)
     print("")
     return
@@ -141,9 +141,9 @@ def printWord(word, guesses):
     text = "Word:     "
     for letter in word:
         if letter in guesses:
-            text = text + " " + letter.upper()
+            text += " " + letter.upper()
         else:
-            text = text + " _"
+            text += " _"
     print(text)
     print("")
     return
@@ -192,7 +192,7 @@ def playHangman(word):
         if correctGuess(wordSet, guess):
             winFlag = isGameWon(wordSet, guesses)
         else:
-            life = life - 1
+            life -= 1
     
     printHangman(life)
     printIncorrectGuesses(wordSet, guesses)
@@ -215,8 +215,8 @@ def main():
     #Game loop
     while loopFlag:
         playHangman(words[gameCounter])
-        gameCounter = gameCounter + 1
-        if gameCounter >= len(words):
+        gameCounter += 1
+        if gameCounter == len(words):
             gameCounter = 0
         newGame = ""
         while newGame not in ["n", "no", "y", "yes"]:
