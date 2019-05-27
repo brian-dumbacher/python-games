@@ -121,7 +121,7 @@ def findMoveSquaresKnight(board, color, square):
     moveSquares = []
     for moveSquare in moveSquaresEight:
         if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
-            if board[moveSquare[0]][moveSquare[1]][0] in [" ",colorOpp]:
+            if board[moveSquare[0]][moveSquare[1]][0] in [" ", colorOpp]:
                 moveSquares.append(moveSquare)
     return moveSquares
 
@@ -191,7 +191,7 @@ def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, squ
     moveSquares = []
     for moveSquare in moveSquaresEight:
         if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
-            if board[moveSquare[0]][moveSquare[1]][0] in [" ",colorOpp]:
+            if board[moveSquare[0]][moveSquare[1]][0] in [" ", colorOpp]:
                 moveSquares.append(moveSquare)
     #Castling
     if canCastleKingside:
@@ -214,10 +214,10 @@ def findAttackSquaresPawn(board, color, square):
     attackSquares = []
     #Capture
     if j >= 1:
-        if board[i+d][j-1][0] in [" ",colorOpp]:
+        if board[i+d][j-1][0] in [" ", colorOpp]:
             attackSquares.append([i+d,j-1])
     if j <= 6:
-        if board[i+d][j+1][0] in [" ",colorOpp]:
+        if board[i+d][j+1][0] in [" ", colorOpp]:
             attackSquares.append([i+d,j+1])
     return attackSquares
 
@@ -244,7 +244,7 @@ def findAttackSquaresKing(board, color, square):
     attackSquares = []
     for attackSquare in attackSquaresEight:
         if attackSquare[0] in [0,1,2,3,4,5,6,7] and attackSquare[1] in [0,1,2,3,4,5,6,7]:
-            if board[attackSquare[0]][attackSquare[1]][0] in [" ",colorOpp]:
+            if board[attackSquare[0]][attackSquare[1]][0] in [" ", colorOpp]:
                 attackSquares.append(attackSquare)
     return attackSquares
 
@@ -295,11 +295,10 @@ def inCheck(board, color):
         attackSquares.extend(findAttackSquaresKing(board, colorOpp, square))
     
     #Determine whether king is in check
-    checkFlag = False
     for attackSquare in attackSquares:
         if attackSquare == squareKing:
-            checkFlag = True
-    return checkFlag
+            return True
+    return False
 
 def isLegalMove(board, color, checkFlag, move):
     i0 = move[0][0]
@@ -308,13 +307,13 @@ def isLegalMove(board, color, checkFlag, move):
     j1 = move[1][1]
     isKing = (board[i0][j0][1] == "K")
     
-    #Castling
+    #Castling transit square
     legalCastleFlag = True
     if isKing and abs(j1 - j0) == 2:
         if j1 > j0:
-            jMiddle = j0 + 1
+            jTransit = j0 + 1
         elif j1 < j0:
-            jMiddle = j0 - 1
+            jTransit = j0 - 1
         if checkFlag:
             legalCastleFlag = False
         else:
@@ -330,11 +329,11 @@ def isLegalMove(board, color, checkFlag, move):
             for i in [0,1,2,3,4,5,6,7]:
                 for j in [0,1,2,3,4,5,6,7]:
                     boardNew[i][j] = board[i][j]
-            boardNew[i1][jMiddle] = boardNew[i0][j0]
+            boardNew[i1][jTransit] = boardNew[i0][j0]
             boardNew[i0][j0] = "  "
             legalCastleFlag = not inCheck(boardNew, color)
     
-    #Everything other than castling
+    #Final square
     row1New = ["  ","  ","  ","  ","  ","  ","  ","  "]
     row2New = ["  ","  ","  ","  ","  ","  ","  ","  "]
     row3New = ["  ","  ","  ","  ","  ","  ","  ","  "]
