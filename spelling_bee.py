@@ -3,6 +3,7 @@
 #Author:   Brian Dumbacher
 
 import codecs
+import random
 import re
 
 def cleanWord(w):
@@ -72,16 +73,18 @@ def main():
     words = []
     score = 0
     continueFlag = True
-    lettersReg = ["T","O","U","F","N","I"]
+    lettersReg = ["F","I","N","O","T","U"]
+    random.seed()
+    random.shuffle(lettersReg)
     letterCenter = "R"
-
+    
     #Slide loop
     while continueFlag == True:
         printPuzzle(lettersReg, letterCenter, words)
         word = input("Word (q to quit): ")
         word = word.upper()
         word = word.strip()
-        if word in ["E","EX","EXI","EXIT","S","ST","STO","STOP","Q","QU","QUI","QUIT"]:
+        if word in ["Q", "QUIT"]:
             continueFlag = False
         else:
             if wordValid(dictionary, lettersReg, letterCenter, word):
