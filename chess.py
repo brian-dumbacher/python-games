@@ -305,15 +305,11 @@ def isLegalMove(board, color, checkFlag, move):
     j0 = move[0][1]
     i1 = move[1][0]
     j1 = move[1][1]
-    isKing = (board[i0][j0][1] == "K")
     
     #Castling transit square
     legalCastleFlag = True
-    if isKing and abs(j1 - j0) == 2:
-        if j1 > j0:
-            jTransit = j0 + 1
-        elif j1 < j0:
-            jTransit = j0 - 1
+    if (board[i0][j0][1] == "K") and (abs(j1 - j0) == 2):
+        jTransit = int((j0 + j1)/2)
         if checkFlag:
             legalCastleFlag = False
         else:
