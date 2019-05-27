@@ -219,10 +219,10 @@ def main():
         if gameCounter >= len(words):
             gameCounter = 0
         newGame = ""
-        while newGame not in ["n", "y"]:
+        while newGame not in ["n", "no", "y", "yes"]:
             newGame = input("Another game? Y/N: ")
             newGame = newGame.lower()
-        if newGame == "n":
+        if newGame in ["n", "no"]:
             loopFlag = False
     print("")
     return
