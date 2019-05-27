@@ -119,6 +119,7 @@ embargo
 embarrassment
 embezzlement
 emblematic
+emphasis
 engineer
 entrance
 entrapment
@@ -128,7 +129,12 @@ esoteric
 euphemism
 euphoria
 evaporate
+exasperate
+excommunicate
 existence
+exoskeleton
+extramarital
+extremity
 fabulous
 fastidious
 feminism
@@ -162,6 +168,8 @@ heuristic
 highway
 hippopotamus
 historical
+histrionics
+homeostasis
 horrible
 hospital
 humility
@@ -371,6 +379,7 @@ summertime
 superior
 suspenseful
 susquipedalian
+susurrus
 sycophant
 synonym
 systematic
@@ -424,6 +433,7 @@ verisimilitude
 vernacular
 veterinarian
 vindictive
+virility
 vitamin
 volition
 voluminous
