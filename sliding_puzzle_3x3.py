@@ -30,7 +30,7 @@ def randomPuzzle():
         slides = slidesValid(puzzle)
         slide = slides[random.randint(0, len(slides) - 1)]
         puzzle = updatePuzzle(puzzle, slide)
-        numSlides = numSlides + 1
+        numSlides += 1
     return puzzle
 
 def printPuzzle(puzzle):
@@ -90,7 +90,7 @@ def playPuzzle(puzzleStart):
         slide = ""
         while not validSlide(puzzle, slide):
             slide = input("Slide: ")
-        numSlides = numSlides + 1
+        numSlides += 1
         puzzle = updatePuzzle(puzzle, slide)
         solveFlag = isPuzzleSolved(puzzle)
     
@@ -107,10 +107,10 @@ def main():
         puzzleStart = randomPuzzle()
         playPuzzle(puzzleStart)
         newPuzzle = ""
-        while newPuzzle not in ["n", "y"]:
+        while newPuzzle not in ["n", "no", "y", "yes"]:
             newPuzzle = input("Another puzzle? Y/N: ")
             newPuzzle = newPuzzle.lower()
-        if newPuzzle == "n":
+        if newPuzzle in ["n", "no"]:
             loopFlag = False
     print("")
     return
