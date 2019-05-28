@@ -54,6 +54,8 @@ broccoli
 bucolic
 bumptious
 cacophony
+carnelian
+castaway
 catapult
 catatonic
 category
@@ -154,12 +156,14 @@ fundamental
 fungible
 garrulous
 geography
+gentrification
 gigantic
 giraffe
 gobsmacked
 goofball
 graphical
 gratuitous
+greenhorn
 guardianship
 guitar
 gyration
@@ -188,9 +192,11 @@ ignoble
 illumination
 immaterial
 imminent
+impecunious
 imperceptible
 imperialism
 impervious
+impoverished
 incongruous
 incorrigible
 incredible
@@ -240,8 +246,10 @@ lassitude
 laziness
 lecherous
 leprechaun
+lethargy
 licentious
 licorice
+listlessness
 literature
 loathsome
 locksmith
@@ -275,6 +283,7 @@ nauseate
 navigable
 necessary
 nemesis
+neophyte
 nescient
 neurology
 neutralize
@@ -320,11 +329,14 @@ pandemonium
 panther
 paradox
 paraprosdokian
+parsimonious
 pastoral
 patience
 peacock
+peccadillo
 pedestrian
 penultimate
+penurious
 perfunctory
 persnickety
 pessimistic
@@ -333,6 +345,7 @@ phlegmatic
 physical
 pinnacle
 podiatrist
+polymath
 potential
 precocious
 predator
@@ -376,6 +389,7 @@ rhinocerous
 ridiculous
 romantic
 rudimentary
+sagacious
 sanctimonious
 sandwich
 satellite
@@ -397,6 +411,7 @@ soldier
 squirrel
 stampede
 statistics
+stowaway
 strenuous
 summertime
 superior
