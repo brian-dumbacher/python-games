@@ -373,19 +373,27 @@ def convertSquareCoord(square):
 def convertMoveCoord(move):
     return convertSquareCoord(move[0]) + "-" + convertSquareCoord(move[1])
 
-def printStatus(colorMove, checkFlag, checkmateFlag):
+def printStatus(colorMove, checkFlag, checkmateFlag, stalemateFlag):
     if colorMove == "w":
         print("Turn to move: WHITE")
     elif colorMove == "b":
         print("Turn to move: BLACK")
+    
     if checkFlag:
         print("In check?     YES")
     else:
         print("In check?     NO")
+    
     if checkmateFlag:
-        print("Checkmated?   YES")
+        print("Checkmate?    YES")
     else:
-        print("Checkmated?   NO")
+        print("Checkmate?    NO")
+    
+    if stalemateFlag:
+        print("Stalemate?    YES")
+    else:
+        print("Stalemate?    NO")
+    
     print("")
     return
 
@@ -483,8 +491,9 @@ def main():
     movesCoord = movesCoordPawn + movesCoordBishop + movesCoordKnight + movesCoordRook + movesCoordQueen + movesCoordKing
     
     #Print status
-    checkmateFlag = (len(movesCoord) == 0)
-    printStatus(colorMove, checkFlag, checkmateFlag)
+    checkmateFlag = checkFlag and len(movesCoord) == 0
+    stalemateFlag = not checkFlag and len(movesCoord) == 0
+    printStatus(colorMove, checkFlag, checkmateFlag, stalemateFlag)
     
     #Print moves
     print("Possible Moves:")
