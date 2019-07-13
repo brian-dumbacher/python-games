@@ -152,7 +152,7 @@ def printEndGame(winHuman, winComputer):
     elif winComputer:
         print("You lose.")
     else:
-        print("Neither you nor the computer has won.")
+        print("Time game.")
     print("==================================================")
     print("")
     return
