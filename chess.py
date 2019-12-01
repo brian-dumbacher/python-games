@@ -176,9 +176,7 @@ def findMoveSquaresRook(board, color, square):
     return moveSquares
 
 def findMoveSquaresQueen(board, color, square):
-    moveSquares = findMoveSquaresBishop(board, color, square)
-    moveSquares.extend(findMoveSquaresRook(board, color, square))
-    return moveSquares
+    return findMoveSquaresBishop(board, color, square) + findMoveSquaresRook(board, color, square)
 
 def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, square):
     if color == "w":
