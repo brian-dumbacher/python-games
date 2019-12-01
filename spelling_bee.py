@@ -39,20 +39,16 @@ def printPuzzle(lettersReg, letterCenter, words):
     return
 
 def settify(listOrString):
-    return set([l for l in listOrString])
+    return set(l for l in listOrString)
 
 def wordValid(dictionary, lettersReg, letterCenter, word):
-    lettersFull = [l for l in lettersReg]
-    lettersFull.append(letterCenter)
+    lettersFull = [l for l in lettersReg] + [letterCenter]
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
 def getScore(lettersReg, letterCenter, word):
-    score = 1
     lettersFull = [l for l in lettersReg]
     lettersFull.append(letterCenter)
-    if settify(word) == settify(lettersFull):
-        score = 3
-    return score
+    return 3 if settify(word) == settify(lettersFull) else 1
 
 def printScore(words, score):
     print("")
@@ -90,7 +86,7 @@ def main():
             if wordValid(dictionary, lettersReg, letterCenter, word):
                 words.append(word)
                 words.sort()
-                score = score + getScore(lettersReg, letterCenter, word)
+                score += getScore(lettersReg, letterCenter, word)
     
     #Print score
     printScore(words, score)
