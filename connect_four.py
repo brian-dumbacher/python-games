@@ -27,12 +27,7 @@ def printBoard(board):
     return
 
 def validMove(board, move):
-    validFlag = False
-    if move in ["1","2","3","4","5","6","7"]:
-        j = int(move) - 1
-        if board[5][j] == " ":
-            validFlag = True
-    return validFlag
+    return True if move in ["1","2","3","4","5","6","7"] and board[5][int(move) - 1] == " " else False
 
 def updateBoard(board, move, player):
     j = int(move) - 1
@@ -152,7 +147,7 @@ def printEndGame(winHuman, winComputer):
     elif winComputer:
         print("You lose.")
     else:
-        print("Time game.")
+        print("Tie game.")
     print("==================================================")
     print("")
     return
