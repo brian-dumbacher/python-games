@@ -1,8 +1,13 @@
-#Name:     connect_four.py
-#Purpose:  Play connect four
-#Author:   Brian Dumbacher
+# Name:     connect_four.py
+# Purpose:  Play connect four
+# Author:   Brian Dumbacher
 
 import random
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def printBoard(board):
     ansiGREY = "\x1b[90m"
@@ -10,9 +15,9 @@ def printBoard(board):
     ansiTEAL = "\x1b[96m"
     ansiEND  = "\x1b[0m"
     print("")
-    for i in [5,4,3,2,1,0]:
+    for i in [5, 4, 3, 2, 1, 0]:
         print(ansiTEAL + "   |" + ansiEND, end="")
-        for j in [0,1,2,3,4,5,6]:
+        for j in [0, 1, 2, 3, 4, 5, 6]:
             if board[i][j] == " ":
                 square = ansiGREY + "." + ansiEND
             elif board[i][j] == "h":
@@ -26,8 +31,18 @@ def printBoard(board):
     print("")
     return
 
-def validMove(board, move):
-    return True if move in ["1","2","3","4","5","6","7"] and board[5][int(move) - 1] == " " else False
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
+def isValidMove(board, move):
+    return True if move in ["1", "2", "3", "4", "5", "6", "7"] and board[5][int(move) - 1] == " " else False
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def updateBoard(board, move, player):
     j = int(move) - 1
@@ -45,100 +60,133 @@ def updateBoard(board, move, player):
         board[5][j] = player
     return board
 
-def checkWin(board, player):
-    #Rows
-    for i in [0,1,2,3,4,5]:
-        for j in [0,1,2,3]:
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
+def isGameWon(board, player):
+    # Rows
+    for i in [0, 1, 2, 3, 4, 5]:
+        for j in [0, 1, 2, 3]:
             if board[i][j] == player and board[i][j+1] == player and board[i][j+2] == player and board[i][j+3] == player:
                 return True
-    #Columns
-    for j in [0,1,2,3,4,5,6]:
-        for i in [0,1,2]:
+    # Columns
+    for j in [0, 1, 2, 3, 4, 5, 6]:
+        for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j] == player and board[i+2][j] == player and board[i+3][j] == player:
                 return True
-    #SW-NE Diagonals
-    for j in [0,1,2,3]:
-        for i in [0,1,2]:
+    # SW-NE Diagonals
+    for j in [0, 1, 2, 3]:
+        for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j+1] == player and board[i+2][j+2] == player and board[i+3][j+3] == player:
                 return True
-    #SE-NW Diagonals
-    for j in [3,4,5,6]:
-        for i in [0,1,2]:
+    # SE-NW Diagonals
+    for j in [3, 4, 5, 6]:
+        for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j-1] == player and board[i+2][j-2] == player and board[i+3][j-3] == player:
                 return True
     return False
 
-def winMove(board, move, player):
-    row6Win = [" "," "," "," "," "," "," "]
-    row5Win = [" "," "," "," "," "," "," "]
-    row4Win = [" "," "," "," "," "," "," "]
-    row3Win = [" "," "," "," "," "," "," "]
-    row2Win = [" "," "," "," "," "," "," "]
-    row1Win = [" "," "," "," "," "," "," "]
-    boardWin = [row1Win,row2Win,row3Win,row4Win,row5Win,row6Win]
-    for i in [0,1,2,3,4,5]:
-        for j in [0,1,2,3,4,5,6]:
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
+def isWinningMove(board, move, player):
+    row6Win = [" ", " ", " ", " ", " ", " ", " "]
+    row5Win = [" ", " ", " ", " ", " ", " ", " "]
+    row4Win = [" ", " ", " ", " ", " ", " ", " "]
+    row3Win = [" ", " ", " ", " ", " ", " ", " "]
+    row2Win = [" ", " ", " ", " ", " ", " ", " "]
+    row1Win = [" ", " ", " ", " ", " ", " ", " "]
+    boardWin = [row1Win, row2Win, row3Win, row4Win, row5Win, row6Win]
+    for i in [0, 1, 2, 3, 4, 5]:
+        for j in [0, 1, 2, 3, 4, 5, 6]:
             boardWin[i][j] = board[i][j]
     boardWin = updateBoard(boardWin, move, player)
-    return checkWin(boardWin, player)
+    return isGameWon(boardWin, player)
 
-def loseMove(board, move, player):
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
+def isLosingMove(board, move, player):
     if player == "c":
         playerOpp = "h"
     elif player == "h":
         playerOpp = "c"
     
-    row6New = [" "," "," "," "," "," "," "]
-    row5New = [" "," "," "," "," "," "," "]
-    row4New = [" "," "," "," "," "," "," "]
-    row3New = [" "," "," "," "," "," "," "]
-    row2New = [" "," "," "," "," "," "," "]
-    row1New = [" "," "," "," "," "," "," "]
-    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New]
-    for i in [0,1,2,3,4,5]:
-        for j in [0,1,2,3,4,5,6]:
+    row6New = [" ", " ", " ", " ", " ", " ", " "]
+    row5New = [" ", " ", " ", " ", " ", " ", " "]
+    row4New = [" ", " ", " ", " ", " ", " ", " "]
+    row3New = [" ", " ", " ", " ", " ", " ", " "]
+    row2New = [" ", " ", " ", " ", " ", " ", " "]
+    row1New = [" ", " ", " ", " ", " ", " ", " "]
+    boardNew = [row1New, row2New, row3New, row4New, row5New, row6New]
+    for i in [0, 1, 2, 3, 4, 5]:
+        for j in [0, 1, 2, 3, 4, 5, 6]:
             boardNew[i][j] = board[i][j]
     boardNew = updateBoard(boardNew, move, player)
     
-    columns = ["1","2","3","4","5","6","7"]
-    validMovesNew = [move for move in columns if validMove(boardNew, move)]
+    columns = ["1", "2", "3", "4", "5", "6", "7"]
+    validMovesNew = [move for move in columns if isValidMove(boardNew, move)]
     for move in validMovesNew:
-        if winMove(boardNew, move, playerOpp):
+        if isWinningMove(boardNew, move, playerOpp):
             return True
     return False
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def getMoveComputer(board, moveHuman):
-    #Classify valid moves
-    columns = ["1","2","3","4","5","6","7"]
-    validMoves = [move for move in columns if validMove(board, move)]
-    winMoves = []
+    # Classify valid moves
+    columns = ["1", "2", "3", "4", "5", "6", "7"]
+    validMoves = [move for move in columns if isValidMove(board, move)]
+    winningMoves = []
     otherMoves = []
-    loseMoves = []
+    losingMoves = []
     for move in validMoves:
-        if winMove(board, move, "c"):
-            winMoves.append(move)
-        elif loseMove(board, move, "c"):
-            loseMoves.append(move)
+        if isWinningMove(board, move, "c"):
+            winningMoves.append(move)
+        elif isLosingMove(board, move, "c"):
+            losingMoves.append(move)
         else:
             otherMoves.append(move)
-    #Randomly choose move
     random.seed()
-    if len(winMoves) > 0:
-        random.shuffle(winMoves)
-        computerMove = winMoves[0]
+    # Randomly choose winning move
+    if len(winningMoves) > 0:
+        random.shuffle(winningMoves)
+        computerMove = winningMoves[0]
+    # Randomly choose other move
     elif len(otherMoves) > 0:
         random.shuffle(otherMoves)
         computerMove = otherMoves[0]
+    # Randomly choose losing move
     else:
-        random.shuffle(loseMoves)
-        computerMove = loseMoves[0]
+        random.shuffle(losingMoves)
+        computerMove = losingMoves[0]
     return computerMove
 
-def checkBoardFull(board):
-    for j in [0,1,2,3,4,5,6]:
+# Name:        isBoardFull
+# Purpose:     Check whether the board is full
+# Parameters:  board (2D list)
+# Returns:     True (the board is full) or False (the board is not full)
+
+def isBoardFull(board):
+    for j in [0, 1, 2, 3, 4, 5, 6]:
         if board[5][j] == " ":
             return False
     return True
+
+# Name:        printEndGame
+# Purpose:     Print results of game
+# Parameters:  winHuman (Boolean value indicating whether the human player won)
+#              winComputer (Boolean value indicating whether the computer player won)
+# Returns:
 
 def printEndGame(winHuman, winComputer):
     print("==================================================")
@@ -152,44 +200,54 @@ def printEndGame(winHuman, winComputer):
     print("")
     return
 
+# Name:        playConnectFour
+# Purpose:     Play a game of Connect Four
+# Parameters:
+# Returns:
+
 def playConnectFour():
-    #Board setup
-    row6 = [" "," "," "," "," "," "," "]
-    row5 = [" "," "," "," "," "," "," "]
-    row4 = [" "," "," "," "," "," "," "]
-    row3 = [" "," "," "," "," "," "," "]
-    row2 = [" "," "," "," "," "," "," "]
-    row1 = [" "," "," "," "," "," "," "]
-    board = [row1,row2,row3,row4,row5,row6]
+    # Board setup
+    row6 = [" ", " ", " ", " ", " ", " ", " "]
+    row5 = [" ", " ", " ", " ", " ", " ", " "]
+    row4 = [" ", " ", " ", " ", " ", " ", " "]
+    row3 = [" ", " ", " ", " ", " ", " ", " "]
+    row2 = [" ", " ", " ", " ", " ", " ", " "]
+    row1 = [" ", " ", " ", " ", " ", " ", " "]
+    board = [row1, row2, row3, row4, row5, row6]
     winHuman = False
     winComputer = False
     boardFull = False
         
-    #Move loop
+    # Move loop
     while (not winHuman) and (not winComputer) and (not boardFull):
         printBoard(board)
-        #Human move
+        # Human move
         moveHuman = ""
-        while not validMove(board, moveHuman):
+        while not isValidMove(board, moveHuman):
             moveHuman = input("Column: ")
         board = updateBoard(board, moveHuman, "h")
-        winHuman = checkWin(board, "h")
-        #Computer move
+        winHuman = isGameWon(board, "h")
+        # Computer move
         if not winHuman:
             moveComputer = getMoveComputer(board, moveHuman)        
             board = updateBoard(board, moveComputer, "c")
-            winComputer = checkWin(board, "c")
-            boardFull = checkBoardFull(board)
+            winComputer = isGameWon(board, "c")
+            boardFull = isBoardFull(board)
     
     printBoard(board)
     printEndGame(winHuman, winComputer)
     return
 
+# Name:        main
+# Purpose:     Loop through multiple games of Connect Four
+# Parameters:
+# Returns:
+
 def main():
-    #Parameters
+    # Parameters
     loopFlag = True
     
-    #Game loop
+    # Game loop
     while loopFlag:
         playConnectFour()
         newGame = ""
