@@ -4,9 +4,9 @@
 
 import random
 
-# Name:
-# Purpose:
-# Parameters:
+# Name:        printBoard
+# Purpose:     Print the board to the screen
+# Parameters:  board (2D list)
 # Returns:
 
 def printBoard(board):
@@ -16,54 +16,50 @@ def printBoard(board):
     ansiEND  = "\x1b[0m"
     print("")
     for i in [5, 4, 3, 2, 1, 0]:
-        print(ansiTEAL + "   |" + ansiEND, end="")
+        print("{}   |{}".format(ansiTEAL, ansiEND), end="")
         for j in [0, 1, 2, 3, 4, 5, 6]:
             if board[i][j] == " ":
-                square = ansiGREY + "." + ansiEND
+                square = "{}.{}".format(ansiGREY, ansiEND)
             elif board[i][j] == "h":
                 square = "o"
             elif board[i][j] == "c":
-                square = ansiBLUE + "o" + ansiEND
-            print(" " + square, end="")
+                square = "{}o{}".format(ansiBLUE, ansiEND)
+            print(" {}".format(square), end="")
         print("")
-    print(ansiTEAL + "     -------------" + ansiEND)
-    print(ansiTEAL + "     1 2 3 4 5 6 7" + ansiEND)
+    print("{}     -------------{}".format(ansiTEAL, ansiEND))
+    print("{}     1 2 3 4 5 6 7{}".format(ansiTEAL, ansiEND))
     print("")
     return
 
-# Name:
-# Purpose:
-# Parameters:
-# Returns:
+# Name:        isValidMove
+# Purpose:     Determine whether move is valid given the board
+# Parameters:  board (2D list)
+#              move
+# Returns:     True (move is valid) or False (move is invalid)
 
 def isValidMove(board, move):
     return True if move in ["1", "2", "3", "4", "5", "6", "7"] and board[5][int(move) - 1] == " " else False
 
-# Name:
-# Purpose:
-# Parameters:
-# Returns:
+# Name:        updateBoard
+# Purpose:     Update the board
+# Parameters:  board
+#              move
+#              player
+# Returns:     updated board (2D list)
 
 def updateBoard(board, move, player):
     j = int(move) - 1
-    if board[0][j] == " ":
-        board[0][j] = player
-    elif board[1][j] == " ":
-        board[1][j] = player
-    elif board[2][j] == " ":
-        board[2][j] = player
-    elif board[3][j] == " ":
-        board[3][j] = player
-    elif board[4][j] == " ":
-        board[4][j] = player
-    elif board[5][j] == " ":
-        board[5][j] = player
+    for i in [0, 1, 2, 3, 4, 5]:
+        if board[i][j] == " ":
+            board[i][j] = player
+            break
     return board
 
-# Name:
-# Purpose:
-# Parameters:
-# Returns:
+# Name:        isGameWon
+# Purpose:     Determine whether the given player has won the game
+# Parameters:  board (2D list)
+#              player
+# Returns:     True (player has won) or False (player has not won)
 
 def isGameWon(board, player):
     # Rows
@@ -88,10 +84,12 @@ def isGameWon(board, player):
                 return True
     return False
 
-# Name:
-# Purpose:
-# Parameters:
-# Returns:
+# Name:        isWinningMove
+# Purpose:     Determine whether move is winning for given player
+# Parameters:  board (2D list)
+#              move
+#              player
+# Returns:     True (move is winning) or False (move is not winning)
 
 def isWinningMove(board, move, player):
     row6Win = [" ", " ", " ", " ", " ", " ", " "]
@@ -107,10 +105,12 @@ def isWinningMove(board, move, player):
     boardWin = updateBoard(boardWin, move, player)
     return isGameWon(boardWin, player)
 
-# Name:
-# Purpose:
-# Parameters:
-# Returns:
+# Name:        isLosingMove
+# Purpose:     Determine whether move is losing for given player
+# Parameters:  board (2D list)
+#              move
+#              player
+# Returns:     True (move is losing) or False (move is not losing)
 
 def isLosingMove(board, move, player):
     if player == "c":
@@ -137,10 +137,11 @@ def isLosingMove(board, move, player):
             return True
     return False
 
-# Name:
-# Purpose:
-# Parameters:
-# Returns:
+# Name:        getMoveComputer
+# Purpose:     Get computer player's move
+# Parameters:  board (2D list)
+#              moveHuman
+# Returns:     computerMove (computer player's move)
 
 def getMoveComputer(board, moveHuman):
     # Classify valid moves
