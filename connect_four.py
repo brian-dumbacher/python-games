@@ -23,7 +23,7 @@ def printBoard(board):
             elif board[i][j] == "h":
                 square = "o"
             elif board[i][j] == "c":
-                square = "{}o{}".format(ansiBLUE, ansiEND)
+                square = "{}x{}".format(ansiBLUE, ansiEND)
             print(" {}".format(square), end="")
         print("")
     print("{}     -------------{}".format(ansiTEAL, ansiEND))
@@ -42,9 +42,9 @@ def isValidMove(board, move):
 
 # Name:        updateBoard
 # Purpose:     Update the board
-# Parameters:  board
+# Parameters:  board (2D list)
 #              move
-#              player
+#              player ("c" or "h")
 # Returns:     updated board (2D list)
 
 def updateBoard(board, move, player):
@@ -58,7 +58,7 @@ def updateBoard(board, move, player):
 # Name:        isGameWon
 # Purpose:     Determine whether the given player has won the game
 # Parameters:  board (2D list)
-#              player
+#              player ("c" or "h")
 # Returns:     True (player has won) or False (player has not won)
 
 def isGameWon(board, player):
@@ -88,7 +88,7 @@ def isGameWon(board, player):
 # Purpose:     Determine whether move is winning for given player
 # Parameters:  board (2D list)
 #              move
-#              player
+#              player ("c" or "h")
 # Returns:     True (move is winning) or False (move is not winning)
 
 def isWinningMove(board, move, player):
@@ -109,7 +109,7 @@ def isWinningMove(board, move, player):
 # Purpose:     Determine whether move is losing for given player
 # Parameters:  board (2D list)
 #              move
-#              player
+#              player ("c" or "h")
 # Returns:     True (move is losing) or False (move is not losing)
 
 def isLosingMove(board, move, player):
