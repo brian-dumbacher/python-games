@@ -32,9 +32,9 @@ def printBoard(board):
     return
 
 # Name:        isValidMove
-# Purpose:     Determine whether move is valid
+# Purpose:     Determine whether the proposed move is valid
 # Parameters:  board (2D list)
-#              move
+#              move (proposed move)
 # Returns:     True (move is valid) or False (move is invalid)
 
 def isValidMove(board, move):
@@ -43,7 +43,7 @@ def isValidMove(board, move):
 # Name:        updateBoard
 # Purpose:     Update the board
 # Parameters:  board (2D list)
-#              move
+#              move (valid move)
 #              player ("c" or "h")
 # Returns:     updated board (2D list)
 
@@ -87,7 +87,7 @@ def isGameWon(board, player):
 # Name:        isWinningMove
 # Purpose:     Determine whether move is winning for given player
 # Parameters:  board (2D list)
-#              move
+#              move (valid move)
 #              player ("c" or "h")
 # Returns:     True (move is winning) or False (move is not winning)
 
@@ -102,7 +102,7 @@ def isWinningMove(board, move, player):
 # Name:        isLosingMove
 # Purpose:     Determine whether move is losing for given player
 # Parameters:  board (2D list)
-#              move
+#              move (valid move)
 #              player ("c" or "h")
 # Returns:     True (move is losing) or False (move is not losing)
 
@@ -118,8 +118,7 @@ def isLosingMove(board, move, player):
             boardNew[i][j] = board[i][j]
     boardNew = updateBoard(boardNew, move, player)
     
-    columns = ["1", "2", "3", "4", "5", "6", "7"]
-    validMovesNew = [move for move in columns if isValidMove(boardNew, move)]
+    validMovesNew = [move for move in ["1", "2", "3", "4", "5", "6", "7"] if isValidMove(boardNew, move)]
     for move in validMovesNew:
         if isWinningMove(boardNew, move, playerOpp):
             return True
@@ -128,13 +127,12 @@ def isLosingMove(board, move, player):
 # Name:        getMoveComputer
 # Purpose:     Get computer player's move
 # Parameters:  board (2D list)
-#              moveHuman
+#              moveHuman (last human move)
 # Returns:     computerMove (computer player's move)
 
 def getMoveComputer(board, moveHuman):
     # Classify valid moves
-    columns = ["1", "2", "3", "4", "5", "6", "7"]
-    validMoves = [move for move in columns if isValidMove(board, move)]
+    validMoves = [move for move in ["1", "2", "3", "4", "5", "6", "7"] if isValidMove(board, move)]
     winningMoves = []
     otherMoves = []
     losingMoves = []
@@ -216,7 +214,8 @@ def playConnectFour():
             board = updateBoard(board, moveComputer, "c")
             winComputer = isGameWon(board, "c")
             boardFull = isBoardFull(board)
-    
+
+    # Game results
     printBoard(board)
     printEndGame(winHuman, winComputer)
     return
@@ -233,11 +232,11 @@ def main():
     # Game loop
     while loopFlag:
         playConnectFour()
-        newGame = ""
-        while newGame not in ["n", "no", "y", "yes"]:
-            newGame = input("Another game? (Y/N): ")
-            newGame = newGame.lower()
-        if newGame in ["n", "no"]:
+        newGameInput = ""
+        while newGameInput not in ["n", "no", "y", "yes"]:
+            newGameInput = input("Another game? (Y/N): ")
+            newGameInput = newGameInput.lower()
+        if newGameInput in ["n", "no"]:
             loopFlag = False
     print("")
     return
