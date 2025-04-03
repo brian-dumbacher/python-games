@@ -10,29 +10,29 @@ import random
 # Returns:
 
 def printBoard(board):
-    ansiGREY = "\x1b[90m"
-    ansiBLUE = "\x1b[94m"
-    ansiTEAL = "\x1b[96m"
-    ansiEND  = "\x1b[0m"
+    ANSI_BLACK     = "\x1b[30m"
+    ANSI_RED_BOLD  = "\x1b[1;31m"
+    ANSI_BLUE_BOLD = "\x1b[1;34m"
+    ANSI_END       = "\x1b[0m"
     print("")
     for i in [5, 4, 3, 2, 1, 0]:
-        print("{}   |{}".format(ansiTEAL, ansiEND), end="")
+        print("{}   |{}".format(ANSI_BLACK, ANSI_END), end="")
         for j in [0, 1, 2, 3, 4, 5, 6]:
             if board[i][j] == " ":
-                square = "{}.{}".format(ansiGREY, ansiEND)
+                square = "{}.{}".format(ANSI_BLACK, ANSI_END)
             elif board[i][j] == "h":
-                square = "o"
+                square = "{}o{}".format(ANSI_BLUE_BOLD, ANSI_END)
             elif board[i][j] == "c":
-                square = "{}x{}".format(ansiBLUE, ansiEND)
+                square = "{}x{}".format(ANSI_RED_BOLD, ANSI_END)
             print(" {}".format(square), end="")
         print("")
-    print("{}     -------------{}".format(ansiTEAL, ansiEND))
-    print("{}     1 2 3 4 5 6 7{}".format(ansiTEAL, ansiEND))
+    print("{}     -------------{}".format(ANSI_BLACK, ANSI_END))
+    print("{}     1 2 3 4 5 6 7{}".format(ANSI_BLACK, ANSI_END))
     print("")
     return
 
 # Name:        isValidMove
-# Purpose:     Determine whether move is valid given the board
+# Purpose:     Determine whether move is valid
 # Parameters:  board (2D list)
 #              move
 # Returns:     True (move is valid) or False (move is invalid)
@@ -92,13 +92,7 @@ def isGameWon(board, player):
 # Returns:     True (move is winning) or False (move is not winning)
 
 def isWinningMove(board, move, player):
-    row6Win = [" ", " ", " ", " ", " ", " ", " "]
-    row5Win = [" ", " ", " ", " ", " ", " ", " "]
-    row4Win = [" ", " ", " ", " ", " ", " ", " "]
-    row3Win = [" ", " ", " ", " ", " ", " ", " "]
-    row2Win = [" ", " ", " ", " ", " ", " ", " "]
-    row1Win = [" ", " ", " ", " ", " ", " ", " "]
-    boardWin = [row1Win, row2Win, row3Win, row4Win, row5Win, row6Win]
+    boardWin = [[" " for j in range(7)] for i in range(6)]
     for i in [0, 1, 2, 3, 4, 5]:
         for j in [0, 1, 2, 3, 4, 5, 6]:
             boardWin[i][j] = board[i][j]
@@ -118,13 +112,7 @@ def isLosingMove(board, move, player):
     elif player == "h":
         playerOpp = "c"
     
-    row6New = [" ", " ", " ", " ", " ", " ", " "]
-    row5New = [" ", " ", " ", " ", " ", " ", " "]
-    row4New = [" ", " ", " ", " ", " ", " ", " "]
-    row3New = [" ", " ", " ", " ", " ", " ", " "]
-    row2New = [" ", " ", " ", " ", " ", " ", " "]
-    row1New = [" ", " ", " ", " ", " ", " ", " "]
-    boardNew = [row1New, row2New, row3New, row4New, row5New, row6New]
+    boardNew = [[" " for j in range(7)] for i in range(6)]
     for i in [0, 1, 2, 3, 4, 5]:
         for j in [0, 1, 2, 3, 4, 5, 6]:
             boardNew[i][j] = board[i][j]
@@ -208,13 +196,7 @@ def printEndGame(winHuman, winComputer):
 
 def playConnectFour():
     # Board setup
-    row6 = [" ", " ", " ", " ", " ", " ", " "]
-    row5 = [" ", " ", " ", " ", " ", " ", " "]
-    row4 = [" ", " ", " ", " ", " ", " ", " "]
-    row3 = [" ", " ", " ", " ", " ", " ", " "]
-    row2 = [" ", " ", " ", " ", " ", " ", " "]
-    row1 = [" ", " ", " ", " ", " ", " ", " "]
-    board = [row1, row2, row3, row4, row5, row6]
+    board = [[" " for j in range(7)] for i in range(6)]
     winHuman = False
     winComputer = False
     boardFull = False
@@ -225,7 +207,7 @@ def playConnectFour():
         # Human move
         moveHuman = ""
         while not isValidMove(board, moveHuman):
-            moveHuman = input("Column: ")
+            moveHuman = input("Your move (column #): ")
         board = updateBoard(board, moveHuman, "h")
         winHuman = isGameWon(board, "h")
         # Computer move
@@ -253,7 +235,7 @@ def main():
         playConnectFour()
         newGame = ""
         while newGame not in ["n", "no", "y", "yes"]:
-            newGame = input("Another game? Y/N: ")
+            newGame = input("Another game? (Y/N): ")
             newGame = newGame.lower()
         if newGame in ["n", "no"]:
             loopFlag = False
