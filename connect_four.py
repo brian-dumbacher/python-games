@@ -13,13 +13,14 @@ def printBoard(board):
     ANSI_BLACK     = "\x1b[30m"
     ANSI_RED_BOLD  = "\x1b[1;31m"
     ANSI_BLUE_BOLD = "\x1b[1;34m"
+    ANSI_GREY      = "\x1b[37m"
     ANSI_END       = "\x1b[0m"
     print("")
     for i in [5, 4, 3, 2, 1, 0]:
         print("{}   |{}".format(ANSI_BLACK, ANSI_END), end="")
         for j in [0, 1, 2, 3, 4, 5, 6]:
             if board[i][j] == " ":
-                square = "{}.{}".format(ANSI_BLACK, ANSI_END)
+                square = "{}.{}".format(ANSI_GREY, ANSI_END)
             elif board[i][j] == "h":
                 square = "{}o{}".format(ANSI_BLUE_BOLD, ANSI_END)
             elif board[i][j] == "c":
@@ -176,14 +177,17 @@ def isBoardFull(board):
 # Returns:
 
 def printEndGame(winHuman, winComputer):
-    print("==================================================")
+    mssg = ""
     if winHuman:
-        print("You win!")
+        mssg = "You win!"
     elif winComputer:
-        print("You lose.")
+        mssg = "You lose."
     else:
-        print("Tie game.")
-    print("==================================================")
+        mssg = "Tie game."
+    n = len(mssg)
+    print("@" * (n + 12))
+    print("@@@   {}   @@@".format(mssg))
+    print("@" * (n + 12))
     print("")
     return
 
