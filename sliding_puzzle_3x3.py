@@ -93,7 +93,8 @@ def playPuzzle(puzzleStart):
         numSlides += 1
         puzzle = updatePuzzle(puzzle, slide)
         solveFlag = isPuzzleSolved(puzzle)
-    
+
+    # Puzzle results
     printPuzzle(puzzle)
     printEndPuzzle(numSlides)
     return
