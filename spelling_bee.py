@@ -15,19 +15,19 @@ def printPuzzle(lettersReg, letterCenter, words):
     print("")
     print("        +---+        ")
     print("       /     \       ")
-    print("      +   " + lettersReg[0] + "   +      ")
+    print("      +   {}   +      ".format(lettersReg[0]))
     print("  +---+       +---+  ")
     print(" /     \     /     \ ")
-    print("+   " + lettersReg[1] + "   +---+   " + lettersReg[2] + "   +")
+    print("+   {}   +---+   {}   +".format(lettersReg[1], lettersReg[2]))
     print("+       +---+       +")
     print(" \     /     \     / ")
-    print("  +---+   " + letterCenter + "   +---+  ")
+    print("  +---+   {}   +---+  ".format(letterCenter))
     print("  +---+       +---+  ")
     print(" /     \     /     \ ")
-    print("+   " + lettersReg[3] + "   +---+   " + lettersReg[4] + "   +")
+    print("+   {}   +---+   {}   +".format(lettersReg[3], lettersReg[4]))
     print("+       +---+       +")
     print(" \     /     \     / ")
-    print("  +---+   " + lettersReg[5] + "   +---+  ")
+    print("  +---+   {}   +---+  ".format(lettersReg[5]))
     print("      +       +      ")
     print("       \     /       ")
     print("        +---+        ")
@@ -41,7 +41,7 @@ def printPuzzle(lettersReg, letterCenter, words):
 def settify(listOrString):
     return set(l for l in listOrString)
 
-def wordValid(dictionary, lettersReg, letterCenter, word):
+def isWordValid(dictionary, lettersReg, letterCenter, word):
     lettersFull = [l for l in lettersReg] + [letterCenter]
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
@@ -52,15 +52,15 @@ def getScore(lettersReg, letterCenter, word):
 
 def printScore(words, score):
     print("")
-    print("==================================================")
-    print("You found " + str(len(words)) + " words.")
-    print("Your score is " + str(score) + ".")
-    print("==================================================")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@@@   You found {} words.".format(len(words)))
+    print("@@@   Your score is {}.".format(score))
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("")
     return
 
 def main():
-    #Parameters
+    # Parameters
     dictionary = []
     f = codecs.open("spelling_bee_dictionary.txt", "r")
     for w in f:
@@ -69,26 +69,26 @@ def main():
     words = []
     score = 0
     continueFlag = True
-    lettersReg = ["F","I","N","O","T","U"]
+    lettersReg = ["F", "I", "N", "O", "T", "U"]
     random.seed()
     random.shuffle(lettersReg)
     letterCenter = "R"
     
-    #Slide loop
+    # Word loop
     while continueFlag == True:
         printPuzzle(lettersReg, letterCenter, words)
         word = input("Word (q to quit): ")
-        word = word.upper()
+        word = word.lower()
         word = word.strip()
-        if word in ["Q", "QUIT"]:
+        if word == "q":
             continueFlag = False
         else:
-            if wordValid(dictionary, lettersReg, letterCenter, word):
+            if isWordValid(dictionary, lettersReg, letterCenter, word):
                 words.append(word)
                 words.sort()
                 score += getScore(lettersReg, letterCenter, word)
     
-    #Print score
+    # Print score
     printScore(words, score)
     return
 
