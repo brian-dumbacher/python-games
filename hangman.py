@@ -141,20 +141,20 @@ def printWord(word, guesses):
     text = "Word:     "
     for letter in word:
         if letter in guesses:
-            text += " " + letter.upper()
+            text += " {}".format(letter.upper())
         else:
             text += " _"
     print(text)
     print("")
     return
 
-def validGuess(guess):
-    return guess in ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+def isValidGuess(guess):
+    return guess in ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-def newGuess(guesses, guess):
+def isNewGuess(guesses, guess):
     return guess not in guesses
 
-def correctGuess(wordSet, guess):
+def isCorrectGuess(wordSet, guess):
     return guess in wordSet
 
 def isGameWon(wordSet, guesses):
@@ -163,33 +163,33 @@ def isGameWon(wordSet, guesses):
 def printEndGame(word, winFlag):
     print("========================================")
     if winFlag:
-        print("The word was indeed " + word.upper())
+        print("The word was indeed {}".format(word.upper()))
         print("You win!")
     else:
-        print("I'm sorry. The word was " + word.upper())
+        print("I'm sorry. The word was {}".format(word.upper()))
         print("You lose.")
     print("========================================")
     print("")
     return
 
 def playHangman(word):
-    #Parameters
+    # Parameters
     winFlag = False
     life = 7
     guesses = []
     wordSet = set([l for l in word])
     
-    #Guess loop
+    # Guess loop
     while life > 0 and winFlag == False:
         printHangman(life)
         printIncorrectGuesses(wordSet, guesses)
         printWord(word, guesses)
         guess = ""
-        while not validGuess(guess) or not newGuess(guesses, guess):
+        while not isValidGuess(guess) or not isNewGuess(guesses, guess):
             guess = input("Guess:     ")
             guess = guess.lower()
         guesses.append(guess)
-        if correctGuess(wordSet, guess):
+        if isCorrectGuess(wordSet, guess):
             winFlag = isGameWon(wordSet, guesses)
         else:
             life -= 1
@@ -201,7 +201,7 @@ def playHangman(word):
     return
 
 def main():
-    #Global parameters
+    # Global parameters
     words = []
     f = codecs.open("hangman_words.txt", "r")
     for w in f:
@@ -212,17 +212,17 @@ def main():
     gameCounter = 0
     loopFlag = True
     
-    #Game loop
+    # Game loop
     while loopFlag:
         playHangman(words[gameCounter])
         gameCounter += 1
         if gameCounter == len(words):
             gameCounter = 0
-        newGame = ""
-        while newGame not in ["n", "no", "y", "yes"]:
-            newGame = input("Another game? Y/N: ")
-            newGame = newGame.lower()
-        if newGame in ["n", "no"]:
+        newGameInput = ""
+        while newGameInput not in ["n", "no", "y", "yes"]:
+            newGameInput = input("Another game? Y/N: ")
+            newGameInput = newGameInput.lower()
+        if newGameInput in ["n", "no"]:
             loopFlag = False
     print("")
     return
