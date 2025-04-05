@@ -1,5 +1,5 @@
 # Name:     sliding_puzzle_3x3.py
-# Purpose:  Play the 3x3 sliding puzzle
+# Purpose:  Solve the 3x3 sliding puzzle
 # Author:   Brian Dumbacher
 
 import random
@@ -115,15 +115,15 @@ def printEndPuzzle(numSlides):
     print("")
     return
 
-# Name:        playPuzzle
-# Purpose:     Play a 3x3 sliding puzzle
-# Parameters:  puzzleStart (2D array)
+# Name:        solvePuzzle
+# Purpose:     Solve a 3x3 sliding puzzle
+# Parameters:
 # Returns:
 
-def playPuzzle(puzzleStart):
+def solvePuzzle():
     # Parameters
+    puzzle = randomPuzzle()
     solveFlag = False
-    puzzle = puzzleStart
     numSlides = 0
     
     # Slide loop
@@ -147,18 +147,17 @@ def playPuzzle(puzzleStart):
 # Returns:
 
 def main():
-    # Global parameters
+    # Loop flag
     loopFlag = True
     
     # Game loop
     while loopFlag:
-        puzzleStart = randomPuzzle()
-        playPuzzle(puzzleStart)
-        newPuzzle = ""
-        while newPuzzle not in ["n", "no", "y", "yes"]:
-            newPuzzle = input("Another puzzle? (Y/N): ")
-            newPuzzle = newPuzzle.lower()
-        if newPuzzle in ["n", "no"]:
+        solvePuzzle()
+        newPuzzleInput = ""
+        while newPuzzleInput not in ["n", "no", "y", "yes"]:
+            newPuzzleInput = input("Another puzzle? (Y/N): ")
+            newPuzzleInput = newPuzzleInput.lower()
+        if newPuzzleInput in ["n", "no"]:
             loopFlag = False
     print("")
     return
