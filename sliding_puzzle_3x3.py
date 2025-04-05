@@ -4,8 +4,18 @@
 
 import random
 
+# Name:        isPuzzleSolved
+# Purpose:     Determine whether puzzle is solved
+# Parameters:  puzzle (2D array)
+# Returns:     True (puzzle is solved) or False (puzzle is not solved)
+
 def isPuzzleSolved(puzzle):
     return puzzle == [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
+
+# Name:        getValidSlides
+# Purpose:     Get list of valid slides
+# Parameters:  puzzle (2D array)
+# Returns:     slides (list of valid slides)
 
 def getValidSlides(puzzle):
     slides = []
@@ -22,6 +32,11 @@ def getValidSlides(puzzle):
         slides.append(puzzle[iBlank][j])
     return slides
 
+# Name:        randomPuzzle
+# Purpose:     Get random puzzle
+# Parameters:
+# Returns:     puzzle (2D array)
+
 def randomPuzzle():
     puzzle = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
     numSlides = 0
@@ -32,6 +47,11 @@ def randomPuzzle():
         puzzle = updatePuzzle(puzzle, slide)
         numSlides += 1
     return puzzle
+
+# Name:        printPuzzle
+# Purpose:     Print puzzle
+# Parameters:  puzzle (2D array)
+# Returns:
 
 def printPuzzle(puzzle):
     print("")
@@ -51,8 +71,20 @@ def printPuzzle(puzzle):
     print("")
     return
 
+# Name:        isValidSlide
+# Purpose:     Determine whether slide is valid
+# Parameters:  puzzle (2D array)
+#              slide
+# Returns:     True (slide is valid) or False (slide is invalid)
+
 def isValidSlide(puzzle, slide):
     return slide in getValidSlides(puzzle)
+
+# Name:        updatePuzzle
+# Purpose:     Update puzzle based on slide
+# Parameters:  puzzle (2D array)
+#              slide
+# Returns:     puzzle (updated 2D array)
 
 def updatePuzzle(puzzle, slide):
     iBlank = 0
@@ -71,12 +103,22 @@ def updatePuzzle(puzzle, slide):
     puzzle[iSlide][jSlide] = " "
     return puzzle
 
+# Name:        printEndPuzzle
+# Purpose:     Print puzzle results
+# Parameters:  numSlides (number of slides)
+# Returns:
+
 def printEndPuzzle(numSlides):
     print("==================================================")
     print("You solved the 3x3 sliding puzzle in {} slides.".format(numSlides))
     print("==================================================")
     print("")
     return
+
+# Name:        playPuzzle
+# Purpose:     Play a 3x3 sliding puzzle
+# Parameters:  puzzleStart (2D array)
+# Returns:
 
 def playPuzzle(puzzleStart):
     # Parameters
@@ -98,6 +140,11 @@ def playPuzzle(puzzleStart):
     printPuzzle(puzzle)
     printEndPuzzle(numSlides)
     return
+
+# Name:        main
+# Purpose:     Loop through multiple 3x3 sliding puzzles
+# Parameters:
+# Returns:
 
 def main():
     # Global parameters
