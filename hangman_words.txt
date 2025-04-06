@@ -43,6 +43,7 @@ aristocracy
 armistice
 arrangement
 artificial
+assassin
 assiduous
 astrological
 astronomy
@@ -54,6 +55,7 @@ automotive
 avaricious
 avuncular
 barbarian
+barbershop
 barricade
 basketball
 bassoon
@@ -65,6 +67,7 @@ belligerent
 benediction
 benefactor
 benevolent
+bioluminescence
 birthday
 bitterness
 blackmail
@@ -85,6 +88,7 @@ bumptious
 buoyant
 business
 cacophony
+calisthenics
 cantankerous
 capricious
 carnelian
@@ -117,7 +121,9 @@ coincidence
 colloquial
 colorless
 combustion
+commonplace
 companion
+compassionate
 compatible
 compunction
 computer
@@ -125,6 +131,8 @@ conciliatory
 conference
 confiscate
 confusion
+condominium
+conscientious
 conspicuous
 constellation
 consternation
@@ -135,6 +143,7 @@ cooperation
 copacetic
 corrugated
 corruption
+cosmetology
 cosmopolitan
 counterfeit
 courtroom
@@ -158,6 +167,7 @@ dexterity
 diaphanous
 diarrhea
 dichotomy
+dictionary
 difficult
 digitization
 dilapidated
@@ -188,6 +198,7 @@ elasticity
 electricity
 elephant
 elevator
+emaciated
 embankment
 embargo
 embarrassment
@@ -220,9 +231,12 @@ extramarital
 extremity
 fabulous
 facetious
+factual
 fantastic
 fashionable
 fastidious
+feckless
+felonious
 feminism
 fictional
 fiduciary
@@ -232,6 +246,7 @@ flabbergasted
 flamboyant
 flamingo
 fleeting
+flowerbed
 fluidity
 football
 forbearance
@@ -242,6 +257,7 @@ fragility
 fraternity
 freezing
 frequency
+frightening
 fundamental
 fungible
 gangplank
@@ -251,6 +267,7 @@ geography
 geophysical
 generous
 gentrification
+ghastly
 gigantic
 giraffe
 gobsmacked
@@ -268,12 +285,14 @@ gymnasium
 gymnastics
 gyration
 habitat
+hairspray
 hamstring
 happenstance
 happiness
 hardcore
 harmonious
 headache
+heartwarming
 hedonism
 helplessness
 hereditary
@@ -289,6 +308,7 @@ hopelessness
 horrible
 hospital
 hospitality
+humidifier
 humility
 hurricane
 hygiene
@@ -328,6 +348,7 @@ ineffable
 ineptitude
 inexorable
 infallible
+infinitessimal
 infrared
 ingratiate
 ingredient
@@ -348,6 +369,7 @@ intransigent
 irrefutable
 irresponsible
 isolation
+isometric
 iteration
 jackknife
 jamboree
@@ -407,6 +429,7 @@ locksmith
 longanimity
 longitude
 loophole
+looseleaf
 loquacious
 loungewear
 lubrication
@@ -438,6 +461,7 @@ meticulous
 microwave
 millionaire
 miniature
+misdemeanor
 misguided
 missionary
 moderation
@@ -446,10 +470,12 @@ monastery
 monotreme
 monumental
 mountainous
+movement
 multifaceted
 multifunctional
 multinational
 munificent
+musician
 mysterious
 narcissism
 nationalism
@@ -481,6 +507,7 @@ nutrition
 oakwood
 oblivion
 obsequious
+obsession
 obsolete
 obstinate
 obstreperous
@@ -499,6 +526,7 @@ opalescent
 opinionated
 opportunity
 opthamology
+optimistic
 opulence
 oozing
 orangutan
@@ -524,6 +552,7 @@ pastoral
 patience
 peacock
 peccadillo
+peculiar
 pedestrian
 peninsula
 penultimate
@@ -543,6 +572,7 @@ pipeline
 pitiful
 pixelation
 pizzeria
+pleasurable
 podiatrist
 polymath
 powerful
@@ -556,6 +586,7 @@ pretentious
 probability
 problematic
 procrastinate
+pronunciation
 propellant
 propriety
 pugnacious
@@ -584,9 +615,11 @@ reassuringly
 rebellion
 recalcitrant
 recidivism
+reciprocal
 recommission
 recrimination
 recycling
+redolent
 refractory
 refrigerator
 relatable
@@ -630,8 +663,10 @@ scandalous
 scientific
 screech
 scurrilous
+secondary
 sedentary
 sedulous
+sensational
 sententious
 serenade
 serendipitous
@@ -655,6 +690,7 @@ solidify
 somnolent
 soporific
 sorority
+sponsorship
 spontaneity
 squirrel
 staircase
@@ -665,6 +701,8 @@ statistics
 steadfast
 stowaway
 strenuous
+subconscious
+subliminal
 summertime
 superior
 surprising
@@ -692,6 +730,7 @@ temperament
 temperature
 temporize
 theatrical
+thesaurus
 threshold
 tightrope
 timeliness
@@ -702,11 +741,15 @@ tollbooth
 tomorrow
 tortoise
 tournament
+traditional
+trampoline
 tranquility
+transgression
 translation
 transmission
 transportation
 treacherous
+trendsetter
 triangular
 triumphant
 tropical
@@ -721,11 +764,13 @@ twilight
 twisted
 ubiquitous
 ugliness
+ukulele
 ulterior
 ultraviolet
 umbrella
 unassuming
 unbelievable
+uncharacteristic
 uncompromising
 uncontrollable
 uncooperative
@@ -741,6 +786,7 @@ unrealistic
 unspeakable
 unwittingly
 unyielding
+uplifting
 uppermost
 uproarious
 usufruct
@@ -757,7 +803,9 @@ venomous
 verisimilitude
 vernacular
 veterinarian
+vibration
 victimless
+videography
 vindictive
 virility
 virtuoso
@@ -776,6 +824,7 @@ watershed
 waterway
 weaponry
 weekend
+welcoming
 wholesale
 wickedness
 willingness
@@ -787,6 +836,7 @@ woodpecker
 woodworking
 worshipper
 wristwatch
+wrongdoing
 xenophobia
 xylophone
 yardstick
