@@ -8,6 +8,7 @@ adamantine
 addlepated
 adjudicate
 adolescent
+adventurous
 aerodynamic
 affiliation
 affluence
@@ -72,6 +73,7 @@ broccoli
 bucolic
 bumptious
 cacophony
+cantankerous
 capricious
 carnelian
 castaway
@@ -126,11 +128,14 @@ decadent
 delectable
 delicious
 democracy
+dentistry
 destitute
 detoxify
+dexterity
 diaphanous
 diarrhea
 dichotomy
+difficult
 digitization
 dilapidated
 dinosaur
@@ -142,6 +147,7 @@ distractible
 doctrinaire
 documentation
 dogmatic
+doubtful
 draconian
 dramatic
 dumbfound
@@ -170,6 +176,7 @@ epicenter
 epistolary
 eponymous
 esoteric
+establishment
 euphemism
 euphoria
 evaporate
@@ -229,12 +236,15 @@ gunpowder
 gymnasium
 gymnastics
 gyration
+habitat
 hamstring
 happenstance
 happiness
+hardcore
 harmonious
 headache
 hedonism
+helplessness
 hereditary
 heuristic
 highway
@@ -242,6 +252,8 @@ hippopotamus
 historical
 histrionics
 homeostasis
+homework
+hopelessness
 horrible
 hospital
 hospitality
@@ -257,8 +269,8 @@ idealistic
 identify
 ignoble
 ignominious
+ignorance
 illumination
-imdemnify
 immaterial
 imminent
 impecunious
@@ -271,6 +283,8 @@ incorrigible
 incredible
 incredulity
 indefatigable
+indelible
+indemnify
 independence
 indigent
 indispensable
@@ -308,6 +322,7 @@ jokingly
 journalist
 judicious
 juggernaut
+jumpsuit
 juncture
 jurisprudence
 kaleidoscope
@@ -318,6 +333,7 @@ kindergarten
 kindness
 kingdom
 kitchenette
+knighthood
 knitwear
 knowledge
 labyrinth
@@ -331,6 +347,7 @@ languorous
 lascivious
 lassitude
 laziness
+leapfrog
 lecherous
 leprechaun
 lethargy
@@ -344,6 +361,8 @@ loathsome
 locality
 locksmith
 longanimity
+longitude
+loophole
 loquacious
 lubrication
 lugubrious
@@ -381,6 +400,7 @@ monumental
 mountainous
 multifaceted
 multifunctional
+multinational
 munificent
 mysterious
 narcissism
@@ -389,6 +409,7 @@ naturalist
 nauseate
 navigable
 necessary
+needlework
 nemesis
 neoclassical
 neophyte
@@ -462,7 +483,9 @@ petulant
 phlegmatic
 photography
 physical
+picturesque
 pinnacle
+pitiful
 pizzeria
 podiatrist
 polymath
@@ -473,6 +496,7 @@ predilection
 prepossessing
 presentiment
 pretentious
+probability
 problematic
 propellant
 propriety
@@ -490,6 +514,7 @@ querulous
 quintessential
 quintuplet
 quixotic
+quotation
 rainbow
 rambunctious
 ramification
@@ -506,11 +531,13 @@ religious
 relinquish
 reluctance
 remarkable
+repercussion
 reprehensible
 reptile
 restaurant
 restlessness
 reticence
+retribution
 reunification
 revanchism
 rhetoric
@@ -544,17 +571,23 @@ simultaneous
 singularity
 skepticism
 skyscraper
+sleeplessness
+smartest
+snowflake
+sociology
 soldier
 somnolent
 sorority
 spontaneity
 squirrel
+staircase
 stampede
 statistics
 stowaway
 strenuous
 summertime
 superior
+surprising
 suspenseful
 susquipedalian
 susurrus
@@ -573,7 +606,7 @@ television
 temperament
 temperature
 temporize
-theater
+theatrical
 tightrope
 timeliness
 tirelessness
@@ -586,6 +619,7 @@ translation
 transmission
 transportation
 treacherous
+triangular
 triumphant
 troublesome
 truculent
@@ -597,6 +631,7 @@ tuxedo
 twilight
 twisted
 ubiquitous
+ugliness
 ulterior
 umbrella
 unassuming
@@ -607,6 +642,7 @@ unctuous
 underdeveloped
 undergrowth
 undertake
+undesirable
 unlikely
 unrealistic
 unspeakable
