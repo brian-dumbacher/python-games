@@ -219,6 +219,7 @@ establishment
 euphemism
 euphoria
 evaporate
+everything
 everywhere
 exasperate
 excavation
@@ -700,7 +701,7 @@ staircase
 stalactite
 stalagmite
 stampede
-starstruck
+starship
 statistics
 steadfast
 stowaway
