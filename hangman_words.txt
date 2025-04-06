@@ -219,6 +219,7 @@ establishment
 euphemism
 euphoria
 evaporate
+everywhere
 exasperate
 excavation
 excommunicate
@@ -420,6 +421,7 @@ lethargy
 licentious
 licorice
 lighthouse
+linguistics
 lipstick
 listlessness
 literature
@@ -574,6 +576,7 @@ pixelation
 pizzeria
 pleasurable
 podiatrist
+polyglot
 polymath
 powerful
 potential
@@ -697,6 +700,7 @@ staircase
 stalactite
 stalagmite
 stampede
+starstruck
 statistics
 steadfast
 stowaway
@@ -722,6 +726,7 @@ tantalizing
 tarantula
 taxonomy
 technology
+teenager
 telecommunications
 telemetry
 telephone
@@ -738,6 +743,7 @@ tirelessness
 toboggan
 together
 tollbooth
+tombstone
 tomorrow
 tortoise
 tournament
