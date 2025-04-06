@@ -6,10 +6,23 @@ import codecs
 import random
 import re
 
-def cleanWord(w):
-    w = w.upper()
-    w = re.sub("\s+", " ", w);
-    return w.strip()
+# Name:        cleanWord
+# Purpose:     Clean/standardize word
+# Parameters:  word
+# Returns:     wordClean (cleaned word)
+
+def cleanWord(word):
+    wordClean = word.upper()
+    wordClean = re.sub("\s+", " ", wordClean)
+    wordClean = wordClean.strip()
+    return wordClean
+
+# Name:        printPuzzle
+# Purpose:     Print puzzle
+# Parameters:  lettersReg (list of regular letters)
+#              letterCenter (center letter)
+#              words (list of words)
+# Returns:
 
 def printPuzzle(lettersReg, letterCenter, words):
     print("")
@@ -38,17 +51,43 @@ def printPuzzle(lettersReg, letterCenter, words):
     print("")
     return
 
+# Name:        settify
+# Purpose:     Convert input list or string to set format
+# Parameters:  listOrString (list or string)
+# Returns:     Set format of input list or string
+
 def settify(listOrString):
     return set(l for l in listOrString)
+
+# Name:        isWordValid
+# Purpose:     Determine whether word is valid
+# Parameters:  dictionary (list of valid words)
+#              lettersReg (list of regular letters)
+#              letterCenter (center letter)
+#              word (proposed word)
+# Returns:     True (word is valid) or False (word is invalid)
 
 def isWordValid(dictionary, lettersReg, letterCenter, word):
     lettersFull = [l for l in lettersReg] + [letterCenter]
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
+# Name:        getScore
+# Purpose:     Calculate score for valid word
+# Parameters:  lettersReg (list of regular letters)
+#              letterCenter (center letter)
+#              word (valid word)
+# Returns:     3 (full score) or 1 (normal score)
+
 def getScore(lettersReg, letterCenter, word):
     lettersFull = [l for l in lettersReg]
     lettersFull.append(letterCenter)
     return 3 if settify(word) == settify(lettersFull) else 1
+
+# Name:        printScore
+# Purpose:     Print score
+# Parameters:  words (list of valid words)
+#              score (total score)
+# Returns:
 
 def printScore(words, score):
     print("")
@@ -58,6 +97,11 @@ def printScore(words, score):
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("")
     return
+
+# Name:        main
+# Purpose:     Play Spelling Bee
+# Parameters:
+# Returns:
 
 def main():
     # Parameters
