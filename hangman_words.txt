@@ -59,6 +59,7 @@ avaricious
 avuncular
 awesome
 axiomatic
+balcony
 bamboo
 barbarian
 barbershop
@@ -97,6 +98,7 @@ business
 byproduct
 cacophony
 calisthenics
+callousness
 cantankerous
 capricious
 carnelian
@@ -145,6 +147,7 @@ conference
 confiscate
 confusion
 condominium
+congressional
 conscientious
 conservative
 conspicuous
@@ -155,6 +158,7 @@ contemptible
 contentious
 cooperation
 copacetic
+corpulent
 corrugated
 corruption
 cosmetology
@@ -469,6 +473,7 @@ loquacious
 loungewear
 lubrication
 lugubrious
+luncheon
 machinery
 magical
 magician
@@ -477,6 +482,7 @@ magnificent
 magnify
 magnitude
 malfeasance
+malnutrition
 malodorous
 management
 manipulative
@@ -605,6 +611,7 @@ perpendicular
 persnickety
 pessimistic
 petulant
+philistine
 phlegmatic
 photography
 photosynthesis
@@ -740,6 +747,7 @@ software
 soldier
 solidify
 somnolent
+sophisticated
 soporific
 sorority
 sponsorship
@@ -886,6 +894,7 @@ weaponry
 weatherize
 weekend
 welcoming
+whiplash
 wholesale
 wickedness
 willingness
