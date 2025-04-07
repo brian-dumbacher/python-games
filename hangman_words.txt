@@ -7,6 +7,7 @@ adamant
 adamantine
 addlepated
 adjudicate
+administration
 adolescent
 adventurous
 aerodynamic
@@ -33,6 +34,7 @@ apathetic
 apocryphal
 apoplectic
 appreciate
+apprehension
 aptitude
 aquarium
 aqueduct
@@ -50,10 +52,14 @@ astronomy
 atrocious
 attitude
 auspicious
+authoritative
 automatic
 automotive
 avaricious
 avuncular
+awesome
+axiomatic
+bamboo
 barbarian
 barbershop
 barricade
@@ -61,6 +67,7 @@ basketball
 bassoon
 battlefield
 beautiful
+beehive
 beekeeping
 behemoth
 belligerent
@@ -87,6 +94,7 @@ bucolic
 bumptious
 buoyant
 business
+byproduct
 cacophony
 calisthenics
 cantankerous
@@ -99,6 +107,7 @@ category
 cauliflower
 cavalcade
 cerulean
+chameleon
 championship
 chaotic
 charitable
@@ -111,11 +120,14 @@ chimerical
 chiropractic
 chocolate
 chronology
+chuckle
 cinemaplex
+cinnamon
 circumference
 circumscribe
 circumspect
 classroom
+cleanliness
 clockwork
 coincidence
 colloquial
@@ -133,6 +145,7 @@ confiscate
 confusion
 condominium
 conscientious
+conservative
 conspicuous
 constellation
 consternation
@@ -207,15 +220,21 @@ emblematic
 emphasis
 enchantment
 encyclopedia
+energetic
 engineer
+enigmatic
 entrance
 entrapment
 ephemeral
 epicenter
 epistolary
 eponymous
+equality
+equanimity
+erroneous
 esoteric
 establishment
+eternity
 euphemism
 euphoria
 evaporate
@@ -224,6 +243,7 @@ everywhere
 exasperate
 excavation
 excommunicate
+exhaustion
 existence
 exoskeleton
 explosive
@@ -238,6 +258,7 @@ fantastic
 fashionable
 fastidious
 feckless
+feedback
 felonious
 feminism
 fictional
@@ -280,7 +301,7 @@ grassland
 gratuitous
 greenhorn
 guardianship
-guitar
+guitarist
 gullibility
 gunpowder
 gymnasium
@@ -288,6 +309,7 @@ gymnastics
 gyration
 habitat
 hairspray
+hamburger
 hamstring
 happenstance
 happiness
@@ -306,6 +328,7 @@ historical
 histrionics
 homeostasis
 homework
+honeycomb
 hopelessness
 horrible
 hospital
@@ -383,6 +406,7 @@ jettison
 jokingly
 journalist
 joystick
+judgmental
 judicious
 juggernaut
 jumpsuit
@@ -390,6 +414,7 @@ juncture
 jurisprudence
 kaleidoscope
 kangaroo
+keenness
 keyboard
 kickback
 kindergarten
@@ -401,6 +426,7 @@ knitwear
 knockout
 knowledge
 labyrinth
+lachrymose
 lackadaisical
 laconic
 laidback
@@ -419,6 +445,8 @@ leapfrog
 lecherous
 leprechaun
 lethargy
+liability
+liberal
 licentious
 licorice
 lighthouse
@@ -447,6 +475,7 @@ magnitude
 malfeasance
 malodorous
 management
+manipulative
 mannequin
 manufacturing
 manumission
@@ -480,6 +509,7 @@ multinational
 munificent
 musician
 mysterious
+namesake
 narcissism
 nationalism
 naturalist
@@ -503,6 +533,7 @@ nocturnal
 nomenclature
 nomination
 nonsensical
+normalize
 notoriety
 nugatory
 numismatist
@@ -531,8 +562,8 @@ opportunity
 opthamology
 optimistic
 opulence
-oozing
 orangutan
+orbital
 ordinary
 organize
 original
@@ -543,7 +574,9 @@ ostrich
 otherworldly
 ottoman
 outgoing
+overthinking
 oxymoron
+packaging
 paleontology
 pandemonium
 panther
@@ -553,10 +586,12 @@ paraprosdokian
 parsimonious
 pastoral
 patience
+paucity
 peacock
 peccadillo
 peculiar
 pedestrian
+pedicure
 peninsula
 penultimate
 penurious
@@ -568,6 +603,7 @@ pessimistic
 petulant
 phlegmatic
 photography
+photosynthesis
 physical
 picturesque
 pinnacle
@@ -610,6 +646,8 @@ quintuplet
 quixotic
 quizzical
 quotation
+quotidian
+quotient
 railroad
 rainbow
 rambunctious
@@ -624,6 +662,7 @@ recommission
 recrimination
 recycling
 redolent
+referee
 refractory
 refrigerator
 relatable
@@ -725,6 +764,8 @@ systematic
 taciturn
 tantalizing
 tarantula
+taxation
+taxidermy
 taxonomy
 technology
 teenager
@@ -746,6 +787,7 @@ together
 tollbooth
 tombstone
 tomorrow
+tornado
 tortoise
 tournament
 traditional
@@ -757,16 +799,17 @@ transmission
 transportation
 treacherous
 trendsetter
+trepidation
 triangular
 triumphant
 tropical
 troublesome
 truculent
+trustworthy
 turbulent
 turpitude
 turquoise
 tutelage
-tuxedo
 twilight
 twisted
 ubiquitous
@@ -830,6 +873,7 @@ waterfall
 watershed
 waterway
 weaponry
+weatherize
 weekend
 welcoming
 wholesale
