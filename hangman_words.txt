@@ -129,6 +129,7 @@ circumspect
 classroom
 cleanliness
 clockwork
+cloudburst
 coincidence
 colloquial
 colorless
@@ -200,6 +201,7 @@ doubtful
 downhill
 draconian
 dramatic
+drowsiness
 dumbfound
 duplicate
 dystopian
@@ -223,6 +225,7 @@ encyclopedia
 energetic
 engineer
 enigmatic
+enormous
 entrance
 entrapment
 ephemeral
@@ -348,6 +351,7 @@ ignoble
 ignominious
 ignorance
 illumination
+illustration
 immaterial
 imminent
 impecunious
@@ -613,10 +617,13 @@ pixelation
 pizzeria
 pleasurable
 podiatrist
+poinsettia
 polyglot
 polymath
+polynomial
 powerful
 potential
+precipitation
 precocious
 predator
 predilection
@@ -626,6 +633,7 @@ pretentious
 probability
 problematic
 procrastinate
+productivity
 pronunciation
 propellant
 propriety
@@ -671,7 +679,7 @@ religious
 relinquish
 reluctance
 remarkable
-rendering
+rendition
 reorganize
 repercussion
 reprehensible
@@ -681,6 +689,7 @@ reservoir
 resolute
 restaurant
 restlessness
+retaliatory
 reticence
 retribution
 reunification
@@ -761,6 +770,7 @@ symbolic
 synchronize
 synonym
 systematic
+tabular
 taciturn
 tantalizing
 tarantula
