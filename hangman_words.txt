@@ -5,6 +5,7 @@ abstraction
 acrimonious
 adamant
 adamantine
+adaptation
 addlepated
 adjudicate
 administration
@@ -108,6 +109,7 @@ catatonic
 category
 cauliflower
 cavalcade
+cephalopod
 cerulean
 chameleon
 championship
@@ -132,6 +134,7 @@ classroom
 cleanliness
 clockwork
 cloudburst
+cohabitate
 coincidence
 colloquial
 colorless
@@ -172,6 +175,7 @@ crystal
 curmudgeon
 cynical
 dandelion
+daredevil
 decadent
 defensive
 deforestation
@@ -179,6 +183,7 @@ delectable
 delicious
 democracy
 dentistry
+depression
 destitute
 detoxify
 dexterity
@@ -201,6 +206,10 @@ distractible
 doctrinaire
 documentation
 dogmatic
+dollhouse
+dominance
+doorbell
+doorframe
 doubtful
 downhill
 draconian
@@ -208,6 +217,7 @@ dramatic
 drowsiness
 dumbfound
 duplicate
+dwelling
 dystopian
 earthquake
 eccentric
@@ -230,6 +240,7 @@ energetic
 engineer
 enigmatic
 enormous
+entertainment
 entrance
 entrapment
 ephemeral
@@ -261,6 +272,7 @@ extremity
 fabulous
 facetious
 factual
+falsification
 fantastic
 fashionable
 fastidious
@@ -281,6 +293,8 @@ fluidity
 football
 forbearance
 forensics
+forgetful
+fortitude
 foundational
 fractious
 fragility
@@ -297,7 +311,9 @@ geography
 geophysical
 generous
 gentrification
+germinate
 ghastly
+ghostwriter
 gigantic
 giraffe
 gobsmacked
@@ -333,9 +349,11 @@ hilarious
 hippopotamus
 historical
 histrionics
+hobbyhorse
 homeostasis
 homework
 honeycomb
+honeymoon
 hopelessness
 horrible
 hospital
@@ -364,6 +382,7 @@ imperialism
 impervious
 implacable
 impoverished
+incantation
 incongruous
 incorrigible
 incredible
@@ -399,6 +418,11 @@ interpretation
 interruption
 intramural
 intransigent
+intravenous
+introduction
+invertebrate
+invitation
+iridescent
 irrefutable
 irresponsible
 isolation
@@ -451,6 +475,7 @@ laziness
 leadership
 leapfrog
 lecherous
+lemonade
 leprechaun
 lethargy
 liability
@@ -458,6 +483,8 @@ liberal
 licentious
 licorice
 lighthouse
+lightweight
+likelihood
 linguistics
 lipstick
 listlessness
@@ -493,6 +520,7 @@ marsupial
 masculinity
 mathematics
 mechanism
+medicine
 mellifluous
 menagerie
 mendacious
@@ -505,17 +533,20 @@ millionaire
 miniature
 misdemeanor
 misguided
+mismatch
 missionary
 moderation
 modesty
 monastery
 monotreme
 monumental
+moonlight
 mountainous
 movement
 multifaceted
 multifunctional
 multinational
+multiplicative
 munificent
 musician
 mysterious
@@ -547,6 +578,7 @@ normalize
 notoriety
 nugatory
 numismatist
+nurseries
 nutrition
 oakwood
 oblivion
@@ -637,6 +669,7 @@ predilection
 prepossessing
 presentiment
 pretentious
+prismatic
 probability
 problematic
 procrastinate
@@ -678,6 +711,8 @@ recrimination
 recycling
 redolent
 referee
+refillery
+refinery
 refractory
 refrigerator
 relatable
@@ -707,6 +742,7 @@ rhinocerous
 ridiculous
 riparian
 romantic
+roommate
 rotation
 rudimentary
 sagacious
@@ -765,6 +801,7 @@ strenuous
 subconscious
 subliminal
 summertime
+supercilious
 superior
 surprising
 suspenseful
@@ -850,6 +887,7 @@ undesirable
 unfazed
 universal
 unlikely
+unpopular
 unrealistic
 unspeakable
 unwittingly
@@ -869,6 +907,7 @@ vegetable
 vengeance
 venomous
 verisimilitude
+veritable
 vernacular
 veterinarian
 vibration
@@ -899,6 +938,7 @@ wholesale
 wickedness
 willingness
 windfall
+windowsill
 wishful
 wolverine
 womanhood
