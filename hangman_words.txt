@@ -88,6 +88,7 @@ bombastic
 bonanza
 bookkeeping
 bookshelf
+boomerang
 borderline
 botanical
 broadcasting
@@ -102,6 +103,8 @@ calisthenics
 callousness
 cantankerous
 capricious
+carbonated
+cardboard
 carnelian
 castaway
 catapult
@@ -116,6 +119,7 @@ championship
 chaotic
 charitable
 chartreuse
+cheerleader
 chemical
 chemistry
 childhood
@@ -159,6 +163,7 @@ consternation
 construction
 contemptible
 contentious
+contraption
 cooperation
 copacetic
 corpulent
@@ -173,6 +178,7 @@ crackdown
 cryptology
 crystal
 curmudgeon
+cylindrical
 cynical
 dandelion
 daredevil
@@ -187,6 +193,7 @@ depression
 destitute
 detoxify
 dexterity
+diagonal
 diaphanous
 diarrhea
 dichotomy
@@ -215,6 +222,7 @@ downhill
 draconian
 dramatic
 drowsiness
+drugstore
 dumbfound
 duplicate
 dwelling
@@ -256,22 +264,27 @@ eternity
 euphemism
 euphoria
 evaporate
+evanescent
 everything
 everywhere
 exasperate
 excavation
+excellent
 excommunicate
 exhaustion
 existence
 exoskeleton
+expectation
 explosive
 expression
 extralegal
 extramarital
+extraordinary
 extremity
 fabulous
 facetious
 factual
+fairytale
 falsification
 fantastic
 fashionable
@@ -283,6 +296,7 @@ feminism
 fictional
 fiduciary
 financial
+fireplace
 fireworks
 flabbergasted
 flamboyant
@@ -304,9 +318,14 @@ frequency
 frightening
 fundamental
 fungible
+galactic
 gangplank
+gardening
 gargantuan
 garrulous
+gaslighting
+gemstone
+geodesic
 geography
 geophysical
 generous
@@ -316,7 +335,9 @@ ghastly
 ghostwriter
 gigantic
 giraffe
+giveaway
 gobsmacked
+goldfish
 goofball
 gooseneck
 graphical
@@ -354,6 +375,7 @@ homeostasis
 homework
 honeycomb
 honeymoon
+hooliganism
 hopelessness
 horrible
 hospital
@@ -429,12 +451,15 @@ isolation
 isometric
 iteration
 jackknife
+jailbreak
+jambalaya
 jamboree
 jealousy
 jeopardy
 jellyfish
 jeremiad
 jettison
+jewelry
 jokingly
 journalist
 joystick
@@ -508,6 +533,8 @@ magnanimous
 magnificent
 magnify
 magnitude
+mahogany
+majestic
 malfeasance
 malnutrition
 malodorous
@@ -548,6 +575,7 @@ multifunctional
 multinational
 multiplicative
 munificent
+muscular
 musician
 mysterious
 namesake
@@ -591,6 +619,7 @@ octagon
 octopus
 odometer
 odorless
+offensive
 official
 olfactory
 omnipotent
@@ -649,6 +678,7 @@ photography
 photosynthesis
 physical
 picturesque
+pillowcase
 pinnacle
 pipeline
 pitiful
@@ -721,6 +751,7 @@ religious
 relinquish
 reluctance
 remarkable
+rendezvous
 rendition
 reorganize
 repercussion
@@ -728,6 +759,7 @@ reprehensible
 reptile
 resemblance
 reservoir
+resilient
 resolute
 restaurant
 restlessness
@@ -755,7 +787,9 @@ satisfaction
 saturnine
 saxophone
 scandalous
+schedule
 scientific
+scoreboard
 screech
 scurrilous
 secondary
@@ -786,8 +820,10 @@ somnolent
 sophisticated
 soporific
 sorority
+spasmodic
 sponsorship
 spontaneity
+springtime
 squirrel
 staircase
 stalactite
@@ -834,6 +870,7 @@ temporize
 theatrical
 thesaurus
 threshold
+thunderbolt
 tightrope
 timeliness
 tirelessness
@@ -844,6 +881,7 @@ tombstone
 tomorrow
 tornado
 tortoise
+touchdown
 tournament
 traditional
 trampoline
@@ -939,11 +977,13 @@ wickedness
 willingness
 windfall
 windowsill
+wingspan
 wishful
 wolverine
 womanhood
 woodpecker
 woodworking
+workmanship
 worshipper
 wristwatch
 wrongdoing
