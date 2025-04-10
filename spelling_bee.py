@@ -54,7 +54,7 @@ def printPuzzle(lettersReg, letterCenter, words):
 # Name:        settify
 # Purpose:     Convert input list or string to set format
 # Parameters:  listOrString (list or string)
-# Returns:     Set format of input list or string
+# Returns:     Set version of input list or string
 
 def settify(listOrString):
     return set(l for l in listOrString)
@@ -71,29 +71,28 @@ def isWordValid(dictionary, lettersReg, letterCenter, word):
     lettersFull = [l for l in lettersReg] + [letterCenter]
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
-# Name:        getScore
+# Name:        calcScore
 # Purpose:     Calculate score for valid word
 # Parameters:  lettersReg (list of regular letters)
 #              letterCenter (center letter)
 #              word (valid word)
 # Returns:     3 (full score) or 1 (normal score)
 
-def getScore(lettersReg, letterCenter, word):
-    lettersFull = [l for l in lettersReg]
-    lettersFull.append(letterCenter)
+def calcScore(lettersReg, letterCenter, word):
+    lettersFull = lettersReg + [letterCenter]
     return 3 if settify(word) == settify(lettersFull) else 1
 
-# Name:        printScore
-# Purpose:     Print score
+# Name:        printEndGame
+# Purpose:     Print results of game
 # Parameters:  words (list of valid words)
 #              score (total score)
 # Returns:
 
-def printScore(words, score):
+def printEndGame(words, score):
     print("")
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("@@@   You found {} words.".format(len(words)))
-    print("@@@   Your score is {}.".format(score))
+    print("@@@   Your final score = {}.".format(score))
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("")
     return
@@ -130,10 +129,10 @@ def main():
             if isWordValid(dictionary, lettersReg, letterCenter, word):
                 words.append(word)
                 words.sort()
-                score += getScore(lettersReg, letterCenter, word)
+                score += calcScore(lettersReg, letterCenter, word)
     
-    # Print score
-    printScore(words, score)
+    # Game results
+    printEndGame(words, score)
     return
 
 if __name__ == "__main__":
