@@ -19,7 +19,7 @@ def cleanWord(word):
 
 # Name:        printHangman
 # Purpose:     Print current state of hangman
-# Parameters:  life
+# Parameters:  life (life total)
 # Returns:
 
 def printHangman(life):
