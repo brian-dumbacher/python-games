@@ -35,7 +35,7 @@ def getValidSlides(puzzle):
 # Name:        randomPuzzle
 # Purpose:     Get random puzzle
 # Parameters:
-# Returns:     puzzle (2D array)
+# Returns:     puzzle (randomized 2D array)
 
 def randomPuzzle():
     puzzle = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
@@ -49,7 +49,7 @@ def randomPuzzle():
     return puzzle
 
 # Name:        printPuzzle
-# Purpose:     Print puzzle
+# Purpose:     Print puzzle in current state
 # Parameters:  puzzle (2D array)
 # Returns:
 
@@ -72,18 +72,18 @@ def printPuzzle(puzzle):
     return
 
 # Name:        isValidSlide
-# Purpose:     Determine whether slide is valid
+# Purpose:     Determine whether proposed slide is valid
 # Parameters:  puzzle (2D array)
-#              slide
+#              slide (proposed slide)
 # Returns:     True (slide is valid) or False (slide is invalid)
 
 def isValidSlide(puzzle, slide):
     return slide in getValidSlides(puzzle)
 
 # Name:        updatePuzzle
-# Purpose:     Update puzzle based on slide
+# Purpose:     Update puzzle based on valid slide
 # Parameters:  puzzle (2D array)
-#              slide
+#              slide (valid slide)
 # Returns:     puzzle (updated 2D array)
 
 def updatePuzzle(puzzle, slide):
