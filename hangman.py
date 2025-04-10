@@ -1,23 +1,35 @@
-#Name:     hangman.py
-#Purpose:  Play hangman
-#Author:   Brian Dumbacher
+# Name:     hangman.py
+# Purpose:  Play hangman
+# Author:   Brian Dumbacher
 
 import codecs
-import re
 import random
+import re
 
-def cleanWord(w):
-    w = w.lower()
-    w = re.sub("\s+", " ", w);
-    return w.strip()
+# Name:        cleanWord
+# Purpose:     Clean word
+# Parameters:  word
+# Returns:     wordClean (cleaned word)
+
+def cleanWord(word):
+    wordClean = word.lower()
+    wordClean = re.sub("\s+", " ", wordClean);
+    wordClean = wordClean.strip()
+    return wordClean
+
+# Name:        printHangman
+# Purpose:     Print current state of hangman
+# Parameters:  life
+# Returns:
 
 def printHangman(life):
     print("")
     if life == 0:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
+        print("    @@           |        ")
         print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@         (o_o)      ")
         print("    @@          _|_       ")
         print("    @@   <<----(   )---->>")
         print("    @@          ( )       ")
@@ -30,8 +42,9 @@ def printHangman(life):
     elif life == 1:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
+        print("    @@           |        ")
         print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@         (o_o)      ")
         print("    @@          _|_       ")
         print("    @@   <<----(   )---->>")
         print("    @@          ( )       ")
@@ -44,8 +57,9 @@ def printHangman(life):
     elif life == 2:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
+        print("    @@           |        ")
         print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@         (o_o)      ")
         print("    @@          _|_       ")
         print("    @@   <<----(   )---->>")
         print("    @@          ( )       ")
@@ -58,8 +72,9 @@ def printHangman(life):
     elif life == 3:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
+        print("    @@           |        ")
         print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@         (o_o)      ")
         print("    @@          _|_       ")
         print("    @@   <<----(   )      ")
         print("    @@          ( )       ")
@@ -72,8 +87,9 @@ def printHangman(life):
     elif life == 4:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
+        print("    @@           |        ")
         print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@         (o_o)      ")
         print("    @@          _|_       ")
         print("    @@         (   )      ")
         print("    @@          ( )       ")
@@ -86,8 +102,9 @@ def printHangman(life):
     elif life == 5:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
+        print("    @@           |        ")
         print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@         (o_o)      ")
         print("    @@          _|_       ")
         print("    @@                    ")
         print("    @@                    ")
@@ -100,8 +117,9 @@ def printHangman(life):
     elif life == 6:
         print("    @@@@@@@@@@@@@@        ")
         print("    @@           |        ")
-        print("    @@          _|_       ")
-        print("    @@         (*_*)      ")
+        print("    @@           |        ")
+        print("    @@           |        ")
+        print("    @@                    ")
         print("    @@                    ")
         print("    @@                    ")
         print("    @@                    ")
@@ -113,8 +131,8 @@ def printHangman(life):
         print("@@@@@@@@@@                ")
     elif life == 7:
         print("    @@@@@@@@@@@@@@        ")
-        print("    @@           |        ")
-        print("    @@           |        ")
+        print("    @@                    ")
+        print("    @@                    ")
         print("    @@                    ")
         print("    @@                    ")
         print("    @@                    ")
@@ -128,6 +146,12 @@ def printHangman(life):
     print("")
     return
 
+# Name:        printIncorrectGuesses
+# Purpose:     Print incorrect guesses
+# Parameters:  wordSet (set of letters in target word)
+#              guesses (list of guesses)
+# Returns:
+
 def printIncorrectGuesses(wordSet, guesses):
     text = "Incorrect: "
     for guess in guesses:
@@ -137,7 +161,13 @@ def printIncorrectGuesses(wordSet, guesses):
     print("")
     return
 
-def printWord(word, guesses):
+# Name:        printCorrectGuesses
+# Purpose:     Print correct guesses
+# Parameters:  word (target word)
+#              guesses (list of guesses)
+# Returns:
+
+def printCorrectGuesses(word, guesses):
     text = "Word:     "
     for letter in word:
         if letter in guesses:
@@ -148,17 +178,46 @@ def printWord(word, guesses):
     print("")
     return
 
+# Name:        isValidGuess
+# Purpose:     Determine whether guess is valid
+# Parameters:  guess
+# Returns:     True (guess is a letter) or False (guess is not a letter)
+
 def isValidGuess(guess):
     return guess in ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+# Name:        isNewGuess
+# Purpose:     Determine whether guess is new
+# Parameters:  guesses (list of guesses)
+#              guess
+# Returns:     True (guess is new) or False (guess is not new)
 
 def isNewGuess(guesses, guess):
     return guess not in guesses
 
+# Name:        isCorrectGuess
+# Purpose:     Determine whether guess is correct
+# Parameters:  wordSet (set of letters in target word)
+#              guess
+# Returns:     True (guess is correct) or False (guess is incorrect)
+
 def isCorrectGuess(wordSet, guess):
     return guess in wordSet
 
+# Name:        isGameWon
+# Purpose:     Determine whether you have won
+# Parameters:  wordSet (set of letters in target word)
+#              guesses (list of guesses)
+# Returns:     True (you have won) or False (you have not won)
+
 def isGameWon(wordSet, guesses):
     return wordSet <= set(guesses)
+
+# Name:        printEndGame
+# Purpose:     Print results of game
+# Parameters:  word (target word)
+#              winFlag (Boolean value indicating whether you have won)
+# Returns:
 
 def printEndGame(word, winFlag):
     print("========================================")
@@ -172,6 +231,11 @@ def printEndGame(word, winFlag):
     print("")
     return
 
+# Name:        playHangman
+# Purpose:     Play a game of Hangman
+# Parameters:  word (target word)
+# Returns:
+
 def playHangman(word):
     # Parameters
     winFlag = False
@@ -183,7 +247,7 @@ def playHangman(word):
     while life > 0 and winFlag == False:
         printHangman(life)
         printIncorrectGuesses(wordSet, guesses)
-        printWord(word, guesses)
+        printCorrectGuesses(word, guesses)
         guess = ""
         while not isValidGuess(guess) or not isNewGuess(guesses, guess):
             guess = input("Guess:     ")
@@ -196,9 +260,14 @@ def playHangman(word):
     
     printHangman(life)
     printIncorrectGuesses(wordSet, guesses)
-    printWord(word, guesses)
+    printCorrectGuesses(word, guesses)
     printEndGame(word, winFlag)
     return
+
+# Name:        main
+# Purpose:     Loop through multiple games of Hangman
+# Parameters:
+# Returns:
 
 def main():
     # Global parameters
