@@ -1,6 +1,11 @@
-#Name:     chess.py
-#Purpose:  Given a legal chess position, determine all possible moves
-#Author:   Brian Dumbacher
+# Name:     chess.py
+# Purpose:  Given a legal chess position, determine all possible moves
+# Author:   Brian Dumbacher
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def printBoard(board):
     ansiGREY = "\x1b[90m"
@@ -8,9 +13,9 @@ def printBoard(board):
     ansiTEAL = "\x1b[96m"
     ansiEND  = "\x1b[0m"
     print("")
-    for i in [7,6,5,4,3,2,1,0]:
+    for i in [7, 6, 5, 4, 3, 2, 1, 0]:
         print(ansiTEAL + " " + str(i+1) + " |" + ansiEND, end="")
-        for j in [0,1,2,3,4,5,6,7]:
+        for j in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[i][j] == "  ":
                 square = ansiGREY + "." + ansiEND
             elif board[i][j][0] == "w":
@@ -24,6 +29,11 @@ def printBoard(board):
     print("")
     return
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def findMoveSquaresPawn(board, color, enPassant, square):
     if color == "w":
         colorOpp = "b"
@@ -34,27 +44,32 @@ def findMoveSquaresPawn(board, color, enPassant, square):
     i = square[0]
     j = square[1]
     moveSquares = []
-    #One square ahead
+    # One square ahead
     if board[i+d][j] == "  ":
-        moveSquares.append([i+d,j])
-    #Two squares ahead
+        moveSquares.append([i+d, j])
+    # Two squares ahead
     if (color == "w" and i == 1) or (color == "b" and i == 6):
         if board[i+d][j] == "  " and board[i+2*d][j] == "  ":
-            moveSquares.append([i+2*d,j])
-    #Capture
+            moveSquares.append([i+2*d, j])
+    # Capture
     if j >= 1:
         if board[i+d][j-1][0] == colorOpp:
-            moveSquares.append([i+d,j-1])
+            moveSquares.append([i+d, j-1])
     if j <= 6:
         if board[i+d][j+1][0] == colorOpp:
-            moveSquares.append([i+d,j+1])
-    #en passant
+            moveSquares.append([i+d, j+1])
+    # en passant
     if enPassant != []:
         iEP = enPassant[0]
         jEP = enPassant[1]
         if i == iEP and abs(j - jEP) == 1:
-            moveSquares.append([iEP+d,jEP])
+            moveSquares.append([iEP+d, jEP])
     return moveSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findMoveSquaresBishop(board, color, square):
     if color == "w":
@@ -64,51 +79,56 @@ def findMoveSquaresBishop(board, color, square):
     i = square[0]
     j = square[1]
     moveSquares = []
-    #Up-Right
+    # Up-Right
     blocked = False
-    numSquares = min([7-i,7-j])
+    numSquares = min([7-i, 7-j])
     for d in range(1, numSquares + 1):
         if not blocked:
             if board[i+d][j+d] == "  ":
-                moveSquares.append([i+d,j+d])
+                moveSquares.append([i+d, j+d])
             else:
                 blocked = True
                 if board[i+d][j+d][0] == colorOpp:
-                    moveSquares.append([i+d,j+d])
-    #Down-Right
+                    moveSquares.append([i+d, j+d])
+    # Down-Right
     blocked = False
-    numSquares = min([i,7-j])
+    numSquares = min([i, 7-j])
     for d in range(1, numSquares + 1):
         if not blocked:
             if board[i-d][j+d] == "  ":
-                moveSquares.append([i-d,j+d])
+                moveSquares.append([i-d, j+d])
             else:
                 blocked = True
                 if board[i-d][j+d][0] == colorOpp:
-                    moveSquares.append([i-d,j+d])
-    #Down-Left
+                    moveSquares.append([i-d, j+d])
+    # Down-Left
     blocked = False
-    numSquares = min([i,j])
+    numSquares = min([i, j])
     for d in range(1, numSquares + 1):
         if not blocked:
             if board[i-d][j-d] == "  ":
-                moveSquares.append([i-d,j-d])
+                moveSquares.append([i-d, j-d])
             else:
                 blocked = True
                 if board[i-d][j-d][0] == colorOpp:
-                    moveSquares.append([i-d,j-d])
-    #Up-Left
+                    moveSquares.append([i-d, j-d])
+    # Up-Left
     blocked = False
-    numSquares = min([7-i,j])
+    numSquares = min([7-i, j])
     for d in range(1, numSquares + 1):
         if not blocked:
             if board[i+d][j-d] == "  ":
-                moveSquares.append([i+d,j-d])
+                moveSquares.append([i+d, j-d])
             else:
                 blocked = True
                 if board[i+d][j-d][0] == colorOpp:
-                    moveSquares.append([i+d,j-d])
+                    moveSquares.append([i+d, j-d])
     return moveSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findMoveSquaresKnight(board, color, square):
     if color == "w":
@@ -117,13 +137,18 @@ def findMoveSquaresKnight(board, color, square):
         colorOpp = "w"
     i = square[0]
     j = square[1]
-    moveSquaresEight = [[i+2,j+1],[i+1,j+2],[i-1,j+2],[i-2,j+1],[i-2,j-1],[i-1,j-2],[i+1,j-2],[i+2,j-1]]
+    moveSquaresEight = [[i+2, j+1], [i+1, j+2], [i-1, j+2], [i-2, j+1], [i-2, j-1], [i-1, j-2], [i+1, j-2], [i+2, j-1]]
     moveSquares = []
     for moveSquare in moveSquaresEight:
-        if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
+        if moveSquare[0] in [0, 1, 2, 3, 4, 5, 6, 7] and moveSquare[1] in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[moveSquare[0]][moveSquare[1]][0] in [" ", colorOpp]:
                 moveSquares.append(moveSquare)
     return moveSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findMoveSquaresRook(board, color, square):
     if color == "w":
@@ -133,50 +158,60 @@ def findMoveSquaresRook(board, color, square):
     i = square[0]
     j = square[1]
     moveSquares = []
-    #Up
+    # Up
     blocked = False
-    for z in [ii for ii in [1,2,3,4,5,6,7] if ii > i]:
+    for z in [ii for ii in [1, 2, 3, 4, 5, 6, 7] if ii > i]:
         if not blocked:
             if board[z][j] == "  ":
-                moveSquares.append([z,j])
+                moveSquares.append([z, j])
             else:
                 blocked = True
                 if board[z][j][0] == colorOpp:
-                    moveSquares.append([z,j])
-    #Down
+                    moveSquares.append([z, j])
+    # Down
     blocked = False
-    for z in [ii for ii in [6,5,4,3,2,1,0] if ii < i]:
+    for z in [ii for ii in [6, 5, 4, 3, 2, 1, 0] if ii < i]:
         if not blocked:
             if board[z][j] == "  ":
-                moveSquares.append([z,j])
+                moveSquares.append([z, j])
             else:
                 blocked = True
                 if board[z][j][0] == colorOpp:
-                    moveSquares.append([z,j])
-    #Right
+                    moveSquares.append([z, j])
+    # Right
     blocked = False
-    for z in [jj for jj in [1,2,3,4,5,6,7] if jj > j]:
+    for z in [jj for jj in [1, 2, 3, 4, 5, 6, 7] if jj > j]:
         if not blocked:
             if board[i][z] == "  ":
-                moveSquares.append([i,z])
+                moveSquares.append([i, z])
             else:
                 blocked = True
                 if board[i][z][0] == colorOpp:
-                    moveSquares.append([i,z])
-    #Left
+                    moveSquares.append([i, z])
+    # Left
     blocked = False
-    for z in [jj for jj in [6,5,4,3,2,1,0] if jj < j]:
+    for z in [jj for jj in [6, 5, 4, 3, 2, 1, 0] if jj < j]:
         if not blocked:
             if board[i][z] == "  ":
-                moveSquares.append([i,z])
+                moveSquares.append([i, z])
             else:
                 blocked = True
                 if board[i][z][0] == colorOpp:
-                    moveSquares.append([i,z])
+                    moveSquares.append([i, z])
     return moveSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findMoveSquaresQueen(board, color, square):
     return findMoveSquaresBishop(board, color, square) + findMoveSquaresRook(board, color, square)
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, square):
     if color == "w":
@@ -185,13 +220,13 @@ def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, squ
         colorOpp = "w"
     i = square[0]
     j = square[1]
-    moveSquaresEight = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
+    moveSquaresEight = [[i+1, j], [i+1, j+1], [i, j+1], [i-1, j+1], [i-1, j], [i-1, j-1], [i, j-1], [i+1, j-1]]
     moveSquares = []
     for moveSquare in moveSquaresEight:
-        if moveSquare[0] in [0,1,2,3,4,5,6,7] and moveSquare[1] in [0,1,2,3,4,5,6,7]:
+        if moveSquare[0] in [0, 1, 2, 3, 4, 5, 6, 7] and moveSquare[1] in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[moveSquare[0]][moveSquare[1]][0] in [" ", colorOpp]:
                 moveSquares.append(moveSquare)
-    #Castling
+    # Castling
     if canCastleKingside:
         if board[i][j+1] == "  " and board[i][j+2] == "  " and board[i][j+3] == (color + "R"):
             moveSquares.append([i, j+2])
@@ -199,6 +234,11 @@ def findMoveSquaresKing(board, color, canCastleKingside, canCastleQueenside, squ
         if board[i][j-1] == "  " and board[i][j-2] == "  " and board[i][j-3] == "  " and board[i][j-4] == (color + "R"):
             moveSquares.append([i, j-2])
     return moveSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findAttackSquaresPawn(board, color, square):
     if color == "w":
@@ -210,26 +250,51 @@ def findAttackSquaresPawn(board, color, square):
     i = square[0]
     j = square[1]
     attackSquares = []
-    #Capture
+    # Capture
     if j >= 1:
         if board[i+d][j-1][0] in [" ", colorOpp]:
-            attackSquares.append([i+d,j-1])
+            attackSquares.append([i+d, j-1])
     if j <= 6:
         if board[i+d][j+1][0] in [" ", colorOpp]:
-            attackSquares.append([i+d,j+1])
+            attackSquares.append([i+d, j+1])
     return attackSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findAttackSquaresBishop(board, color, square):
     return findMoveSquaresBishop(board, color, square)
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def findAttackSquaresKnight(board, color, square):
     return findMoveSquaresKnight(board, color, square)
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findAttackSquaresRook(board, color, square):
     return findMoveSquaresRook(board, color, square)
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def findAttackSquaresQueen(board, color, square):
     return findMoveSquaresQueen(board, color, square)
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def findAttackSquaresKing(board, color, square):
     if color == "w":
@@ -238,13 +303,18 @@ def findAttackSquaresKing(board, color, square):
         colorOpp = "w"
     i = square[0]
     j = square[1]
-    attackSquaresEight = [[i+1,j],[i+1,j+1],[i,j+1],[i-1,j+1],[i-1,j],[i-1,j-1],[i,j-1],[i+1,j-1]]
+    attackSquaresEight = [[i+1, j], [i+1, j+1], [i, j+1], [i-1, j+1], [i-1, j], [i-1, j-1], [i, j-1], [i+1, j-1]]
     attackSquares = []
     for attackSquare in attackSquaresEight:
-        if attackSquare[0] in [0,1,2,3,4,5,6,7] and attackSquare[1] in [0,1,2,3,4,5,6,7]:
+        if attackSquare[0] in [0, 1, 2, 3, 4, 5, 6, 7] and attackSquare[1] in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[attackSquare[0]][attackSquare[1]][0] in [" ", colorOpp]:
                 attackSquares.append(attackSquare)
     return attackSquares
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def inCheck(board, color):
     if color == "w":
@@ -252,32 +322,32 @@ def inCheck(board, color):
     elif color == "b":
         colorOpp = "w"
     
-    #Piece positions
+    # Piece positions
     squaresPawnOpp   = []
     squaresBishopOpp = []
     squaresKnightOpp = []
     squaresRookOpp   = []
     squaresQueenOpp  = []
     squaresKingOpp   = []
-    for i in [0,1,2,3,4,5,6,7]:
-        for j in [0,1,2,3,4,5,6,7]:
+    for i in [0, 1, 2, 3, 4, 5, 6, 7]:
+        for j in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[i][j][0] == colorOpp:
                 if board[i][j][1] == "p":
-                    squaresPawnOpp.append([i,j])
+                    squaresPawnOpp.append([i, j])
                 elif board[i][j][1] == "B":
-                    squaresBishopOpp.append([i,j])
+                    squaresBishopOpp.append([i, j])
                 elif board[i][j][1] == "N":
-                    squaresKnightOpp.append([i,j])
+                    squaresKnightOpp.append([i, j])
                 elif board[i][j][1] == "R":
-                    squaresRookOpp.append([i,j])
+                    squaresRookOpp.append([i, j])
                 elif board[i][j][1] == "Q":
-                    squaresQueenOpp.append([i,j])
+                    squaresQueenOpp.append([i, j])
                 elif board[i][j][1] == "K":
-                    squaresKingOpp.append([i,j])
+                    squaresKingOpp.append([i, j])
             elif board[i][j] == color + "K":
-                squareKing = [i,j]
+                squareKing = [i, j]
     
-    #Possible moves
+    # Possible moves
     attackSquares = []
     for square in squaresPawnOpp:
         attackSquares.extend(findAttackSquaresPawn(board, colorOpp, square))
@@ -292,11 +362,16 @@ def inCheck(board, color):
     for square in squaresKingOpp:
         attackSquares.extend(findAttackSquaresKing(board, colorOpp, square))
     
-    #Determine whether king is in check
+    # Determine whether king is in check
     for attackSquare in attackSquares:
         if attackSquare == squareKing:
             return True
     return False
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def isLegalMove(board, color, checkFlag, move):
     i0 = move[0][0]
@@ -304,47 +379,52 @@ def isLegalMove(board, color, checkFlag, move):
     i1 = move[1][0]
     j1 = move[1][1]
     
-    #Castling transit square
+    # Castling transit square
     legalCastleFlag = True
     if (board[i0][j0][1] == "K") and (abs(j1 - j0) == 2):
         jTransit = int((j0 + j1)/2)
         if checkFlag:
             legalCastleFlag = False
         else:
-            row1New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row2New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row3New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row4New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row5New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row6New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row7New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            row8New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-            boardNew = [row1New,row2New,row3New,row4New,row5New,row6New,row7New,row8New]
-            for i in [0,1,2,3,4,5,6,7]:
-                for j in [0,1,2,3,4,5,6,7]:
+            row1New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row2New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row3New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row4New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row5New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row6New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row7New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            row8New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+            boardNew = [row1New, row2New, row3New, row4New, row5New, row6New, row7New, row8New]
+            for i in [0, 1, 2, 3, 4, 5, 6, 7]:
+                for j in [0, 1, 2, 3, 4, 5, 6, 7]:
                     boardNew[i][j] = board[i][j]
             boardNew[i1][jTransit] = boardNew[i0][j0]
             boardNew[i0][j0] = "  "
             legalCastleFlag = not inCheck(boardNew, color)
     
-    #Final square
-    row1New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row2New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row3New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row4New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row5New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row6New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row7New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row8New = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    boardNew = [row1New,row2New,row3New,row4New,row5New,row6New,row7New,row8New]
-    for i in [0,1,2,3,4,5,6,7]:
-        for j in [0,1,2,3,4,5,6,7]:
+    # Final square
+    row1New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row2New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row3New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row4New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row5New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row6New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row7New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row8New = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    boardNew = [row1New, row2New, row3New, row4New, row5New, row6New, row7New, row8New]
+    for i in [0, 1, 2, 3, 4, 5, 6, 7]:
+        for j in [0, 1, 2, 3, 4, 5, 6, 7]:
             boardNew[i][j] = board[i][j]
     boardNew[i1][j1] = boardNew[i0][j0]
     boardNew[i0][j0] = "  "
     legalFlag = not inCheck(boardNew, color)
     
     return legalCastleFlag and legalFlag
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def convertSquareCoord(square):
     i = square[0]
@@ -368,8 +448,18 @@ def convertSquareCoord(square):
         col = "h"
     return col + row
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def convertMoveCoord(move):
     return convertSquareCoord(move[0]) + "-" + convertSquareCoord(move[1])
+
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
 
 def printStatus(colorMove, checkFlag, checkmateFlag, stalemateFlag):
     if colorMove == "w":
@@ -395,55 +485,65 @@ def printStatus(colorMove, checkFlag, checkmateFlag, stalemateFlag):
     print("")
     return
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def printMovesCoord(text, movesCoord):
     print(text, end="")
     print(", ".join(movesCoord))
     return
 
+# Name:
+# Purpose:
+# Parameters:
+# Returns:
+
 def main():
-    #Position setup
-    row8 = ["bR","bN","bB","bQ","bK","bB","bN","bR"]
-    row7 = ["bp","bp","bp","bp","bp","bp","bp","bp"]
-    row6 = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row5 = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row4 = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row3 = ["  ","  ","  ","  ","  ","  ","  ","  "]
-    row2 = ["wp","wp","wp","wp","wp","wp","wp","wp"]
-    row1 = ["wR","wN","wB","wQ","wK","wB","wN","wR"]
-    board = [row1,row2,row3,row4,row5,row6,row7,row8]
+    # Position setup
+    row8 = ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"]
+    row7 = ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"]
+    row6 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row5 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row4 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row3 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row2 = ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"]
+    row1 = ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
+    board = [row1, row2, row3, row4, row5, row6, row7, row8]
     colorMove = "w"
     checkFlag = inCheck(board, colorMove)
     canCastleKingside = True
     canCastleQueenside = True
     enPassant = []
     
-    #Print board
+    # Print board
     printBoard(board)
     
-    #Piece positions
+    # Piece positions
     squaresPawn   = []
     squaresBishop = []
     squaresKnight = []
     squaresRook   = []
     squaresQueen  = []
     squaresKing   = []
-    for i in [0,1,2,3,4,5,6,7]:
-        for j in [0,1,2,3,4,5,6,7]:
+    for i in [0, 1, 2, 3, 4, 5, 6, 7]:
+        for j in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[i][j][0] == colorMove:
                 if board[i][j][1] == "p":
-                    squaresPawn.append([i,j])
+                    squaresPawn.append([i, j])
                 elif board[i][j][1] == "B":
-                    squaresBishop.append([i,j])
+                    squaresBishop.append([i, j])
                 elif board[i][j][1] == "N":
-                    squaresKnight.append([i,j])
+                    squaresKnight.append([i, j])
                 elif board[i][j][1] == "R":
-                    squaresRook.append([i,j])
+                    squaresRook.append([i, j])
                 elif board[i][j][1] == "Q":
-                    squaresQueen.append([i,j])
+                    squaresQueen.append([i, j])
                 elif board[i][j][1] == "K":
-                    squaresKing.append([i,j])
+                    squaresKing.append([i, j])
     
-    #Possible moves
+    # Possible moves
     movesPawn = []
     for square in squaresPawn:
         movesPawn.extend([[square, moveSquare] for moveSquare in findMoveSquaresPawn(board, colorMove, enPassant, square)])
@@ -488,12 +588,12 @@ def main():
     
     movesCoord = movesCoordPawn + movesCoordBishop + movesCoordKnight + movesCoordRook + movesCoordQueen + movesCoordKing
     
-    #Print status
+    # Print status
     checkmateFlag = checkFlag and len(movesCoord) == 0
     stalemateFlag = not checkFlag and len(movesCoord) == 0
     printStatus(colorMove, checkFlag, checkmateFlag, stalemateFlag)
     
-    #Print moves
+    # Print moves
     print("Possible Moves:")
     printMovesCoord("Pawn   | ", movesCoordPawn)
     printMovesCoord("Bishop | ", movesCoordBishop)
