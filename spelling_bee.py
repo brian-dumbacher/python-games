@@ -1,13 +1,13 @@
-#Name:     spelling_bee.py
-#Purpose:  Play the spelling bee game
-#Author:   Brian Dumbacher
+# Name:     spelling_bee.py
+# Purpose:  Play the spelling bee game
+# Author:   Brian Dumbacher
 
 import codecs
 import random
 import re
 
 # Name:        cleanWord
-# Purpose:     Clean/standardize word
+# Purpose:     Clean word
 # Parameters:  word
 # Returns:     wordClean (cleaned word)
 
