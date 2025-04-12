@@ -32,21 +32,21 @@ def getValidSlides(puzzle):
         slidesValid.append(puzzle[iBlank][j])
     return slidesValid
 
-# Name:        randomPuzzle
+# Name:        getRandomPuzzle
 # Purpose:     Generate random puzzle
 # Parameters:
-# Returns:     puzzle (random 2D list)
+# Returns:     puzzleRandom (random shuffle of puzzle in solved state)
 
-def randomPuzzle():
-    puzzle = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
+def getRandomPuzzle():
+    puzzleRandom = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
     numSlides = 0
-    while isPuzzleSolved(puzzle) or numSlides < 50:
+    while isPuzzleSolved(puzzleRandom) or numSlides < 50:
         random.seed()
-        slides = getValidSlides(puzzle)
+        slides = getValidSlides(puzzleRandom)
         slide = slides[random.randint(0, len(slides) - 1)]
-        puzzle = updatePuzzle(puzzle, slide)
+        puzzleRandom = updatePuzzle(puzzleRandom, slide)
         numSlides += 1
-    return puzzle
+    return puzzleRandom
 
 # Name:        printPuzzle
 # Purpose:     Print puzzle in current state
@@ -122,7 +122,7 @@ def printEndPuzzle(numSlides):
 
 def solvePuzzle():
     # Parameters
-    puzzle = randomPuzzle()
+    puzzle = getRandomPuzzle()
     solveFlag = False
     numSlides = 0
     
@@ -154,10 +154,10 @@ def main():
     while loopFlag:
         solvePuzzle()
         newPuzzleInput = ""
-        while newPuzzleInput not in ["n", "no", "y", "yes"]:
+        while newPuzzleInput not in ["N", "NO", "Y", "YES"]:
             newPuzzleInput = input("Another puzzle? (Y/N): ")
-            newPuzzleInput = newPuzzleInput.lower()
-        if newPuzzleInput in ["n", "no"]:
+            newPuzzleInput = newPuzzleInput.upper()
+        if newPuzzleInput in ["N", "NO"]:
             loopFlag = False
 
     print("")
