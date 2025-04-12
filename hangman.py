@@ -1,5 +1,5 @@
 # Name:     hangman.py
-# Purpose:  Play hangman
+# Purpose:  Play Hangman
 # Author:   Brian Dumbacher
 
 import codecs
@@ -7,18 +7,18 @@ import random
 import re
 
 # Name:        cleanWord
-# Purpose:     Clean word by converting to uppercase and stripping whitespace
-# Parameters:  word
+# Purpose:     Clean word by converting it to uppercase and stripping whitespace
+# Parameters:  wordRaw (raw word)
 # Returns:     wordClean (cleaned word)
 
-def cleanWord(word):
-    wordClean = word.upper()
+def cleanWord(wordRaw):
+    wordClean = wordRaw.upper()
     wordClean = re.sub("\s+", " ", wordClean);
     wordClean = wordClean.strip()
     return wordClean
 
 # Name:        printHangman
-# Purpose:     Print hangman in current state
+# Purpose:     Print Hangman in current state
 # Parameters:  life (life total)
 # Returns:
 
@@ -293,6 +293,7 @@ def main():
             newGameInput = newGameInput.upper()
         if newGameInput in ["N", "NO"]:
             loopFlag = False
+
     print("")
     return
 
