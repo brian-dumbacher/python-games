@@ -1,5 +1,5 @@
 # Name:     spelling_bee.py
-# Purpose:  Play the spelling bee game
+# Purpose:  Play Spelling Bee
 # Author:   Brian Dumbacher
 
 import codecs
@@ -8,39 +8,39 @@ import re
 
 # Name:        cleanWord
 # Purpose:     Clean word
-# Parameters:  word
+# Parameters:  wordRaw (raw word)
 # Returns:     wordClean (cleaned word)
 
-def cleanWord(word):
-    wordClean = word.upper()
+def cleanWord(wordRaw):
+    wordClean = wordRaw.upper()
     wordClean = re.sub("\s+", " ", wordClean)
     wordClean = wordClean.strip()
     return wordClean
 
 # Name:        printPuzzle
 # Purpose:     Print puzzle
-# Parameters:  lettersReg (list of regular letters)
+# Parameters:  lettersNormal (list of normal letters)
 #              letterCenter (center letter)
 #              words (list of words)
 # Returns:
 
-def printPuzzle(lettersReg, letterCenter, words):
+def printPuzzle(lettersNormal, letterCenter, words):
     print("")
     print("        +---+        ")
     print("       /     \       ")
-    print("      +   {}   +      ".format(lettersReg[0]))
+    print("      +   {}   +      ".format(lettersNormal[0]))
     print("  +---+       +---+  ")
     print(" /     \     /     \ ")
-    print("+   {}   +---+   {}   +".format(lettersReg[1], lettersReg[2]))
+    print("+   {}   +---+   {}   +".format(lettersNormal[1], lettersNormal[2]))
     print("+       +---+       +")
     print(" \     /     \     / ")
     print("  +---+   {}   +---+  ".format(letterCenter))
     print("  +---+       +---+  ")
     print(" /     \     /     \ ")
-    print("+   {}   +---+   {}   +".format(lettersReg[3], lettersReg[4]))
+    print("+   {}   +---+   {}   +".format(lettersNormal[3], lettersNormal[4]))
     print("+       +---+       +")
     print(" \     /     \     / ")
-    print("  +---+   {}   +---+  ".format(lettersReg[5]))
+    print("  +---+   {}   +---+  ".format(lettersNormal[5]))
     print("      +       +      ")
     print("       \     /       ")
     print("        +---+        ")
@@ -62,36 +62,36 @@ def settify(listOrString):
 # Name:        isWordValid
 # Purpose:     Determine whether word is valid
 # Parameters:  dictionary (list of valid words)
-#              lettersReg (list of regular letters)
+#              lettersNormal (list of normal letters)
 #              letterCenter (center letter)
 #              word (proposed word)
 # Returns:     True (word is valid) or False (word is invalid)
 
-def isWordValid(dictionary, lettersReg, letterCenter, word):
-    lettersFull = [l for l in lettersReg] + [letterCenter]
+def isWordValid(dictionary, lettersNormal, letterCenter, word):
+    lettersFull = [l for l in lettersNormal] + [letterCenter]
     return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
 
 # Name:        calcScore
 # Purpose:     Calculate score for valid word
-# Parameters:  lettersReg (list of regular letters)
+# Parameters:  lettersNormal (list of normal letters)
 #              letterCenter (center letter)
-#              word (valid word)
+#              wordValid (valid word)
 # Returns:     3 (full score) or 1 (normal score)
 
-def calcScore(lettersReg, letterCenter, word):
-    lettersFull = lettersReg + [letterCenter]
-    return 3 if settify(word) == settify(lettersFull) else 1
+def calcScore(lettersNormal, letterCenter, wordValid):
+    lettersFull = lettersNormal + [letterCenter]
+    return 3 if settify(wordValid) == settify(lettersFull) else 1
 
 # Name:        printEndGame
 # Purpose:     Print results of game
-# Parameters:  words (list of valid words)
+# Parameters:  wordsValid (list of valid words)
 #              score (total score)
 # Returns:
 
-def printEndGame(words, score):
+def printEndGame(wordsValid, score):
     print("")
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print("@@@   You found {} words.".format(len(words)))
+    print("@@@   You found {} words.".format(len(wordsValid)))
     print("@@@   Your final score = {}.".format(score))
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("")
@@ -109,30 +109,30 @@ def main():
     for w in f:
         dictionary.append(cleanWord(w))
     f.close()
-    words = []
+    wordsValid = []
     score = 0
     continueFlag = True
-    lettersReg = ["F", "I", "N", "O", "T", "U"]
+    lettersNormal = ["F", "I", "N", "O", "T", "U"]
     random.seed()
-    random.shuffle(lettersReg)
+    random.shuffle(lettersNormal)
     letterCenter = "R"
     
     # Word loop
     while continueFlag == True:
-        printPuzzle(lettersReg, letterCenter, words)
+        printPuzzle(lettersNormal, letterCenter, words)
         word = input("Word (q to quit): ")
-        word = word.lower()
+        word = word.upper()
         word = word.strip()
-        if word == "q":
+        if word == "Q":
             continueFlag = False
         else:
-            if isWordValid(dictionary, lettersReg, letterCenter, word):
-                words.append(word)
-                words.sort()
-                score += calcScore(lettersReg, letterCenter, word)
+            if isWordValid(dictionary, lettersNormal, letterCenter, word):
+                wordsValid.append(word)
+                wordsValid.sort()
+                score += calcScore(lettersNormal, letterCenter, word)
     
     # Game results
-    printEndGame(words, score)
+    printEndGame(wordsValid, score)
     return
 
 if __name__ == "__main__":
