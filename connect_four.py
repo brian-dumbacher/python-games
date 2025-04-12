@@ -1,5 +1,5 @@
 # Name:     connect_four.py
-# Purpose:  Play connect four
+# Purpose:  Play Connect Four
 # Author:   Brian Dumbacher
 
 import random
@@ -93,12 +93,12 @@ def isGameWon(board, player):
 # Returns:     True (move is winning) or False (move is not winning)
 
 def isWinningMove(board, moveValid, player):
-    boardWin = [[" " for j in range(7)] for i in range(6)]
+    boardNew = [[" " for j in range(7)] for i in range(6)]
     for i in [0, 1, 2, 3, 4, 5]:
         for j in [0, 1, 2, 3, 4, 5, 6]:
-            boardWin[i][j] = board[i][j]
-    boardWin = updateBoard(boardWin, moveValid, player)
-    return isGameWon(boardWin, player)
+            boardNew[i][j] = board[i][j]
+    boardNew = updateBoard(boardNew, moveValid, player)
+    return isGameWon(boardNew, player)
 
 # Name:        isLosingMove
 # Purpose:     Determine whether move is losing for given player
@@ -125,13 +125,13 @@ def isLosingMove(board, moveValid, player):
             return True
     return False
 
-# Name:        getMoveComputer
+# Name:        getComputerMove
 # Purpose:     Get computer player's move
 # Parameters:  board (2D list)
 #              moveHuman (last human move)
 # Returns:     moveComputer (computer player's move)
 
-def getMoveComputer(board, moveHuman):
+def getComputerMove(board):
     # Classify valid moves
     validMoves = [move for move in ["1", "2", "3", "4", "5", "6", "7"] if isValidMove(board, move)]
     winningMoves = []
@@ -206,15 +206,17 @@ def playConnectFour():
     # Move loop
     while (not winHuman) and (not winComputer) and (not boardFull):
         printBoard(board)
+
         # Human move
         moveHuman = ""
         while not isValidMove(board, moveHuman):
             moveHuman = input("Your move (column #): ")
         board = updateBoard(board, moveHuman, "h")
         winHuman = isGameWon(board, "h")
+
         # Computer move
         if not winHuman:
-            moveComputer = getMoveComputer(board, moveHuman)        
+            moveComputer = getComputerMove(board)        
             board = updateBoard(board, moveComputer, "c")
             winComputer = isGameWon(board, "c")
             boardFull = isBoardFull(board)
@@ -237,10 +239,10 @@ def main():
     while loopFlag:
         playConnectFour()
         newGameInput = ""
-        while newGameInput not in ["n", "no", "y", "yes"]:
+        while newGameInput not in ["N", "NO", "Y", "YES"]:
             newGameInput = input("Another game? (Y/N): ")
-            newGameInput = newGameInput.lower()
-        if newGameInput in ["n", "no"]:
+            newGameInput = newGameInput.upper()
+        if newGameInput in ["N", "NO"]:
             loopFlag = False
 
     print("")
