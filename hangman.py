@@ -7,18 +7,18 @@ import random
 import re
 
 # Name:        cleanWord
-# Purpose:     Clean word
+# Purpose:     Clean word by converting to uppercase and stripping whitespace
 # Parameters:  word
 # Returns:     wordClean (cleaned word)
 
 def cleanWord(word):
-    wordClean = word.lower()
+    wordClean = word.upper()
     wordClean = re.sub("\s+", " ", wordClean);
     wordClean = wordClean.strip()
     return wordClean
 
 # Name:        printHangman
-# Purpose:     Print current state of hangman
+# Purpose:     Print hangman in current state
 # Parameters:  life (life total)
 # Returns:
 
@@ -184,7 +184,7 @@ def printCorrectGuesses(word, guesses):
 # Returns:     True (guess is a letter) or False (guess is not a letter)
 
 def isValidGuess(guess):
-    return guess in ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    return guess in ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 # Name:        isNewGuess
 # Purpose:     Determine whether guess is new
@@ -238,10 +238,10 @@ def printEndGame(word, winFlag):
 
 def playHangman(word):
     # Parameters
-    winFlag = False
+    wordSet = set([l for l in word])
     life = 7
     guesses = []
-    wordSet = set([l for l in word])
+    winFlag = False
     
     # Guess loop
     while life > 0 and winFlag == False:
@@ -251,7 +251,7 @@ def playHangman(word):
         guess = ""
         while not isValidGuess(guess) or not isNewGuess(guesses, guess):
             guess = input("Guess:     ")
-            guess = guess.lower()
+            guess = guess.upper()
         guesses.append(guess)
         if isCorrectGuess(wordSet, guess):
             winFlag = isGameWon(wordSet, guesses)
@@ -288,10 +288,10 @@ def main():
         if gameCounter == len(words):
             gameCounter = 0
         newGameInput = ""
-        while newGameInput not in ["n", "no", "y", "yes"]:
+        while newGameInput not in ["N", "NO", "Y", "YES"]:
             newGameInput = input("Another game? Y/N: ")
-            newGameInput = newGameInput.lower()
-        if newGameInput in ["n", "no"]:
+            newGameInput = newGameInput.upper()
+        if newGameInput in ["N", "NO"]:
             loopFlag = False
     print("")
     return
