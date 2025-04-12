@@ -6,7 +6,7 @@ import random
 
 # Name:        isPuzzleSolved
 # Purpose:     Determine whether puzzle is solved
-# Parameters:  puzzle (2D array)
+# Parameters:  puzzle (2D list)
 # Returns:     True (puzzle is solved) or False (puzzle is not solved)
 
 def isPuzzleSolved(puzzle):
@@ -14,7 +14,7 @@ def isPuzzleSolved(puzzle):
 
 # Name:        getValidSlides
 # Purpose:     Get list of valid slides
-# Parameters:  puzzle (2D array)
+# Parameters:  puzzle (2D list)
 # Returns:     slidesValid (list of valid slides)
 
 def getValidSlides(puzzle):
@@ -35,7 +35,7 @@ def getValidSlides(puzzle):
 # Name:        randomPuzzle
 # Purpose:     Generate random puzzle
 # Parameters:
-# Returns:     puzzle (random 2D array)
+# Returns:     puzzle (random 2D list)
 
 def randomPuzzle():
     puzzle = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
@@ -50,7 +50,7 @@ def randomPuzzle():
 
 # Name:        printPuzzle
 # Purpose:     Print puzzle in current state
-# Parameters:  puzzle (2D array)
+# Parameters:  puzzle (2D list)
 # Returns:
 
 def printPuzzle(puzzle):
@@ -73,7 +73,7 @@ def printPuzzle(puzzle):
 
 # Name:        isValidSlide
 # Purpose:     Determine whether proposed slide is valid
-# Parameters:  puzzle (2D array)
+# Parameters:  puzzle (2D list)
 #              slideProposed (proposed slide)
 # Returns:     True (proposed slide is valid) or False (proposed slide is invalid)
 
@@ -82,9 +82,9 @@ def isValidSlide(puzzle, slideProposed):
 
 # Name:        updatePuzzle
 # Purpose:     Update puzzle based on valid slide
-# Parameters:  puzzle (2D array)
+# Parameters:  puzzle (2D list)
 #              slideValid (valid slide)
-# Returns:     puzzle (updated 2D array)
+# Returns:     puzzle (updated 2D list)
 
 def updatePuzzle(puzzle, slideValid):
     iBlank = 0
