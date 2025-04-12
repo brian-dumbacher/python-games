@@ -15,10 +15,10 @@ def isPuzzleSolved(puzzle):
 # Name:        getValidSlides
 # Purpose:     Get list of valid slides
 # Parameters:  puzzle (2D array)
-# Returns:     slides (list of valid slides)
+# Returns:     slidesValid (list of valid slides)
 
 def getValidSlides(puzzle):
-    slides = []
+    slidesValid = []
     iBlank = 0
     jBlank = 0
     for i in [0, 1, 2]:
@@ -27,15 +27,15 @@ def getValidSlides(puzzle):
                 iBlank = i
                 jBlank = j
     for i in [n for n in [iBlank-1, iBlank+1] if n in [0, 1, 2]]:
-        slides.append(puzzle[i][jBlank])
+        slidesValid.append(puzzle[i][jBlank])
     for j in [n for n in [jBlank-1, jBlank+1] if n in [0, 1, 2]]:
-        slides.append(puzzle[iBlank][j])
-    return slides
+        slidesValid.append(puzzle[iBlank][j])
+    return slidesValid
 
 # Name:        randomPuzzle
-# Purpose:     Get random puzzle
+# Purpose:     Generate random puzzle
 # Parameters:
-# Returns:     puzzle (randomized 2D array)
+# Returns:     puzzle (random 2D array)
 
 def randomPuzzle():
     puzzle = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
@@ -74,19 +74,19 @@ def printPuzzle(puzzle):
 # Name:        isValidSlide
 # Purpose:     Determine whether proposed slide is valid
 # Parameters:  puzzle (2D array)
-#              slide (proposed slide)
-# Returns:     True (slide is valid) or False (slide is invalid)
+#              slideProposed (proposed slide)
+# Returns:     True (proposed slide is valid) or False (proposed slide is invalid)
 
-def isValidSlide(puzzle, slide):
-    return slide in getValidSlides(puzzle)
+def isValidSlide(puzzle, slideProposed):
+    return slideProposed in getValidSlides(puzzle)
 
 # Name:        updatePuzzle
 # Purpose:     Update puzzle based on valid slide
 # Parameters:  puzzle (2D array)
-#              slide (valid slide)
+#              slideValid (valid slide)
 # Returns:     puzzle (updated 2D array)
 
-def updatePuzzle(puzzle, slide):
+def updatePuzzle(puzzle, slideValid):
     iBlank = 0
     jBlank = 0
     iSlide = 0
@@ -96,10 +96,10 @@ def updatePuzzle(puzzle, slide):
             if puzzle[i][j] == " ":
                 iBlank = i
                 jBlank = j
-            elif puzzle[i][j] == slide:
+            elif puzzle[i][j] == slideValid:
                 iSlide = i
                 jSlide = j
-    puzzle[iBlank][jBlank] = slide
+    puzzle[iBlank][jBlank] = slideValid
     puzzle[iSlide][jSlide] = " "
     return puzzle
 
@@ -150,7 +150,7 @@ def main():
     # Loop flag
     loopFlag = True
     
-    # Game loop
+    # Puzzle loop
     while loopFlag:
         solvePuzzle()
         newPuzzleInput = ""
@@ -159,6 +159,7 @@ def main():
             newPuzzleInput = newPuzzleInput.lower()
         if newPuzzleInput in ["n", "no"]:
             loopFlag = False
+
     print("")
     return
 
