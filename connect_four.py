@@ -5,7 +5,7 @@
 import random
 
 # Name:        printBoard
-# Purpose:     Print the board to the screen
+# Purpose:     Print board in current state
 # Parameters:  board (2D list)
 # Returns:
 
@@ -35,21 +35,21 @@ def printBoard(board):
 # Name:        isValidMove
 # Purpose:     Determine whether the proposed move is valid
 # Parameters:  board (2D list)
-#              move (proposed move)
-# Returns:     True (move is valid) or False (move is invalid)
+#              moveProposed (proposed move)
+# Returns:     True (proposed move is valid) or False (proposed move is invalid)
 
-def isValidMove(board, move):
-    return True if move in ["1", "2", "3", "4", "5", "6", "7"] and board[5][int(move) - 1] == " " else False
+def isValidMove(board, moveProposed):
+    return True if moveProposed in ["1", "2", "3", "4", "5", "6", "7"] and board[5][int(moveProposed) - 1] == " " else False
 
 # Name:        updateBoard
 # Purpose:     Update the board
 # Parameters:  board (2D list)
-#              move (valid move)
+#              moveValid (valid move)
 #              player ("c" or "h")
 # Returns:     updated board (2D list)
 
-def updateBoard(board, move, player):
-    j = int(move) - 1
+def updateBoard(board, moveValid, player):
+    j = int(moveValid) - 1
     for i in [0, 1, 2, 3, 4, 5]:
         if board[i][j] == " ":
             board[i][j] = player
@@ -73,12 +73,12 @@ def isGameWon(board, player):
         for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j] == player and board[i+2][j] == player and board[i+3][j] == player:
                 return True
-    # SW-NE Diagonals
+    # SW-NE diagonals
     for j in [0, 1, 2, 3]:
         for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j+1] == player and board[i+2][j+2] == player and board[i+3][j+3] == player:
                 return True
-    # SE-NW Diagonals
+    # SE-NW diagonals
     for j in [3, 4, 5, 6]:
         for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j-1] == player and board[i+2][j-2] == player and board[i+3][j-3] == player:
@@ -88,26 +88,26 @@ def isGameWon(board, player):
 # Name:        isWinningMove
 # Purpose:     Determine whether move is winning for given player
 # Parameters:  board (2D list)
-#              move (valid move)
+#              moveValid (valid move)
 #              player ("c" or "h")
 # Returns:     True (move is winning) or False (move is not winning)
 
-def isWinningMove(board, move, player):
+def isWinningMove(board, moveValid, player):
     boardWin = [[" " for j in range(7)] for i in range(6)]
     for i in [0, 1, 2, 3, 4, 5]:
         for j in [0, 1, 2, 3, 4, 5, 6]:
             boardWin[i][j] = board[i][j]
-    boardWin = updateBoard(boardWin, move, player)
+    boardWin = updateBoard(boardWin, moveValid, player)
     return isGameWon(boardWin, player)
 
 # Name:        isLosingMove
 # Purpose:     Determine whether move is losing for given player
 # Parameters:  board (2D list)
-#              move (valid move)
+#              moveValid (valid move)
 #              player ("c" or "h")
 # Returns:     True (move is losing) or False (move is not losing)
 
-def isLosingMove(board, move, player):
+def isLosingMove(board, moveValid, player):
     if player == "c":
         playerOpp = "h"
     elif player == "h":
@@ -117,11 +117,11 @@ def isLosingMove(board, move, player):
     for i in [0, 1, 2, 3, 4, 5]:
         for j in [0, 1, 2, 3, 4, 5, 6]:
             boardNew[i][j] = board[i][j]
-    boardNew = updateBoard(boardNew, move, player)
+    boardNew = updateBoard(boardNew, moveValid, player)
     
     validMovesNew = [move for move in ["1", "2", "3", "4", "5", "6", "7"] if isValidMove(boardNew, move)]
-    for move in validMovesNew:
-        if isWinningMove(boardNew, move, playerOpp):
+    for moveValidNew in validMovesNew:
+        if isWinningMove(boardNew, moveValidNew, playerOpp):
             return True
     return False
 
@@ -129,7 +129,7 @@ def isLosingMove(board, move, player):
 # Purpose:     Get computer player's move
 # Parameters:  board (2D list)
 #              moveHuman (last human move)
-# Returns:     computerMove (computer player's move)
+# Returns:     moveComputer (computer player's move)
 
 def getMoveComputer(board, moveHuman):
     # Classify valid moves
@@ -148,16 +148,16 @@ def getMoveComputer(board, moveHuman):
     # Randomly choose winning move
     if len(winningMoves) > 0:
         random.shuffle(winningMoves)
-        computerMove = winningMoves[0]
+        moveComputer = winningMoves[0]
     # Randomly choose other move
     elif len(otherMoves) > 0:
         random.shuffle(otherMoves)
-        computerMove = otherMoves[0]
+        moveComputer = otherMoves[0]
     # Randomly choose losing move
     else:
         random.shuffle(losingMoves)
-        computerMove = losingMoves[0]
-    return computerMove
+        moveComputer = losingMoves[0]
+    return moveComputer
 
 # Name:        isBoardFull
 # Purpose:     Check whether the board is full
@@ -242,6 +242,7 @@ def main():
             newGameInput = newGameInput.lower()
         if newGameInput in ["n", "no"]:
             loopFlag = False
+
     print("")
     return
 
