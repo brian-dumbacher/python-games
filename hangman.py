@@ -284,14 +284,13 @@ def main():
     # Game loop
     while loopFlag:
         playHangman(words[gameCounter])
-        gameCounter += 1
-        if gameCounter == len(words):
-            gameCounter = 0
         newGameInput = ""
-        while newGameInput not in ["N", "NO", "Y", "YES"]:
+        while newGameInput not in ["Y", "YES", "N", "NO"]:
             newGameInput = input("Another game? Y/N: ")
             newGameInput = newGameInput.upper()
-        if newGameInput in ["N", "NO"]:
+        if newGameInput in ["Y", "YES"]:
+            gameCounter = (gameCounter + 1) % len(words)
+        elif newGameInput in ["N", "NO"]:
             loopFlag = False
 
     print("")
