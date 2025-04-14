@@ -154,7 +154,7 @@ def main():
     while loopFlag:
         solvePuzzle()
         newPuzzleInput = ""
-        while newPuzzleInput not in ["N", "NO", "Y", "YES"]:
+        while newPuzzleInput not in ["Y", "YES", "N", "NO"]:
             newPuzzleInput = input("Another puzzle? (Y/N): ")
             newPuzzleInput = newPuzzleInput.upper()
         if newPuzzleInput in ["N", "NO"]:
