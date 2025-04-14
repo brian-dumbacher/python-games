@@ -239,7 +239,7 @@ def main():
     while loopFlag:
         playConnectFour()
         newGameInput = ""
-        while newGameInput not in ["N", "NO", "Y", "YES"]:
+        while newGameInput not in ["Y", "YES", "N", "NO"]:
             newGameInput = input("Another game? (Y/N): ")
             newGameInput = newGameInput.upper()
         if newGameInput in ["N", "NO"]:
