@@ -1,6 +1,7 @@
 # Name:     connect_four.py
 # Purpose:  Play Connect Four
 # Author:   Brian Dumbacher
+# Date:     May 24, 2025
 
 import random
 
@@ -211,6 +212,7 @@ def playConnectFour():
         moveHuman = ""
         while not isValidMove(board, moveHuman):
             moveHuman = input("Your move (column #): ")
+            moveHuman = moveHuman.strip()
         board = updateBoard(board, moveHuman, "h")
         winHuman = isGameWon(board, "h")
 
@@ -241,7 +243,7 @@ def main():
         newGameInput = ""
         while newGameInput not in ["Y", "YES", "N", "NO"]:
             newGameInput = input("Another game? (Y/N): ")
-            newGameInput = newGameInput.upper()
+            newGameInput = newGameInput.upper().strip()
         if newGameInput in ["N", "NO"]:
             loopFlag = False
 
