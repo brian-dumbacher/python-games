@@ -1,8 +1,9 @@
 # Name:     hangman.py
 # Purpose:  Play Hangman
 # Author:   Brian Dumbacher
+# Date:     May 24, 2025
 
-import codecs
+import io
 import random
 import re
 
@@ -13,7 +14,7 @@ import re
 
 def cleanWord(wordRaw):
     wordClean = wordRaw.upper()
-    wordClean = re.sub("\s+", " ", wordClean);
+    wordClean = re.sub("\s+", " ", wordClean)
     wordClean = wordClean.strip()
     return wordClean
 
@@ -251,7 +252,7 @@ def playHangman(word):
         guess = ""
         while not isValidGuess(guess) or not isNewGuess(guesses, guess):
             guess = input("Guess:     ")
-            guess = guess.upper()
+            guess = guess.upper().strip()
         guesses.append(guess)
         if isCorrectGuess(wordSet, guess):
             winFlag = isGameWon(wordSet, guesses)
@@ -272,7 +273,7 @@ def playHangman(word):
 def main():
     # Global parameters
     words = []
-    f = codecs.open("hangman_words.txt", "r")
+    f = io.open("hangman_words.txt", "r")
     for w in f:
         words.append(cleanWord(w))
     f.close()
@@ -287,7 +288,7 @@ def main():
         newGameInput = ""
         while newGameInput not in ["Y", "YES", "N", "NO"]:
             newGameInput = input("Another game? Y/N: ")
-            newGameInput = newGameInput.upper()
+            newGameInput = newGameInput.upper().strip()
         if newGameInput in ["Y", "YES"]:
             gameCounter = (gameCounter + 1) % len(words)
         elif newGameInput in ["N", "NO"]:
