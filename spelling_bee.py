@@ -1,8 +1,9 @@
 # Name:     spelling_bee.py
 # Purpose:  Play Spelling Bee
 # Author:   Brian Dumbacher
+# Date:     May 26, 2025
 
-import codecs
+import io
 import random
 import re
 
@@ -21,10 +22,10 @@ def cleanWord(wordRaw):
 # Purpose:     Print puzzle
 # Parameters:  lettersNormal (list of normal letters)
 #              letterCenter (center letter)
-#              words (list of words)
+#              wordsValid (list of valid words)
 # Returns:
 
-def printPuzzle(lettersNormal, letterCenter, words):
+def printPuzzle(lettersNormal, letterCenter, wordsValid):
     print("")
     print("        +---+        ")
     print("       /     \       ")
@@ -46,7 +47,7 @@ def printPuzzle(lettersNormal, letterCenter, words):
     print("        +---+        ")
     print("")
     print("Words found:")
-    for word in words:
+    for word in wordsValid:
         print(word)
     print("")
     return
@@ -85,7 +86,7 @@ def calcScore(lettersNormal, letterCenter, wordValid):
 # Name:        printEndGame
 # Purpose:     Print results of game
 # Parameters:  wordsValid (list of valid words)
-#              score (total score)
+#              score (final score)
 # Returns:
 
 def printEndGame(wordsValid, score):
@@ -105,7 +106,7 @@ def printEndGame(wordsValid, score):
 def main():
     # Parameters
     dictionary = []
-    f = codecs.open("spelling_bee_dictionary.txt", "r")
+    f = io.open("spelling_bee_dictionary.txt", "r")
     for w in f:
         dictionary.append(cleanWord(w))
     f.close()
@@ -119,10 +120,9 @@ def main():
     
     # Word loop
     while continueFlag == True:
-        printPuzzle(lettersNormal, letterCenter, words)
+        printPuzzle(lettersNormal, letterCenter, wordsValid)
         word = input("Word (q to quit): ")
-        word = word.upper()
-        word = word.strip()
+        word = word.upper().strip()
         if word == "Q":
             continueFlag = False
         else:
