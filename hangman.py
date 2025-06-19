@@ -1,7 +1,7 @@
 # Name:     hangman.py
 # Purpose:  Play Hangman
 # Author:   Brian Dumbacher
-# Date:     May 24, 2025
+# Date:     June 19, 2025
 
 import io
 import random
@@ -259,6 +259,7 @@ def playHangman(word):
         else:
             life -= 1
     
+    # Print end state
     printHangman(life)
     printIncorrectGuesses(wordSet, guesses)
     printCorrectGuesses(word, guesses)
