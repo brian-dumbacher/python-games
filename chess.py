@@ -35,7 +35,7 @@ def printBoard(board):
             print(" {} {}|{}".format(square, ANSI_GREY, ANSI_END), end="")
         print("")
     print("{}    -------------------------------{}".format(ANSI_GREY, ANSI_END))
-    print("{}     a   b   c   d   e   f   g   h{}".format(ANSI_BLACK, ANSI_END))
+    print("{}     a   b   c   d   e   f   g   h {}".format(ANSI_BLACK, ANSI_END))
     print("")
     return
 
@@ -551,22 +551,39 @@ def isLegalMove(board, player, checkFlag, moveCand):
     i1 = moveCand["endSquare"][0]
     j1 = moveCand["endSquare"][1]
 
-    # Check castling legality
+    # Special moves
     isMoveCastle = moveCand["type"] in ["0-0", "0-0-0"]
+    isMovePromotion = moveCand["promotion"] in ["=B", "=N", "=R", "=Q"]
+
+    # Check castling transit square legality
     canCastleFlag = False
     legalTransitFlag = False
     if isMoveCastle and not checkFlag:
         canCastleFlag = True
         jTransit = int((j0 + j1)/2)
         boardNew = copy.deepcopy(board)
-        boardNew[i1][jTransit] = boardNew[i0][j0]
+        boardNew[i1][jTransit] = "{}K".format(player)
         boardNew[i0][j0] = "  "
         legalTransitFlag = not inCheck(boardNew, player)
 
     # Check end square legality
     boardNew = copy.deepcopy(board)
-    boardNew[i1][j1] = boardNew[i0][j0]
-    boardNew[i0][j0] = "  "
+    if isMoveCastle:
+        boardNew[i1][j1] = boardNew[i0][j0]
+        boardNew[i0][j0] = "  "
+        if (j1 < j0):
+            boardNew[i1][0]    = "  "
+            boardNew[i1][j1+1] = "{}R".format(player)
+        elif (j1 > j0):
+            boardNew[i1][7]    = "  "
+            boardNew[i1][j1-1] = "{}R".format(player)
+    elif isMovePromotion:
+        boardNew[i1][j1] = "{}{}".format(player, moveCand["promotion"][1])
+        boardNew[i0][j0] = "  "
+    else:
+        boardNew[i1][j1] = boardNew[i0][j0]
+        boardNew[i0][j0] = "  "
+    
     legalEndFlag = not inCheck(boardNew, player)
 
     return (isMoveCastle and canCastleFlag and legalTransitFlag and legalEndFlag) or (not isMoveCastle and legalEndFlag)
@@ -678,8 +695,22 @@ def convertMoveNotation(board, player, moveLegal):
     i1 = moveLegal["endSquare"][0]
     j1 = moveLegal["endSquare"][1]
     boardNew = copy.deepcopy(board)
-    boardNew[i1][j1] = boardNew[i0][j0]
-    boardNew[i0][j0] = "  "
+
+    if moveLegal["type"] in ["0-0", "0-0-0"]:
+        boardNew[i1][j1] = boardNew[i0][j0]
+        boardNew[i0][j0] = "  "
+        if (j1 < j0):
+            boardNew[i1][0]    = "  "
+            boardNew[i1][j1+1] = "{}R".format(player)
+        elif (j1 > j0):
+            boardNew[i1][7]    = "  "
+            boardNew[i1][j1-1] = "{}R".format(player)
+    elif moveLegal["promotion"] in ["=B", "=N", "=R", "=Q"]:
+        boardNew[i1][j1] = "{}{}".format(player, moveLegal["promotion"][1])
+        boardNew[i0][j0] = "  "
+    else:
+        boardNew[i1][j1] = boardNew[i0][j0]
+        boardNew[i0][j0] = "  "
     if inCheck(boardNew, playerOpp):
         moveLegalNotation += "+"
 
@@ -739,14 +770,23 @@ def printMovesLegalNotation(text, movesLegalNotation):
 
 def main():
     # Position setup
-    row8 = ["bR", "  ", "bB", "bQ", "bK", "bB", "bN", "bR"]
-    row7 = ["  ", "bp", "bp", "  ", "  ", "bp", "bp", "bp"]
-    row6 = ["bp", "  ", "bN", "bp", "  ", "  ", "  ", "  "]
-    row5 = ["  ", "  ", "  ", "  ", "bp", "  ", "  ", "  "]
-    row4 = ["wB", "  ", "  ", "  ", "wp", "  ", "  ", "  "]
-    row3 = ["  ", "  ", "  ", "  ", "  ", "wN", "  ", "  "]
-    row2 = ["wp", "wp", "wp", "wp", "  ", "wp", "wp", "wp"]
-    row1 = ["wR", "wN", "wB", "wQ", "wK", "  ", "  ", "wR"]
+    #row8 = ["bR", "  ", "bB", "bQ", "bK", "bB", "bN", "bR"]
+    #row7 = ["  ", "bp", "bp", "  ", "  ", "bp", "bp", "bp"]
+    #row6 = ["bp", "  ", "bN", "bp", "  ", "  ", "  ", "  "]
+    #row5 = ["  ", "  ", "  ", "  ", "bp", "  ", "  ", "  "]
+    #row4 = ["wB", "  ", "  ", "  ", "wp", "  ", "  ", "  "]
+    #row3 = ["  ", "  ", "  ", "  ", "  ", "wN", "  ", "  "]
+    #row2 = ["wp", "wp", "wp", "wp", "  ", "wp", "wp", "wp"]
+    #row1 = ["wR", "wN", "wB", "wQ", "wK", "  ", "  ", "wR"]
+
+    row8 = ["  ", "  ", "  ", "bK", "  ", "  ", "  ", "bR"]
+    row7 = ["wp", "wp", "  ", "  ", "bp", "  ", "bp", "bp"]
+    row6 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row5 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row4 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row3 = ["wR", "  ", "bB", "  ", "  ", "  ", "  ", "  "]
+    row2 = ["wR", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
+    row1 = ["  ", "  ", "  ", "  ", "wK", "  ", "  ", "  "]
     board = [row1, row2, row3, row4, row5, row6, row7, row8]
     playerTurn = "w"
     canCastleKingside = True
