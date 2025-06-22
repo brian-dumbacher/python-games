@@ -239,11 +239,11 @@ def printEndGame(word, winFlag):
 
 def playHangman(word):
     # Parameters
-    wordSet = set([l for l in word])
+    wordSet = set(word)
     life = 7
     guesses = []
     winFlag = False
-    
+
     # Guess loop
     while life > 0 and winFlag == False:
         printHangman(life)
@@ -258,7 +258,7 @@ def playHangman(word):
             winFlag = isGameWon(wordSet, guesses)
         else:
             life -= 1
-    
+
     # Print end state
     printHangman(life)
     printIncorrectGuesses(wordSet, guesses)
@@ -282,7 +282,7 @@ def main():
     random.shuffle(words)
     gameCounter = 0
     loopFlag = True
-    
+
     # Game loop
     while loopFlag:
         playHangman(words[gameCounter])
