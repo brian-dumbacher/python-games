@@ -93,7 +93,7 @@ def findMovesCandPawn(board, player, enPassant, startSquare):
         jEP = enPassant[1]
         if (i == iEP) and (abs(j - jEP) == 1):
             endSquares.append((iEP+d, jEP))
-            moveTypes.append("capture")
+            moveTypes.append("enpassant")
 
     # List of candidate pawn moves
     movesCandInit = [{"piece": "pawn", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i]} for i in range(len(endSquares))]
@@ -105,7 +105,7 @@ def findMovesCandPawn(board, player, enPassant, startSquare):
             movesCandFinal.append({"piece": d["piece"], "startSquare": d["startSquare"], "endSquare": d["endSquare"], "type": d["type"], "promotion": "=R"})
             movesCandFinal.append({"piece": d["piece"], "startSquare": d["startSquare"], "endSquare": d["endSquare"], "type": d["type"], "promotion": "=Q"})
         else:
-            movesCandFinal.append({"piece": d["piece"], "startSquare": d["startSquare"], "endSquare": d["endSquare"], "type": d["type"], "promotion": "none"})
+            movesCandFinal.append({"piece": d["piece"], "startSquare": d["startSquare"], "endSquare": d["endSquare"], "type": d["type"], "promotion": ""})
 
     return movesCandFinal
 
@@ -131,7 +131,7 @@ def findMovesCandBishop(board, player, startSquare):
     endSquares = []
     moveTypes = []
 
-    # Up-Right
+    # Up-right
     blocked = False
     numSquares = min([7-i, 7-j])
     for d in range(1, numSquares + 1):
@@ -145,7 +145,7 @@ def findMovesCandBishop(board, player, startSquare):
                     endSquares.append((i+d, j+d))
                     moveTypes.append("capture")
 
-    # Down-Right
+    # Down-right
     blocked = False
     numSquares = min([i, 7-j])
     for d in range(1, numSquares + 1):
@@ -159,7 +159,7 @@ def findMovesCandBishop(board, player, startSquare):
                     endSquares.append((i-d, j+d))
                     moveTypes.append("capture")
 
-    # Down-Left
+    # Down-left
     blocked = False
     numSquares = min([i, j])
     for d in range(1, numSquares + 1):
@@ -173,7 +173,7 @@ def findMovesCandBishop(board, player, startSquare):
                     endSquares.append((i-d, j-d))
                     moveTypes.append("capture")
 
-    # Up-Left
+    # Up-left
     blocked = False
     numSquares = min([7-i, j])
     for d in range(1, numSquares + 1):
@@ -188,7 +188,7 @@ def findMovesCandBishop(board, player, startSquare):
                     moveTypes.append("capture")
 
     # List of candidate bishop moves
-    movesCandFinal = [{"piece": "bishop", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": "na"} for i in range(len(endSquares))]
+    movesCandFinal = [{"piece": "bishop", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": ""} for i in range(len(endSquares))]
 
     return movesCandFinal
 
@@ -214,6 +214,7 @@ def findMovesCandKnight(board, player, startSquare):
     endSquares = []
     moveTypes = []
 
+    # Normal moves and captures
     endSquaresEight = [(i+2, j+1), (i+1, j+2), (i-1, j+2), (i-2, j+1), (i-2, j-1), (i-1, j-2), (i+1, j-2), (i+2, j-1)]
     for endSquare in endSquaresEight:
         if endSquare[0] in [0, 1, 2, 3, 4, 5, 6, 7] and endSquare[1] in [0, 1, 2, 3, 4, 5, 6, 7]:
@@ -225,7 +226,7 @@ def findMovesCandKnight(board, player, startSquare):
                 moveTypes.append("capture")
 
     # List of candidate knight moves
-    movesCandFinal = [{"piece": "knight", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": "na"} for i in range(len(endSquares))]
+    movesCandFinal = [{"piece": "knight", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": ""} for i in range(len(endSquares))]
 
     return movesCandFinal
 
@@ -304,7 +305,7 @@ def findMovesCandRook(board, player, startSquare):
                     moveTypes.append("capture")
 
     # List of candidate rook moves
-    movesCandFinal = [{"piece": "rook", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": "na"} for i in range(len(endSquares))]
+    movesCandFinal = [{"piece": "rook", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": ""} for i in range(len(endSquares))]
 
     return movesCandFinal
 
@@ -347,6 +348,7 @@ def findMovesCandKing(board, player, canCastleKingside, canCastleQueenside, star
     endSquares = []
     moveTypes = []
 
+    # Normal moves and captures
     moveSquaresEight = [(i+1, j), (i+1, j+1), (i, j+1), (i-1, j+1), (i-1, j), (i-1, j-1), (i, j-1), (i+1, j-1)]
     for moveSquare in moveSquaresEight:
         if moveSquare[0] in [0, 1, 2, 3, 4, 5, 6, 7] and moveSquare[1] in [0, 1, 2, 3, 4, 5, 6, 7]:
@@ -370,7 +372,7 @@ def findMovesCandKing(board, player, canCastleKingside, canCastleQueenside, star
                 moveTypes.append("0-0-0")
 
     # List of candidate king moves
-    movesCandFinal = [{"piece": "king", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": "na"} for i in range(len(endSquares))]
+    movesCandFinal = [{"piece": "king", "startSquare": startSquare, "endSquare": endSquares[i], "type": moveTypes[i], "promotion": ""} for i in range(len(endSquares))]
 
     return movesCandFinal
 
@@ -390,14 +392,12 @@ def findAttackSquaresPawn(board, player, square):
         playerOpp = "w"
         d = -1
 
-    # Piece square
+    # Pawn square
     i = square[0]
     j = square[1]
 
     # Attack squares
     attackSquares = []
-
-    # Capture
     if j >= 1:
         if board[i+d][j-1] == "  " or board[i+d][j-1][0] == playerOpp:
             attackSquares.append((i+d, j-1))
@@ -461,13 +461,12 @@ def findAttackSquaresKing(board, player, square):
     elif player == "b":
         playerOpp = "w"
 
-    # Current square
+    # King square
     i = square[0]
     j = square[1]
 
     # Attack squares
     attackSquares = []
-
     attackSquaresEight = [(i+1, j), (i+1, j+1), (i, j+1), (i-1, j+1), (i-1, j), (i-1, j-1), (i, j-1), (i+1, j-1)]
     for attackSquare in attackSquaresEight:
         if attackSquare[0] in [0, 1, 2, 3, 4, 5, 6, 7] and attackSquare[1] in [0, 1, 2, 3, 4, 5, 6, 7]:
@@ -514,24 +513,24 @@ def inCheck(board, player):
             elif board[i][j] == player + "K":
                 squareKing = (i, j)
 
-    # Possible moves
-    attackSquares = []
+    # Determine whether player's king occupies a square under attack by the opponent
     for square in squaresPawnOpp:
-        attackSquares.extend(findAttackSquaresPawn(board, playerOpp, square))
+        if squareKing in findAttackSquaresPawn(board, playerOpp, square):
+            return True
     for square in squaresBishopOpp:
-        attackSquares.extend(findAttackSquaresBishop(board, playerOpp, square))
+        if squareKing in findAttackSquaresBishop(board, playerOpp, square):
+            return True
     for square in squaresKnightOpp:
-        attackSquares.extend(findAttackSquaresKnight(board, playerOpp, square))
+        if squareKing in findAttackSquaresKnight(board, playerOpp, square):
+            return True
     for square in squaresRookOpp:
-        attackSquares.extend(findAttackSquaresRook(board, playerOpp, square))
+        if squareKing in findAttackSquaresRook(board, playerOpp, square):
+            return True
     for square in squaresQueenOpp:
-        attackSquares.extend(findAttackSquaresQueen(board, playerOpp, square))
+        if squareKing in findAttackSquaresQueen(board, playerOpp, square):
+            return True
     for square in squaresKingOpp:
-        attackSquares.extend(findAttackSquaresKing(board, playerOpp, square))
-
-    # Determine whether king is in check
-    for attackSquare in attackSquares:
-        if attackSquare == squareKing:
+        if squareKing in findAttackSquaresKing(board, playerOpp, square):
             return True
 
     return False
@@ -552,7 +551,8 @@ def isLegalMove(board, player, checkFlag, moveCand):
     j1 = moveCand["endSquare"][1]
 
     # Special moves
-    isMoveCastle = moveCand["type"] in ["0-0", "0-0-0"]
+    isMoveCastle    = moveCand["type"] in ["0-0", "0-0-0"]
+    isMoveEnPassant = moveCand["type"] == "enpassant"
     isMovePromotion = moveCand["promotion"] in ["=B", "=N", "=R", "=Q"]
 
     # Check castling transit square legality
@@ -577,6 +577,10 @@ def isLegalMove(board, player, checkFlag, moveCand):
         elif (j1 > j0):
             boardNew[i1][7]    = "  "
             boardNew[i1][j1-1] = "{}R".format(player)
+    elif isMoveEnPassant:
+        boardNew[i1][j1] = boardNew[i0][j0]
+        boardNew[i0][j0] = "  "
+        boardNew[i0][j1] = "  "
     elif isMovePromotion:
         boardNew[i1][j1] = "{}{}".format(player, moveCand["promotion"][1])
         boardNew[i0][j0] = "  "
@@ -643,12 +647,12 @@ def convertMoveNotation(board, player, moveLegal):
 
     # Pawn
     if moveLegal["piece"] == "pawn":
-        if moveLegal["type"] == "capture":
+        if moveLegal["type"] in ["capture", "enpassant"]:
             startSquareNotation = convertSquareNotation(moveLegal["startSquare"])
             moveLegalNotation += startSquareNotation[0]
             moveLegalNotation += "x"
         moveLegalNotation += endSquareNotation
-        if moveLegal["promotion"] != "none":
+        if moveLegal["promotion"] != "":
             moveLegalNotation += moveLegal["promotion"]
 
     # Bishop
@@ -694,9 +698,13 @@ def convertMoveNotation(board, player, moveLegal):
     j0 = moveLegal["startSquare"][1]
     i1 = moveLegal["endSquare"][0]
     j1 = moveLegal["endSquare"][1]
-    boardNew = copy.deepcopy(board)
 
-    if moveLegal["type"] in ["0-0", "0-0-0"]:
+    isMoveCastle    = moveLegal["type"] in ["0-0", "0-0-0"]
+    isMoveEnPassant = moveLegal["type"] == "enpassant"
+    isMovePromotion = moveLegal["promotion"] in ["=B", "=N", "=R", "=Q"]
+
+    boardNew = copy.deepcopy(board)
+    if isMoveCastle:
         boardNew[i1][j1] = boardNew[i0][j0]
         boardNew[i0][j0] = "  "
         if (j1 < j0):
@@ -705,12 +713,17 @@ def convertMoveNotation(board, player, moveLegal):
         elif (j1 > j0):
             boardNew[i1][7]    = "  "
             boardNew[i1][j1-1] = "{}R".format(player)
-    elif moveLegal["promotion"] in ["=B", "=N", "=R", "=Q"]:
+    elif isMoveEnPassant:
+        boardNew[i1][j1] = boardNew[i0][j0]
+        boardNew[i0][j0] = "  "
+        boardNew[i0][j1] = "  "
+    elif isMovePromotion:
         boardNew[i1][j1] = "{}{}".format(player, moveLegal["promotion"][1])
         boardNew[i0][j0] = "  "
     else:
         boardNew[i1][j1] = boardNew[i0][j0]
         boardNew[i0][j0] = "  "
+
     if inCheck(boardNew, playerOpp):
         moveLegalNotation += "+"
 
@@ -770,23 +783,14 @@ def printMovesLegalNotation(text, movesLegalNotation):
 
 def main():
     # Position setup
-    #row8 = ["bR", "  ", "bB", "bQ", "bK", "bB", "bN", "bR"]
-    #row7 = ["  ", "bp", "bp", "  ", "  ", "bp", "bp", "bp"]
-    #row6 = ["bp", "  ", "bN", "bp", "  ", "  ", "  ", "  "]
-    #row5 = ["  ", "  ", "  ", "  ", "bp", "  ", "  ", "  "]
-    #row4 = ["wB", "  ", "  ", "  ", "wp", "  ", "  ", "  "]
-    #row3 = ["  ", "  ", "  ", "  ", "  ", "wN", "  ", "  "]
-    #row2 = ["wp", "wp", "wp", "wp", "  ", "wp", "wp", "wp"]
-    #row1 = ["wR", "wN", "wB", "wQ", "wK", "  ", "  ", "wR"]
-
-    row8 = ["  ", "  ", "  ", "bK", "  ", "  ", "  ", "bR"]
-    row7 = ["wp", "wp", "  ", "  ", "bp", "  ", "bp", "bp"]
-    row6 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
-    row5 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
-    row4 = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
-    row3 = ["wR", "  ", "bB", "  ", "  ", "  ", "  ", "  "]
-    row2 = ["wR", "  ", "  ", "  ", "  ", "  ", "  ", "  "]
-    row1 = ["  ", "  ", "  ", "  ", "wK", "  ", "  ", "  "]
+    row8 = ["bR", "  ", "bB", "bQ", "bK", "bB", "bN", "bR"]
+    row7 = ["  ", "bp", "bp", "  ", "  ", "bp", "bp", "bp"]
+    row6 = ["bp", "  ", "bN", "bp", "  ", "  ", "  ", "  "]
+    row5 = ["  ", "  ", "  ", "  ", "bp", "  ", "  ", "  "]
+    row4 = ["wB", "  ", "  ", "  ", "wp", "  ", "  ", "  "]
+    row3 = ["  ", "  ", "  ", "  ", "  ", "wN", "  ", "  "]
+    row2 = ["wp", "wp", "wp", "wp", "  ", "wp", "wp", "wp"]
+    row1 = ["wR", "wN", "wB", "wQ", "wK", "  ", "  ", "wR"]
     board = [row1, row2, row3, row4, row5, row6, row7, row8]
     playerTurn = "w"
     canCastleKingside = True
@@ -848,7 +852,7 @@ def main():
     printStatus(playerTurn, checkFlag, checkmateFlag, stalemateFlag)
 
     # Print moves
-    print("Possible moves:")
+    print("Number of possible moves:  {}".format(len(movesLegal)))
     print("")
     printMovesLegalNotation("Pawn   | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "pawn"])
     printMovesLegalNotation("Bishop | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "bishop"])
