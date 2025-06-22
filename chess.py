@@ -23,7 +23,7 @@ def printBoard(board):
         if i == 7:
             print("{}    -------------------------------{}".format(ANSI_GREY, ANSI_END))
         else:
-            print("{}   |---+---+---+---+---+---+---+---{}".format(ANSI_GREY, ANSI_END))
+            print("{}   |---+---+---+---+---+---+---+---|{}".format(ANSI_GREY, ANSI_END))
         print(" {}{}{} {}|{}".format(ANSI_BLACK, i+1, ANSI_END, ANSI_GREY, ANSI_END), end="")
         for j in [0, 1, 2, 3, 4, 5, 6, 7]:
             if board[i][j] == "  ":
@@ -362,12 +362,12 @@ def findMovesCandKing(board, player, canCastleKingside, canCastleQueenside, star
     # Castling
     if canCastleKingside:
         if ((player == "w") and (i == 0) and (j == 4)) or ((player == "b") and (i == 7) and (j == 4)):
-            if (board[i][j+1] == "  ") and (board[i][j+2] == "  ") and (board[i][j+3] == (player + "R")):
+            if (board[i][j+1] == "  ") and (board[i][j+2] == "  ") and (board[i][j+3] == ("{}R".format(player))):
                 endSquares.append((i, j+2))
                 moveTypes.append("0-0")
     if canCastleQueenside:
         if ((player == "w") and (i == 0) and (j == 4)) or ((player == "b") and (i == 7) and (j == 4)):
-            if (board[i][j-1] == "  ") and (board[i][j-2] == "  ") and (board[i][j-3] == "  ") and (board[i][j-4] == (player + "R")):
+            if (board[i][j-1] == "  ") and (board[i][j-2] == "  ") and (board[i][j-3] == "  ") and (board[i][j-4] == ("{}R".format(player))):
                 endSquares.append((i, j-2))
                 moveTypes.append("0-0-0")
 
@@ -510,7 +510,7 @@ def inCheck(board, player):
                     squaresQueenOpp.append((i, j))
                 elif board[i][j][1] == "K":
                     squaresKingOpp.append((i, j))
-            elif board[i][j] == player + "K":
+            elif board[i][j] == "{}K".format(player):
                 squareKing = (i, j)
 
     # Determine whether player's king occupies a square under attack by the opponent
@@ -535,7 +535,7 @@ def inCheck(board, player):
 
     return False
 
-# Name:        isLegalMove
+# Name:        isMoveLegal
 # Purpose:     Determine whether candidate move is legal
 # Parameters:  board (2D list)
 #              player ("w" or "b")
@@ -543,7 +543,7 @@ def inCheck(board, player):
 #              moveCand (candidate move)
 # Returns:
 
-def isLegalMove(board, player, checkFlag, moveCand):
+def isMoveLegal(board, player, checkFlag, moveCand):
     # Start square and end square
     i0 = moveCand["startSquare"][0]
     j0 = moveCand["startSquare"][1]
@@ -592,10 +592,10 @@ def isLegalMove(board, player, checkFlag, moveCand):
 
     return (isMoveCastle and canCastleFlag and legalTransitFlag and legalEndFlag) or (not isMoveCastle and legalEndFlag)
 
-# Name:        convertSquareCoord
-# Purpose:     Convert square to board coordinates
+# Name:        convertSquareNotation
+# Purpose:     Convert square to chess notation
 # Parameters:  square (i, j)
-# Returns:     square in board coordinates (e.g., "e4")
+# Returns:     square in chess notation (e.g., "e4")
 
 def convertSquareNotation(square):
     #Setup
@@ -626,11 +626,11 @@ def convertSquareNotation(square):
     return "{}{}".format(col, row)
 
 # Name:        convertMoveNotation
-# Purpose:     Convert move to chess notation
+# Purpose:     Convert legal move to chess notation
 # Parameters:  board (2D list)
 #              player ("w" or "b")
-#              moveLeval (legal move)
-# Returns:     move in chess notation
+#              moveLegal (legal move)
+# Returns:     legal move in chess notation
 
 def convertMoveNotation(board, player, moveLegal):
     # Opponent
@@ -694,11 +694,13 @@ def convertMoveNotation(board, player, moveLegal):
             moveLegalNotation += endSquareNotation
 
     # Check whether opponent is now in check
+    # Start square and end square
     i0 = moveLegal["startSquare"][0]
     j0 = moveLegal["startSquare"][1]
     i1 = moveLegal["endSquare"][0]
     j1 = moveLegal["endSquare"][1]
 
+    # Special moves
     isMoveCastle    = moveLegal["type"] in ["0-0", "0-0-0"]
     isMoveEnPassant = moveLegal["type"] == "enpassant"
     isMovePromotion = moveLegal["promotion"] in ["=B", "=N", "=R", "=Q"]
@@ -766,14 +768,13 @@ def printStatus(playerTurn, checkFlag, checkmateFlag, stalemateFlag):
     return
 
 # Name:        printMovesLegalNotation
-# Purpose:     Print legal moves
-# Parameters:  text (beginning text)
-#              movesLegalNotation (list of legal moves in chess notation)
+# Purpose:     Given a piece, print legal moves
+# Parameters:  text
+#              movesLegalNotation (list of legal moves)
 # Returns:
 
 def printMovesLegalNotation(text, movesLegalNotation):
-    print(text, end="")
-    print(", ".join(sorted(movesLegalNotation)))
+    print("  {:<6}  |  {:<10}  |  {}".format(text, len(movesLegalNotation), ", ".join(sorted(movesLegalNotation))))
     return
 
 # Name:        main
@@ -792,10 +793,13 @@ def main():
     row2 = ["wp", "wp", "wp", "wp", "  ", "wp", "wp", "wp"]
     row1 = ["wR", "wN", "wB", "wQ", "wK", "  ", "  ", "wR"]
     board = [row1, row2, row3, row4, row5, row6, row7, row8]
-    playerTurn = "w"
-    canCastleKingside = True
-    canCastleQueenside = True
-    enPassant = ()
+
+    playerTurn            = "w"
+    canCastleKingside     = True
+    canCastleQueenside    = True
+    canCastleKingsideOpp  = True
+    canCastleQueensideOpp = True
+    enPassant             = ()
 
     # Set check flag
     checkFlag = inCheck(board, playerTurn)
@@ -842,7 +846,7 @@ def main():
         movesCand += findMovesCandKing(board, playerTurn, canCastleKingside, canCastleQueenside, square)
 
     # Determine legal moves
-    movesLegal = [moveCand for moveCand in movesCand if isLegalMove(board, playerTurn, checkFlag, moveCand)]
+    movesLegal = [moveCand for moveCand in movesCand if isMoveLegal(board, playerTurn, checkFlag, moveCand)]
 
     # Set checkmate and stalemate flags
     checkmateFlag = (len(movesLegal) == 0) and checkFlag
@@ -851,15 +855,26 @@ def main():
     # Print status
     printStatus(playerTurn, checkFlag, checkmateFlag, stalemateFlag)
 
-    # Print moves
-    print("Number of possible moves:  {}".format(len(movesLegal)))
+    # Convert legal moves to chess notation, by piece
+    movesLegalNotationPawn   = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "pawn"]
+    movesLegalNotationBishop = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "bishop"]
+    movesLegalNotationKnight = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "knight"]
+    movesLegalNotationRook   = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "rook"]
+    movesLegalNotationQueen  = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "queen"]
+    movesLegalNotationKing   = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "king"]
+
+    # Print summary of legal moves
     print("")
-    printMovesLegalNotation("Pawn   | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "pawn"])
-    printMovesLegalNotation("Bishop | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "bishop"])
-    printMovesLegalNotation("Knight | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "knight"])
-    printMovesLegalNotation("Rook   | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "rook"])
-    printMovesLegalNotation("Queen  | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "queen"])
-    printMovesLegalNotation("King   | ", [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "king"])
+    print("  {:<6}  |  {:<10}  |  {}".format("Piece", "# of Moves", "Moves"))
+    print("----------+--------------+----------------------------------------------------------")
+    printMovesLegalNotation("Pawn",   movesLegalNotationPawn)
+    printMovesLegalNotation("Bishop", movesLegalNotationBishop)
+    printMovesLegalNotation("Knight", movesLegalNotationKnight)
+    printMovesLegalNotation("Rook",   movesLegalNotationRook)
+    printMovesLegalNotation("Queen",  movesLegalNotationQueen)
+    printMovesLegalNotation("King",   movesLegalNotationKing)
+    print("----------+--------------+----------------------------------------------------------")
+    print("  {:<6}  |  {:<10}  |".format("Total", len(movesLegal)))
     print("")
 
     return
