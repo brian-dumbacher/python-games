@@ -27,24 +27,24 @@ def cleanWord(wordRaw):
 
 def printPuzzle(lettersNormal, letterCenter, wordsValid):
     print("")
-    print("        +---+        ")
-    print("       /     \       ")
-    print("      +   {}   +      ".format(lettersNormal[0]))
-    print("  +---+       +---+  ")
-    print(" /     \     /     \ ")
-    print("+   {}   +---+   {}   +".format(lettersNormal[1], lettersNormal[2]))
-    print("+       +---+       +")
-    print(" \     /     \     / ")
-    print("  +---+   {}   +---+  ".format(letterCenter))
-    print("  +---+       +---+  ")
-    print(" /     \     /     \ ")
-    print("+   {}   +---+   {}   +".format(lettersNormal[3], lettersNormal[4]))
-    print("+       +---+       +")
-    print(" \     /     \     / ")
-    print("  +---+   {}   +---+  ".format(lettersNormal[5]))
-    print("      +       +      ")
-    print("       \     /       ")
-    print("        +---+        ")
+    print("          +---+        ")
+    print("         /     \       ")
+    print("        +   {}   +      ".format(lettersNormal[0]))
+    print("    +---+       +---+  ")
+    print("   /     \     /     \ ")
+    print("  +   {}   +---+   {}   +".format(lettersNormal[1], lettersNormal[2]))
+    print("  +       +---+       +")
+    print("   \     /     \     / ")
+    print("    +---+   {}   +---+  ".format(letterCenter))
+    print("    +---+       +---+  ")
+    print("   /     \     /     \ ")
+    print("  +   {}   +---+   {}   +".format(lettersNormal[3], lettersNormal[4]))
+    print("  +       +---+       +")
+    print("   \     /     \     / ")
+    print("    +---+   {}   +---+  ".format(lettersNormal[5]))
+    print("        +       +      ")
+    print("         \     /       ")
+    print("          +---+        ")
     print("")
     print("Words found:")
     for word in wordsValid:
@@ -53,12 +53,12 @@ def printPuzzle(lettersNormal, letterCenter, wordsValid):
     return
 
 # Name:        settify
-# Purpose:     Convert input list or string to set format
+# Purpose:     Convert input list or string to a set
 # Parameters:  listOrString (list or string)
 # Returns:     Set version of input list or string
 
 def settify(listOrString):
-    return set(l for l in listOrString)
+    return set(listOrString)
 
 # Name:        isWordValid
 # Purpose:     Determine whether word is valid
@@ -92,7 +92,7 @@ def calcScore(lettersNormal, letterCenter, wordValid):
 def printEndGame(wordsValid, score):
     print("")
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print("@@@   You found {} words.".format(len(wordsValid)))
+    print("@@@   You found {} word{}.".format(len(wordsValid), "s" * (len(wordsValid) > 1)))
     print("@@@   Your final score = {}.".format(score))
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     print("")

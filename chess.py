@@ -598,7 +598,7 @@ def isMoveLegal(board, player, checkFlag, moveCand):
 # Returns:     square in chess notation (e.g., "e4")
 
 def convertSquareNotation(square):
-    #Setup
+    # Square
     i = square[0]
     j = square[1]
 
@@ -733,7 +733,7 @@ def convertMoveNotation(board, player, moveLegal):
 
 # Name:        printStatus
 # Purpose:     Print status
-# Parameters:  playerTurn ("w" or "b"; player whose turn it is)
+# Parameters:  playerTurn ("w" or "b")
 #              checkFlag (boolean)
 #              checkmateFlag (boolean)
 #              stalemateFlag (boolean)
@@ -864,7 +864,6 @@ def main():
     movesLegalNotationKing   = [convertMoveNotation(board, playerTurn, moveLegal) for moveLegal in movesLegal if moveLegal["piece"] == "king"]
 
     # Print summary of legal moves
-    print("")
     print("  {:<6}  |  {:<10}  |  {}".format("Piece", "# of Moves", "Moves"))
     print("----------+--------------+----------------------------------------------------------")
     printMovesLegalNotation("Pawn",   movesLegalNotationPawn)
