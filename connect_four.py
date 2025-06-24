@@ -3,6 +3,7 @@
 # Author:   Brian Dumbacher
 # Date:     May 24, 2025
 
+import copy
 import random
 
 # Name:        printBoard
@@ -11,11 +12,14 @@ import random
 # Returns:
 
 def printBoard(board):
+    # ANSI escape codes
     ANSI_BLACK     = "\x1b[30m"
     ANSI_RED_BOLD  = "\x1b[1;31m"
     ANSI_BLUE_BOLD = "\x1b[1;34m"
     ANSI_GREY      = "\x1b[37m"
     ANSI_END       = "\x1b[0m"
+
+    # Print board
     print("")
     for i in [5, 4, 3, 2, 1, 0]:
         print("{}   |{}".format(ANSI_BLACK, ANSI_END), end="")
@@ -31,6 +35,7 @@ def printBoard(board):
     print("{}     -------------{}".format(ANSI_BLACK, ANSI_END))
     print("{}     1 2 3 4 5 6 7{}".format(ANSI_BLACK, ANSI_END))
     print("")
+
     return
 
 # Name:        isValidMove
@@ -55,6 +60,7 @@ def updateBoard(board, moveValid, player):
         if board[i][j] == " ":
             board[i][j] = player
             break
+
     return board
 
 # Name:        isGameWon
@@ -69,21 +75,25 @@ def isGameWon(board, player):
         for j in [0, 1, 2, 3]:
             if board[i][j] == player and board[i][j+1] == player and board[i][j+2] == player and board[i][j+3] == player:
                 return True
+
     # Columns
     for j in [0, 1, 2, 3, 4, 5, 6]:
         for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j] == player and board[i+2][j] == player and board[i+3][j] == player:
                 return True
+
     # SW-NE diagonals
     for j in [0, 1, 2, 3]:
         for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j+1] == player and board[i+2][j+2] == player and board[i+3][j+3] == player:
                 return True
+
     # SE-NW diagonals
     for j in [3, 4, 5, 6]:
         for i in [0, 1, 2]:
             if board[i][j] == player and board[i+1][j-1] == player and board[i+2][j-2] == player and board[i+3][j-3] == player:
                 return True
+
     return False
 
 # Name:        isWinningMove
@@ -94,11 +104,10 @@ def isGameWon(board, player):
 # Returns:     True (move is winning) or False (move is not winning)
 
 def isWinningMove(board, moveValid, player):
-    boardNew = [[" " for j in range(7)] for i in range(6)]
-    for i in [0, 1, 2, 3, 4, 5]:
-        for j in [0, 1, 2, 3, 4, 5, 6]:
-            boardNew[i][j] = board[i][j]
+    # Update board with valid move
+    boardNew = copy.deepcopy(board)
     boardNew = updateBoard(boardNew, moveValid, player)
+
     return isGameWon(boardNew, player)
 
 # Name:        isLosingMove
@@ -109,21 +118,22 @@ def isWinningMove(board, moveValid, player):
 # Returns:     True (move is losing) or False (move is not losing)
 
 def isLosingMove(board, moveValid, player):
+    # Opponent
     if player == "c":
         playerOpp = "h"
     elif player == "h":
         playerOpp = "c"
-    
-    boardNew = [[" " for j in range(7)] for i in range(6)]
-    for i in [0, 1, 2, 3, 4, 5]:
-        for j in [0, 1, 2, 3, 4, 5, 6]:
-            boardNew[i][j] = board[i][j]
+
+    # Update board with valid move
+    boardNew = copy.deepcopy(board)
     boardNew = updateBoard(boardNew, moveValid, player)
     
+    # Determine opponent's valid moves and check whether they are winning
     validMovesNew = [move for move in ["1", "2", "3", "4", "5", "6", "7"] if isValidMove(boardNew, move)]
     for moveValidNew in validMovesNew:
         if isWinningMove(boardNew, moveValidNew, playerOpp):
             return True
+
     return False
 
 # Name:        getComputerMove
@@ -145,19 +155,25 @@ def getComputerMove(board):
             losingMoves.append(move)
         else:
             otherMoves.append(move)
+
+    # Set random seed
     random.seed()
+
     # Randomly choose winning move
     if len(winningMoves) > 0:
         random.shuffle(winningMoves)
         moveComputer = winningMoves[0]
+
     # Randomly choose other move
     elif len(otherMoves) > 0:
         random.shuffle(otherMoves)
         moveComputer = otherMoves[0]
+
     # Randomly choose losing move
     else:
         random.shuffle(losingMoves)
         moveComputer = losingMoves[0]
+
     return moveComputer
 
 # Name:        isBoardFull
@@ -169,6 +185,7 @@ def isBoardFull(board):
     for j in [0, 1, 2, 3, 4, 5, 6]:
         if board[5][j] == " ":
             return False
+
     return True
 
 # Name:        printEndGame
@@ -178,6 +195,7 @@ def isBoardFull(board):
 # Returns:
 
 def printEndGame(winHuman, winComputer):
+    # Message
     mssg = ""
     if winHuman:
         mssg = "You win!"
@@ -186,10 +204,13 @@ def printEndGame(winHuman, winComputer):
     else:
         mssg = "Tie game."
     n = len(mssg)
+
+    # Print message
     print("@" * (n + 12))
     print("@@@   {}   @@@".format(mssg))
     print("@" * (n + 12))
     print("")
+
     return
 
 # Name:        playConnectFour
