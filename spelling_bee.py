@@ -52,14 +52,6 @@ def printPuzzle(lettersNormal, letterCenter, wordsValid):
     print("")
     return
 
-# Name:        settify
-# Purpose:     Convert input list or string to a set
-# Parameters:  listOrString (list or string)
-# Returns:     Set version of input list or string
-
-def settify(listOrString):
-    return set(listOrString)
-
 # Name:        isWordValid
 # Purpose:     Determine whether word is valid
 # Parameters:  dictionary (list of valid words)
@@ -70,7 +62,7 @@ def settify(listOrString):
 
 def isWordValid(dictionary, lettersNormal, letterCenter, word):
     lettersFull = [l for l in lettersNormal] + [letterCenter]
-    return (len(word) >= 5) and (letterCenter in settify(word)) and (settify(word) <= settify(lettersFull)) and (word in dictionary)
+    return (len(word) >= 5) and (letterCenter in set(word)) and (set(word) <= set(lettersFull)) and (word in dictionary)
 
 # Name:        calcScore
 # Purpose:     Calculate score for valid word
@@ -81,7 +73,7 @@ def isWordValid(dictionary, lettersNormal, letterCenter, word):
 
 def calcScore(lettersNormal, letterCenter, wordValid):
     lettersFull = lettersNormal + [letterCenter]
-    return 3 if settify(wordValid) == settify(lettersFull) else 1
+    return 3 if set(wordValid) == set(lettersFull) else 1
 
 # Name:        printEndGame
 # Purpose:     Print results of game
