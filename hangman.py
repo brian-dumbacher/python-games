@@ -240,7 +240,7 @@ def printEndGame(word, winFlag):
 def playHangman(word):
     # Parameters
     wordSet = set(word)
-    life = 7
+    life    = 7
     guesses = []
     winFlag = False
 
@@ -288,7 +288,7 @@ def main():
         playHangman(words[gameCounter])
         newGameInput = ""
         while newGameInput not in ["Y", "YES", "N", "NO"]:
-            newGameInput = input("Another game? Y/N: ")
+            newGameInput = input("Another game? (Y/N):  ")
             newGameInput = newGameInput.upper().strip()
         if newGameInput in ["Y", "YES"]:
             gameCounter = (gameCounter + 1) % len(words)
