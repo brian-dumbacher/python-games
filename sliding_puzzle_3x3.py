@@ -1,6 +1,7 @@
 # Name:     sliding_puzzle_3x3.py
-# Purpose:  Solve the 3x3 sliding puzzle
+# Purpose:  Play the 3x3 sliding puzzle
 # Author:   Brian Dumbacher
+# Date:     June 30, 2025
 
 import random
 
@@ -13,7 +14,7 @@ def isPuzzleSolved(puzzle):
     return puzzle == [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
 
 # Name:        getValidSlides
-# Purpose:     Get list of valid slides
+# Purpose:     Get valid slides
 # Parameters:  puzzle (2D list)
 # Returns:     slidesValid (list of valid slides)
 
@@ -33,23 +34,23 @@ def getValidSlides(puzzle):
     return slidesValid
 
 # Name:        getRandomPuzzle
-# Purpose:     Generate random puzzle
+# Purpose:     Generate random 3x3 sliding puzzle
 # Parameters:
-# Returns:     puzzleRandom (random shuffle of puzzle in solved state)
+# Returns:     puzzle (2D list)
 
 def getRandomPuzzle():
-    puzzleRandom = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
+    puzzle = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", " "]]
     numSlides = 0
-    while isPuzzleSolved(puzzleRandom) or numSlides < 50:
+    while isPuzzleSolved(puzzle) or numSlides < 50:
         random.seed()
-        slides = getValidSlides(puzzleRandom)
-        slide = slides[random.randint(0, len(slides) - 1)]
-        puzzleRandom = updatePuzzle(puzzleRandom, slide)
+        slides = getValidSlides(puzzle)
+        slide  = slides[random.randint(0, len(slides) - 1)]
+        puzzle = updatePuzzle(puzzle, slide)
         numSlides += 1
-    return puzzleRandom
+    return puzzle
 
 # Name:        printPuzzle
-# Purpose:     Print puzzle in current state
+# Purpose:     Print puzzle in its current state
 # Parameters:  puzzle (2D list)
 # Returns:
 
@@ -71,17 +72,17 @@ def printPuzzle(puzzle):
     print("")
     return
 
-# Name:        isValidSlide
-# Purpose:     Determine whether proposed slide is valid
+# Name:        isSlideValid
+# Purpose:     Determine whether candidate slide is valid
 # Parameters:  puzzle (2D list)
-#              slideProposed (proposed slide)
-# Returns:     True (proposed slide is valid) or False (proposed slide is invalid)
+#              slideCand (candidate slide)
+# Returns:     True (candidate slide is valid) or False (candidate slide is invalid)
 
-def isValidSlide(puzzle, slideProposed):
-    return slideProposed in getValidSlides(puzzle)
+def isSlideValid(puzzle, slideCand):
+    return slideCand in getValidSlides(puzzle)
 
 # Name:        updatePuzzle
-# Purpose:     Update puzzle based on valid slide
+# Purpose:     Update puzzle with valid slide
 # Parameters:  puzzle (2D list)
 #              slideValid (valid slide)
 # Returns:     puzzle (updated 2D list)
@@ -104,62 +105,61 @@ def updatePuzzle(puzzle, slideValid):
     return puzzle
 
 # Name:        printEndPuzzle
-# Purpose:     Print puzzle results
+# Purpose:     Print end of puzzle
 # Parameters:  numSlides (number of slides)
 # Returns:
 
 def printEndPuzzle(numSlides):
     print("==================================================")
-    print("You solved the 3x3 sliding puzzle in {} slides.".format(numSlides))
+    print("You solved the 3x3 sliding puzzle in {} slide{}.".format(numSlides, "s" * (numSlides > 1)))
     print("==================================================")
     print("")
     return
 
-# Name:        solvePuzzle
-# Purpose:     Solve a 3x3 sliding puzzle
-# Parameters:
+# Name:        playPuzzle
+# Purpose:     Play 3x3 sliding puzzle
+# Parameters:  puzzleStart (starting puzzle as a 2D list)
 # Returns:
 
-def solvePuzzle():
-    # Parameters
-    puzzle = getRandomPuzzle()
+def playPuzzle(puzzleStart):
+    #Parameters
     solveFlag = False
+    puzzle    = puzzleStart
     numSlides = 0
     
-    # Slide loop
+    #Slide loop
     while solveFlag == False:
         printPuzzle(puzzle)
         slide = ""
-        while not isValidSlide(puzzle, slide):
-            slide = input("Slide: ")
+        while not isSlideValid(puzzle, slide):
+            slide = input("Slide:  ")
         numSlides += 1
         puzzle = updatePuzzle(puzzle, slide)
         solveFlag = isPuzzleSolved(puzzle)
-
-    # Puzzle results
+    
     printPuzzle(puzzle)
     printEndPuzzle(numSlides)
     return
 
 # Name:        main
-# Purpose:     Loop through multiple 3x3 sliding puzzles
+# Purpose:     Loop through multiple sliding puzzles
 # Parameters:
 # Returns:
 
 def main():
-    # Loop flag
+    #Global parameters
     loopFlag = True
     
-    # Puzzle loop
+    #Game loop
     while loopFlag:
-        solvePuzzle()
-        newPuzzleInput = ""
-        while newPuzzleInput not in ["Y", "YES", "N", "NO"]:
-            newPuzzleInput = input("Another puzzle? (Y/N): ")
-            newPuzzleInput = newPuzzleInput.upper()
-        if newPuzzleInput in ["N", "NO"]:
+        puzzleStart = getRandomPuzzle()
+        playPuzzle(puzzleStart)
+        newPuzzle = ""
+        while newPuzzle not in ["N", "NO", "Y", "YES"]:
+            newPuzzle = input("Another 3x3 sliding puzzle? (Y/N):  ")
+            newPuzzle = newPuzzle.upper().strip()
+        if newPuzzle in ["N", "NO"]:
             loopFlag = False
-
     print("")
     return
 
