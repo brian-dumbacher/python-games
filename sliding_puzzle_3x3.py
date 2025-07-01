@@ -122,19 +122,19 @@ def printEndPuzzle(numSlides):
 # Returns:
 
 def playPuzzle(puzzleStart):
-    #Parameters
+    # Parameters
     solveFlag = False
     puzzle    = puzzleStart
     numSlides = 0
     
-    #Slide loop
+    # Slide loop
     while solveFlag == False:
         printPuzzle(puzzle)
         slide = ""
         while not isSlideValid(puzzle, slide):
             slide = input("Slide:  ")
         numSlides += 1
-        puzzle = updatePuzzle(puzzle, slide)
+        puzzle    = updatePuzzle(puzzle, slide)
         solveFlag = isPuzzleSolved(puzzle)
     
     printPuzzle(puzzle)
@@ -142,15 +142,15 @@ def playPuzzle(puzzleStart):
     return
 
 # Name:        main
-# Purpose:     Loop through multiple sliding puzzles
+# Purpose:     Loop through multiple 3x3 sliding puzzles
 # Parameters:
 # Returns:
 
 def main():
-    #Global parameters
+    # Loop flag
     loopFlag = True
     
-    #Game loop
+    # Puzzle loop
     while loopFlag:
         puzzleStart = getRandomPuzzle()
         playPuzzle(puzzleStart)
@@ -160,6 +160,7 @@ def main():
             newPuzzle = newPuzzle.upper().strip()
         if newPuzzle in ["N", "NO"]:
             loopFlag = False
+
     print("")
     return
 
